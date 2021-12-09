@@ -10,6 +10,7 @@ Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying,
 - Lots of dialogue
 - Weapons from Manhunt
 - Enemies/Friendlies are tanky, like in the game.
+- Satisfyingly fun to hide from
 
 
 # Credits:
