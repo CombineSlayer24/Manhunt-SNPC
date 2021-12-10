@@ -26,4 +26,7 @@ Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC 
 - [Rockstar Games](https://www.rockstargames.com/) - Original content, sounds and trademark of Manhunt / Manhunt series.
 - [Geist](https://steamcommunity.com/sharedfiles/filedetails/?id=691058457) - Ported models, textures, sounds. Without him, this SNPC conversion wouldn't be possible.
 - [VJBase](https://steamcommunity.com/sharedfiles/filedetails/?id=131759821) - For making an awesome NPC Base. Sounds, models.
+- [Me - Pyri](https://steamcommunity.com/id/swellseeker7820/) - Spawnicons {steam release}, porting sounds, manhunt fan!
 - more credits soon, major ones out
+
+*ps, lcs update isn't forgotten ;)*
