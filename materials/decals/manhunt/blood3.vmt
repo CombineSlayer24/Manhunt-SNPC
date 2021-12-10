@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{ 
+	"$translucent" 1
+	"$basetexture" "decals/manhunt/blood3"
+	"$decal" 1
+	"$decalscale" 0.5
+	"$modelmaterial" "decals/manhunt/blood3_model"
+} 
