@@ -6,7 +6,7 @@
 Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying, and more.
 
 ### FEATURES:
-- Gibbing
+- Gibbing (headshots will gib)
 - Lots of dialogue
 - Weapons from Manhunt
 - Enemies/Friendlies are tanky, like in the game.
