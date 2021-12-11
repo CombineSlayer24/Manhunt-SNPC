@@ -1,6 +1,6 @@
 /*--------------------------------------------------
 	=============== Autorun File ===============
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 --------------------------------------------------
@@ -29,7 +29,7 @@ if VJExists == true then
 	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT", "weapon_vj_manhunt_glock")
 	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT (PS2)", "weapon_vj_manhunt_glockps2")
 
-	--VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ Decals ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,6 +77,7 @@ if VJExists == true then
 	-- end
 	-- 	hook.Add( "PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", VJ_ADDTOMENU_MANHUNT )
 	-- end
+	-- ConVars --
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)
 	VJ.AddAddonProperty(AddonName,AddonType)
