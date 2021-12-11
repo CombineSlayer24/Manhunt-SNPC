@@ -7,4 +7,4 @@ In spawnmenu go to "Spawnlists" tab, go to "Browse Sounds", in "Legacy Addons", 
 
 then click on music > stems and there you go.
 
-I only provided the first levels OST (Born Again) for this demo/preview.
+I only provided two level OST (Born Again and Doorway to Hell) for this demo/preview.
