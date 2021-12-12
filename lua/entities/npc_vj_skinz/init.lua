@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/manhunt/npc/skin1.mdl","models/manhunt/npc/skin2.mdl","models/manhunt/npc/skin3.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
-ENT.StartHealth = 150 -- The starting health of the NPC
+ENT.StartHealth = 325 -- The starting health of the NPC
 ENT.HullType = HULL_HUMAN
 	-- ====== Sight & Speed Variables ====== --
 ENT.SightDistance = 6000 -- How far it can see
