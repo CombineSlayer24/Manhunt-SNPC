@@ -38,8 +38,6 @@ ENT.CallForHelpAnimationPlayBackRate = 1 -- How fast should the animation play? 
 ENT.CallForHelpStopAnimations = true -- Should it stop attacks for a certain amount of time?
 	-- ====== Sound Detection Variables ====== --
 ENT.InvestigateSoundDistance = 18 -- How far away can the SNPC hear sounds? | This number is timed by the calculated volume of the detectable sound.
-	-- ====== Miscellaneous Variables ====== --
-ENT.CombatFaceEnemy = true -- If enemy is exists and is visible
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ Damaged / Injured Variables ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +71,7 @@ ENT.SoundTbl_Pain = {"shared_sfx_hunters/pain1.wav","shared_sfx_hunters/pain2.wa
 
 -- ^^ ARE SHARED ^^ // Down below isnt --
 function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawned, however, they will all have Footsteps, Pained and Death sounds.
-    local voices = math.random(1,1)
+    local voices = math.random(1,2)
         if voices == 1 then -- Skinz 1 voices
 		self.SoundTbl_Alert = 
 		{
