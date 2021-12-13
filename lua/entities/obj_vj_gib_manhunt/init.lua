@@ -33,7 +33,7 @@ function ENT:Initialize()
 	if GetConVar("vj_npc_nogibdecals"):GetInt() == 1 then self.Collide_Decal = "" end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-local defCollideSds = {"weapons/body_impact1.wav","weapons/body_impact2.wav","weapons/body_impact3.wav","weapons/body_impact4.wav","weapons/body_impact5.wav","weapons/body_impact6.wav"}
+local defCollideSds = {"weapons/bloody_impact1.wav","weapons/bloody_impact2.wav","weapons/bloody_impact3.wav","weapons/bloody_impact4.wav","weapons/bloody_impact5.wav","weapons/bloody_impact6.wav"}
 --
 function ENT:InitialSetup()
 	if self.CollideSound == "Default" then
