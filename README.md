@@ -17,11 +17,11 @@ Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying,
 - This is a W.I.P preview pack, meaning I will only contain little bit of content in here
 Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC Weapons (Light pistol, Light pistol 'ps2 version')
 
-### I only included 1 NPC in here, was planning on adding 4:
+### I only included 1 NPC in here, was planning on adding 4: ( at least i'm getting to it )
    - 1 Skin (In preview)
    - 1 Cop 
-   - 1 Hoods
-   - James Earl Cash
+   - 1 Hoods (In preview)
+   - James Earl Cash (In preview)
 
 # Credits:
 - [Rockstar Games](https://www.rockstargames.com/) - Original content, sounds and trademark of Manhunt / Manhunt series.
