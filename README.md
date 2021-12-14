@@ -31,4 +31,27 @@ Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC 
 - [Me - Pyri](https://steamcommunity.com/id/swellseeker7820/) - Spawnicons {steam release}, porting sounds, manhunt fan!
 - more credits soon, major ones out
 
+### PROGRESS:
+- Skinz
+- [x] Voiceset 1
+- [x] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
+- [ ] Voiceset 5
+- [ ] Voiceset 6
+
+- Hoods
+- [x] Voiceset 1
+- [ ] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
+- [ ] Voiceset 5
+- [ ] Voiceset 6
+
+- Carcer City Police (Police Officer)
+- [ ] Voiceset 1
+- [ ] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
+
 *ps, lcs update isn't forgotten ;)*
