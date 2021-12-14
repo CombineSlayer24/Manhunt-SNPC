@@ -15,19 +15,29 @@ local VJExists = file.Exists("lua/autorun/vj_base_autorun.lua","GAME")
 if VJExists == true then
 	include('autorun/vj_controls.lua')
 
-	local vManhunt_Skinz_Cat = "Manhunt - The Skinz"
+	local vManhunt_Hunters_Cat = "Manhunt - Hunters"
+	local vManhunt_Misc_Cat = "Manhunt - Misc"
 	
-	VJ.AddCategoryInfo(vManhunt_Skinz_Cat, {Icon = "vgui/mh_logo.png"})
+	VJ.AddCategoryInfo(vManhunt_Hunters_Cat, {Icon = "vgui/mh_logo.png"})
+	VJ.AddCategoryInfo(vManhunt_Misc_Cat, {Icon = "vgui/mh_logo.png"})
 
 	local ManHunt_Skinz_Weapons =  {"weapon_vj_manhunt_glock","weapon_vj_manhunt_glockps2"}
 
 	---------- Hunters ---------------------
-	VJ.AddNPC_HUMAN("Skinz Member","npc_vj_skinz",ManHunt_Skinz_Weapons,vManhunt_Skinz_Cat)
-	VJ.AddNPC_HUMAN("Skinz Member (Hostile)","npc_vj_skinz_h",ManHunt_Skinz_Weapons,vManhunt_Skinz_Cat)
+	VJ.AddNPC_HUMAN("Skinz Member","npc_vj_skin",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Skinz Member (Hostile)","npc_vj_skin_h",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+
+	VJ.AddNPC_HUMAN("Hoods Member","npc_vj_hood",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Hoods Member (Hostile)","npc_vj_hood_h",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+
+	---------- Misc ------------------------
+	VJ.AddNPC_HUMAN("James Earl Cash","npc_vj_cash",ManHunt_Skinz_Weapons,vManhunt_Misc_Cat)
+	VJ.AddNPC_HUMAN("James Earl Cash (Hostile)","npc_vj_cash_h",ManHunt_Skinz_Weapons,vManhunt_Misc_Cat)
 
 	---------- Weapons ---------------------
 	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT", "weapon_vj_manhunt_glock")
 	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT (PS2)", "weapon_vj_manhunt_glockps2")
+	VJ.AddNPCWeapon("VJ_MANHUNT_MELEE_BLACKJACK", "weapon_vj_manhunt_blackjack")
 
 	VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

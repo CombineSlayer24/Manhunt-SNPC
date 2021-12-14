@@ -12,7 +12,7 @@ ENT.Type 			= "anim"
 ENT.PrintName 		= "Pills Pickup (Spining)"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
-ENT.Purpose 		= "Gives small % of health."
+ENT.Purpose 		= "Gives half % of health."
 ENT.Instructions 	= "Don't change anything."
 ENT.Category		= "VJ Base"
 
@@ -144,11 +144,11 @@ if CLIENT then -- Light glow code
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Use(activator) -- Gives health upon pressing "Use" key
+function ENT:Use(activator) -- Gives health upon pressing "Use" key (Figure out how to limit it's max health.)
 	if activator:IsPlayer() then
---		self:EmitSound(Sound("weapons/health_pickup.wav"), 70, 100)     // NO SOUND PROVIDED YET
+		self:EmitSound(Sound("weapons/pills_pickup.wav"), 70, 100)
 		activator:SetHealth(activator:Health() + math.random(25,65) )
-		activator:PrintMessage(HUD_PRINTTALK, "Pain Pills taken." )
+		activator:PrintMessage(HUD_PRINTTALK, "Pills taken." )
 		self:Remove()
 	end
 end
