@@ -15,9 +15,9 @@ SWEP.MadeForNPCsOnly = true -- Is this weapon meant to be for NPCs only?
 SWEP.Spawnable = false
 	-- NPC Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_EnableDontUseRegulate 	= false -- Used for VJ Base SNPCs, if enabled the SNPC will remove use regulate
-SWEP.NPC_NextPrimaryFire 		= 5.0 -- Next time it can use primary fire
+SWEP.NPC_NextPrimaryFire 		= 4.0 -- Next time it can use primary fire
 SWEP.NPC_TimeUntilFire	 		= 0.1 -- How much time until the bullet/projectile is fired?
-SWEP.NPC_TimeUntilFireExtraTimers = {0.5,1.0,1.5,2.0,2.5,3.0} -- Next time it can use primary fire
+SWEP.NPC_TimeUntilFireExtraTimers = {0.5,1.0,1.5,2.0} -- Next time it can use primary fire
 SWEP.NPC_UsePistolBehavior 		= true
 SWEP.NPC_CustomSpread = 1.5
 SWEP.NPC_AllowCustomSpread = true

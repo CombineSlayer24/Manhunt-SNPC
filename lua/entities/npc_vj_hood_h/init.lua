@@ -71,7 +71,7 @@ ENT.SoundTbl_Pain = {"shared_sfx_hunters/pain1.wav","shared_sfx_hunters/pain2.wa
 
 -- ^^ ARE SHARED ^^ // Down below isnt --
 function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawned, however, they will all have Footsteps, Pained and Death sounds.
-    local voices = math.random(1,1)
+    local voices = math.random(1,2)
         if voices == 1 then -- Hoods 1 voices
 		self.SoundTbl_Alert = 
 		{
@@ -265,6 +265,195 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/hoods/hood1_suppressing13.wav",
 			"characters/hoods/hood1_suppressing14.wav"
 		}
+    elseif voices == 2 then -- Hoods 2 voices
+		self.SoundTbl_Alert = 
+		{
+			"characters/hoods/hood2_alert1.wav",
+			"characters/hoods/hood2_alert2.wav",
+			"characters/hoods/hood2_alert3.wav",
+			"characters/hoods/hood2_alert4.wav",
+			"characters/hoods/hood2_alert5.wav",
+			"characters/hoods/hood2_alert6.wav",
+			"characters/hoods/hood2_alert7.wav",
+			"characters/hoods/hood2_alert8.wav",
+			"characters/hoods/hood2_alert9.wav",
+			"characters/hoods/hood2_alert10.wav",
+			"characters/hoods/hood2_alert11.wav",
+			"characters/hoods/hood2_alert12.wav",
+			"characters/hoods/hood2_alert13.wav"
+		}
+		self.SoundTbl_AllyDeath = 
+		{
+			"characters/hoods/hood2_ally_death1.wav",
+			"characters/hoods/hood2_ally_death2.wav",
+			"characters/hoods/hood2_ally_death3.wav",
+			"characters/hoods/hood2_ally_death4.wav",
+			"characters/hoods/hood2_ally_death5.wav",
+			"characters/hoods/hood2_ally_death6.wav",
+			"characters/hoods/hood2_ally_death7.wav"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"characters/hoods/hood2_suppressing7.wav",
+			"characters/hoods/hood2_player_hurtby3.wav"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"characters/hoods/hood2_fight1.wav",
+			"characters/hoods/hood2_fight2.wav",
+			"characters/hoods/hood2_fight3.wav",
+			"characters/hoods/hood2_fight4.wav",
+			"characters/hoods/hood2_fight5.wav",
+			"characters/hoods/hood2_fight6.wav",
+			"characters/hoods/hood2_fight7.wav",
+			"characters/hoods/hood2_fight8.wav",
+			"characters/hoods/hood2_fight9.wav",
+			"characters/hoods/hood2_fight10.wav",
+			"characters/hoods/hood2_fight11.wav",
+			"characters/hoods/hood2_fight12.wav",
+			"characters/hoods/hood2_fight13.wav",
+			"characters/hoods/hood2_fight14.wav",
+			"characters/hoods/hood2_fight15.wav",
+			"characters/hoods/hood2_fight16.wav"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"characters/hoods/hood2_grenade_spot1.wav",
+			"characters/hoods/hood2_grenade_spot2.wav",
+			"characters/hoods/hood2_grenade_spot3.wav",
+			"characters/hoods/hood2_death1.wav",
+			"characters/hoods/hood2_death2.wav",
+			"characters/hoods/hood2_death3.wav"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"characters/hoods/hood2_idle_answer1.wav",
+			"characters/hoods/hood2_idle_answer2.wav",
+			"characters/hoods/hood2_idle_answer3.wav",
+			"characters/hoods/hood2_idle_answer4.wav",
+			"characters/hoods/hood2_idle_answer5.wav",
+			"characters/hoods/hood2_idle_answer6.wav",
+			"characters/hoods/hood2_idle_answer7.wav",
+			"characters/hoods/hood2_idle_answer8.wav"
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"characters/hoods/hood2_idle_question1.wav",
+			"characters/hoods/hood2_idle_question2.wav",
+			"characters/hoods/hood2_idle_question3.wav",
+			"characters/hoods/hood2_idle_question4.wav",
+			"characters/hoods/hood2_idle_question5.wav"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"characters/hoods/hood2_idle1.wav",
+			"characters/hoods/hood2_idle2.wav",
+			"characters/hoods/hood2_idle3.wav",
+			"characters/hoods/hood2_idle4.wav",
+			"characters/hoods/hood2_idle5.wav",
+			"characters/hoods/hood2_idle6.wav",
+			"characters/hoods/hood2_idle7.wav",
+			"characters/hoods/hood2_idle8.wav",
+			"characters/hoods/hood2_idle9.wav",
+			"characters/hoods/hood2_idle10.wav",
+			"characters/hoods/hood2_idle11.wav",
+			"characters/hoods/hood2_idle12.wav",
+			"characters/hoods/hood2_idle13.wav",
+			"characters/hoods/hood2_idle14.wav",
+			"characters/hoods/hood2_idle15.wav",
+			"characters/hoods/hood2_idle16.wav",
+			"characters/hoods/hood2_idle17.wav",
+			"characters/hoods/hood2_idle18.wav",
+			"characters/hoods/hood2_idle19.wav",
+			"characters/hoods/hood2_idle20.wav",
+			"characters/hoods/hood2_idle21.wav",
+			"characters/hoods/hood2_idle22.wav",
+			"characters/hoods/hood2_idle23.wav",
+			"characters/hoods/hood2_idle24.wav",
+			"characters/hoods/hood2_idle25.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"characters/hoods/hood2_investigate1.wav",
+			"characters/hoods/hood2_investigate2.wav",
+			"characters/hoods/hood2_investigate3.wav",
+			"characters/hoods/hood2_investigate4.wav",
+			"characters/hoods/hood2_investigate5.wav",
+			"characters/hoods/hood2_investigate6.wav",
+			"characters/hoods/hood2_investigate7.wav",
+			"characters/hoods/hood2_investigate8.wav",
+			"characters/hoods/hood2_investigate9.wav",
+			"characters/hoods/hood2_investigate10.wav",
+			"characters/hoods/hood2_investigate11.wav",
+			"characters/hoods/hood2_investigate12.wav",
+			"characters/hoods/hood2_investigate13.wav",
+			"characters/hoods/hood2_investigate14.wav",
+			"characters/hoods/hood2_investigate15.wav",
+			"characters/hoods/hood2_investigate16.wav",
+			"characters/hoods/hood2_investigate17.wav"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"characters/hoods/hood2_kill1.wav",
+			"characters/hoods/hood2_kill2.wav",
+			"characters/hoods/hood2_kill3.wav",
+			"characters/hoods/hood2_kill4.wav"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"characters/hoods/hood2_lost_enemy1.wav",
+			"characters/hoods/hood2_lost_enemy2.wav",
+			"characters/hoods/hood2_lost_enemy4.wav",
+			"characters/hoods/hood2_lost_enemy5.wav",
+			"characters/hoods/hood2_lost_enemy6.wav",
+			"characters/hoods/hood2_lost_enemy7.wav",
+			"characters/hoods/hood2_lost_enemy8.wav",
+			"characters/hoods/hood2_lost_enemy9.wav",
+			"characters/hoods/hood2_lost_enemy10.wav",
+			"characters/hoods/hood2_lost_enemy11.wav",
+			"characters/hoods/hood2_lost_enemy12.wav",
+			"characters/hoods/hood2_lost_enemy13.wav"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"characters/hoods/hood2_player_follow1.wav",
+			"characters/hoods/hood2_player_follow2.wav"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"characters/hoods/hood2_player_hurtby1.wav",
+			"characters/hoods/hood2_player_hurtby2.wav",
+			"characters/hoods/hood2_player_hurtby3.wav"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"characters/hoods/hood2_player_spot1.wav",
+			"characters/hoods/hood2_player_spot2.wav",
+			"characters/hoods/hood2_player_spot3.wav"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"characters/hoods/hood2_player_unfollow1.wav",
+			"characters/hoods/hood2_player_unfollow2.wav"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"characters/hoods/hood2_suppressing1.wav",
+			"characters/hoods/hood2_suppressing2.wav",
+			"characters/hoods/hood2_suppressing3.wav",
+			"characters/hoods/hood2_suppressing4.wav",
+			"characters/hoods/hood2_suppressing5.wav",
+			"characters/hoods/hood2_suppressing6.wav",
+			"characters/hoods/hood2_suppressing7.wav",
+			"characters/hoods/hood2_suppressing8.wav",
+			"characters/hoods/hood2_suppressing9.wav",
+			"characters/hoods/hood2_suppressing10.wav",
+			"characters/hoods/hood2_suppressing11.wav",
+			"characters/hoods/hood2_suppressing12.wav",
+			"characters/hoods/hood2_suppressing13.wav",
+			"characters/hoods/hood2_suppressing14.wav",
+			"characters/hoods/hood2_suppressing15.wav"
+		}
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -302,10 +491,9 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 		
 	local bloodspray = EffectData()
 		bloodspray:SetOrigin(self:LocalToWorld(Vector(0,0,50)))
-		bloodspray:SetScale(8)
+		bloodspray:SetScale(5)
 		bloodspray:SetFlags(3)
 		bloodspray:SetColor(0)
-		util.Effect("bloodspray",bloodspray)
 		util.Effect("bloodspray",bloodspray)
 
 	if hitgroup == HITGROUP_HEAD then

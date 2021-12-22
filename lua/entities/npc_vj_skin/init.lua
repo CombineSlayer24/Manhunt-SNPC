@@ -502,10 +502,9 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 		
 	local bloodspray = EffectData()
 		bloodspray:SetOrigin(self:LocalToWorld(Vector(0,0,50)))
-		bloodspray:SetScale(8)
+		bloodspray:SetScale(5)
 		bloodspray:SetFlags(3)
 		bloodspray:SetColor(0)
-		util.Effect("bloodspray",bloodspray)
 		util.Effect("bloodspray",bloodspray)
 
 	if hitgroup == HITGROUP_HEAD then

@@ -18,4 +18,5 @@ SWEP.WorldModel = "models/Manhunt/weapons/w_blackjack.mdl"
 SWEP.HoldType = "melee"
 	-- Primary Fire ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.Primary.Damage = 10 -- Damage
-SWEP.IsMeleeWeapon = true -- Should this weapon be a melee weapon? 
+SWEP.IsMeleeWeapon  = true -- Should this weapon be a melee weapon? 
+SWEP.Primary.Ammo	= "Null" -- Ammo type
