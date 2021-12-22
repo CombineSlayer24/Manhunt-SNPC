@@ -17,11 +17,13 @@ Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying,
 - This is a W.I.P preview pack, meaning I will only contain little bit of content in here
 Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC Weapons (Light pistol, Light pistol 'ps2 version')
 
-### I only included 1 NPC in here, was planning on adding 4: ( at least i'm getting to it )
-   - 1 Skin (In preview)
-   - 1 Cop 
-   - 1 Hoods (In preview)
-   - James Earl Cash (In preview)
+Spawn Icons, and everything in this pack right now is bound to change.
+
+### The included NPCs in this demo is:
+- [x] Skinz
+- [ ] CCPD (Police Officer) 
+- [x] Hoods
+- [x] James Earl Cash
 
 # Credits:
 - [Rockstar Games](https://www.rockstargames.com/) - Original content, sounds and trademark of Manhunt / Manhunt series.
@@ -30,5 +32,30 @@ Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC 
 - [☭Comrade Communist☭](https://steamcommunity.com/id/comrade_communist) - Melee weapon animations, Fist code.
 - [Me - Pyri](https://steamcommunity.com/id/swellseeker7820/) - Spawnicons {steam release}, porting sounds, manhunt fan!
 - more credits soon, major ones out
+
+### PROGRESS:
+- Skinz
+- [x] Voiceset 1
+- [x] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
+- [ ] Voiceset 5
+- [ ] Voiceset 6
+
+//
+- Hoods
+- [x] Voiceset 1
+- [ ] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
+- [ ] Voiceset 5
+- [ ] Voiceset 6
+
+//
+- Carcer City Police (Police Officer)
+- [ ] Voiceset 1
+- [ ] Voiceset 2
+- [ ] Voiceset 3
+- [ ] Voiceset 4
 
 *ps, lcs update isn't forgotten ;)*
