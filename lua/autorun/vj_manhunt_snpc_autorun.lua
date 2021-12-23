@@ -35,9 +35,11 @@ if VJExists == true then
 	VJ.AddNPC_HUMAN("James Earl Cash (Hostile)","npc_vj_cash_h",ManHunt_Skinz_Weapons,vManhunt_Misc_Cat)
 
 	---------- Weapons ---------------------
-	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT", "weapon_vj_manhunt_glock")
-	VJ.AddNPCWeapon("VJ_MANHUNT_PISTOL_LIGHT (PS2)", "weapon_vj_manhunt_glockps2")
-	VJ.AddNPCWeapon("VJ_MANHUNT_MELEE_BLACKJACK", "weapon_vj_manhunt_blackjack")
+	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Light", "weapon_vj_manhunt_pistol_light")
+	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Light (PS2)", "weapon_vj_manhunt_pistol_light_ps2")
+	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Revolver", "weapon_vj_manhunt_pistol_38r")
+	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Nailgun", "weapon_vj_manhunt_pistol_nailgun")
+	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Blackjack", "weapon_vj_manhunt_blackjack")
 
 	VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,6 +54,12 @@ if VJExists == true then
 	util.PrecacheModel("models/manhunt/gibs/2.mdl")
 	util.PrecacheModel("models/manhunt/gibs/3.mdl")
 	util.PrecacheModel("models/manhunt/gibs/4.mdl")
+	util.PrecacheModel("models/manhunt/npc/skin1.mdl")
+	util.PrecacheModel("models/manhunt/npc/skin2.mdl")
+	util.PrecacheModel("models/manhunt/npc/skin3.mdl")
+	util.PrecacheModel("models/manhunt/npc/hood1.mdl")
+	util.PrecacheModel("models/manhunt/npc/hood2.mdl")
+	util.PrecacheModel("models/manhunt/npc/hood3.mdl")
 	------------------------------------------------------------------------------------------------------------------------------------------------------
 	// Add this later
 	-- local AddConvars = {}
