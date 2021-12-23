@@ -478,6 +478,7 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz2_call_for_help4.wav"
 		}
 	elseif voices == 3 then -- Skinz 3 voices
+		self.SuppressingSoundChance = 5
 		self.SoundTbl_Alert = 
 		{
 			"characters/skinz/skinz3_alert1.wav",
