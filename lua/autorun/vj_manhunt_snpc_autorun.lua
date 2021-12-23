@@ -39,7 +39,9 @@ if VJExists == true then
 	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Light (PS2)", "weapon_vj_manhunt_pistol_light_ps2")
 	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Revolver", "weapon_vj_manhunt_pistol_38r")
 	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Nailgun", "weapon_vj_manhunt_pistol_nailgun")
-	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Blackjack", "weapon_vj_manhunt_blackjack")
+	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Blackjack", "weapon_vj_manhunt_melee_blackjack")
+	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Bat (Metal)", "weapon_vj_manhunt_melee_bat_m")
+	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Bat (Wood)", "weapon_vj_manhunt_melee_bat_w")
 
 	VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
