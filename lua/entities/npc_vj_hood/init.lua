@@ -62,6 +62,7 @@ ENT.DeathSoundPitch = VJ_Set(100,100)
 ENT.PainSoundPitch = VJ_Set(100,100)
 ENT.IdleSoundChance = 2
 ENT.OnPlayerSightSoundChance = 4
+ENT.SuppressingSoundChance = 3 -- to prevent suppressing quotes overlapping fight quotes
 ENT.NextSoundTime_Idle = VJ_Set(8, 20)
 ENT.OnPlayerSightNextTime = VJ_Set(15, 20)
 -----------------GLOBAL SOUNDS-------------------

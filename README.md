@@ -37,7 +37,7 @@ Spawn Icons, and everything in this pack right now is bound to change.
 - Skinz
 - [x] Voiceset 1
 - [x] Voiceset 2
-- [ ] Voiceset 3
+- [x] Voiceset 3
 - [ ] Voiceset 4
 - [ ] Voiceset 5
 - [ ] Voiceset 6
@@ -45,7 +45,7 @@ Spawn Icons, and everything in this pack right now is bound to change.
 //
 - Hoods
 - [x] Voiceset 1
-- [ ] Voiceset 2
+- [x] Voiceset 2
 - [ ] Voiceset 3
 - [ ] Voiceset 4
 - [ ] Voiceset 5

@@ -62,6 +62,7 @@ ENT.DeathSoundPitch = VJ_Set(100,100)
 ENT.PainSoundPitch = VJ_Set(100,100)
 ENT.IdleSoundChance = 2
 ENT.OnPlayerSightSoundChance = 4
+ENT.SuppressingSoundChance = 3 -- to prevent suppressing quotes overlapping fight quotes
 ENT.NextSoundTime_Idle = VJ_Set(8, 20)
 ENT.OnPlayerSightNextTime = VJ_Set(15, 20)
 -----------------GLOBAL SOUNDS-------------------
@@ -71,7 +72,7 @@ ENT.SoundTbl_Pain = {"shared_sfx_hunters/pain1.wav","shared_sfx_hunters/pain2.wa
 
 -- ^^ ARE SHARED ^^ // Down below isnt --
 function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawned, however, they will all have Footsteps, Pained and Death sounds.
-    local voices = math.random(1,2)
+    local voices = math.random(1,3)
         if voices == 1 then -- Skinz 1 voices
 		self.SoundTbl_Alert = 
 		{
@@ -96,13 +97,13 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz1_bump3.wav",
 			"characters/skinz/skinz1_bump4.wav"
 		}
-		self.SoundTbl_CallForHelp = 
+--[[		self.SoundTbl_CallForHelp = 
 		{
 			"characters/skinz/skinz1_call_for_help1.wav",
 			"characters/skinz/skinz1_call_for_help2.wav",
 			"characters/skinz/skinz1_call_for_help3.wav",
 			"characters/skinz/skinz1_call_for_help4.wav"
-		}
+		}--]]
 		self.SoundTbl_CombatIdle = 
 		{
 			"characters/skinz/skinz1_fight1.wav",
@@ -262,7 +263,14 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz1_suppressing13.wav",
 			"characters/skinz/skinz1_suppressing14.wav",
 			"characters/skinz/skinz1_suppressing15.wav",
-			"characters/skinz/skinz1_suppressing16.wav"
+			"characters/skinz/skinz1_suppressing16.wav",
+			"characters/skinz/skinz1_call_for_help_reply1.wav",
+			"characters/skinz/skinz1_call_for_help_reply2.wav",
+			"characters/skinz/skinz1_call_for_help_reply3.wav",
+			"characters/skinz/skinz1_call_for_help1.wav",
+			"characters/skinz/skinz1_call_for_help2.wav",
+			"characters/skinz/skinz1_call_for_help3.wav",
+			"characters/skinz/skinz1_call_for_help4.wav"
 		}
 		--[[I thought that OnReceiveOrder is responding to CallForHelp, but it's for the SNPC controller--]]
 --		self.SoundTbl_OnReceiveOrder = 
@@ -287,20 +295,20 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz2_alert11.wav",
 			"characters/skinz/skinz2_alert12.wav",
 			"characters/skinz/skinz2_alert13.wav",
-			"characters/skinz/skinz2_alert14.wav",
+			"characters/skinz/skinz2_alert14.wav"
 		}
 		self.SoundTbl_MoveOutOfPlayersWay = 
 		{
 			"characters/skinz/skinz2_bump1.wav",
 			"characters/skinz/skinz2_bump2.wav"
 		}
-		self.SoundTbl_CallForHelp = 
+--[[		self.SoundTbl_CallForHelp = 
 		{
 			"characters/skinz/skinz2_call_for_help1.wav",
 			"characters/skinz/skinz2_call_for_help2.wav",
 			"characters/skinz/skinz2_call_for_help3.wav",
 			"characters/skinz/skinz2_call_for_help4.wav"
-		}
+		}--]]
 		self.SoundTbl_CombatIdle = 
 		{
 			"characters/skinz/skinz2_fight1.wav",
@@ -463,7 +471,200 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz2_suppressing12.wav",
 			"characters/skinz/skinz2_suppressing13.wav",
 			"characters/skinz/skinz2_suppressing14.wav",
-			"characters/skinz/skinz2_suppressing15.wav"
+			"characters/skinz/skinz2_suppressing15.wav",
+			"characters/skinz/skinz2_call_for_help1.wav",
+			"characters/skinz/skinz2_call_for_help2.wav",
+			"characters/skinz/skinz2_call_for_help3.wav",
+			"characters/skinz/skinz2_call_for_help4.wav"
+		}
+	elseif voices == 3 then -- Skinz 3 voices
+		self.SoundTbl_Alert = 
+		{
+			"characters/skinz/skinz3_alert1.wav",
+			"characters/skinz/skinz3_alert2.wav",
+			"characters/skinz/skinz3_alert3.wav",
+			"characters/skinz/skinz3_alert4.wav",
+			"characters/skinz/skinz3_alert5.wav",
+			"characters/skinz/skinz3_alert6.wav",
+			"characters/skinz/skinz3_alert7.wav",
+			"characters/skinz/skinz3_alert8.wav",
+			"characters/skinz/skinz3_alert9.wav",
+			"characters/skinz/skinz3_alert10.wav",
+			"characters/skinz/skinz3_alert11.wav",
+			"characters/skinz/skinz3_alert12.wav",
+			"characters/skinz/skinz3_alert13.wav"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"characters/skinz/skinz3_ally_death1.wav",
+			"characters/skinz/skinz3_ally_death2.wav",
+			"characters/skinz/skinz3_ally_death3.wav",
+			"characters/skinz/skinz3_ally_death4.wav"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"characters/skinz/skinz3_bump1.wav",
+			"characters/skinz/skinz3_bump2.wav"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"characters/skinz/skinz3_fight1.wav",
+			"characters/skinz/skinz3_fight2.wav",
+			"characters/skinz/skinz3_fight3.wav",
+			"characters/skinz/skinz3_fight4.wav",
+			"characters/skinz/skinz3_fight5.wav",
+			"characters/skinz/skinz3_fight6.wav",
+			"characters/skinz/skinz3_fight7.wav",
+			"characters/skinz/skinz3_fight8.wav",
+			"characters/skinz/skinz3_fight9.wav",
+			"characters/skinz/skinz3_fight10.wav",
+			"characters/skinz/skinz3_fight11.wav",
+			"characters/skinz/skinz3_fight12.wav",
+			"characters/skinz/skinz3_fight13.wav",
+			"characters/skinz/skinz3_fight14.wav",
+			"characters/skinz/skinz3_fight15.wav",
+			"characters/skinz/skinz3_fight16.wav",
+			"characters/skinz/skinz3_fight17.wav",
+			"characters/skinz/skinz3_fight18.wav",
+			"characters/skinz/skinz3_fight19.wav"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"characters/skinz/skinz3_grenade_spot1.wav",
+			"characters/skinz/skinz3_grenade_spot2.wav",
+			"characters/skinz/skinz3_grenade_spot3.wav",
+			"characters/skinz/skinz3_grenade_spot4.wav",
+			"characters/skinz/skinz3_death1.wav",
+			"characters/skinz/skinz3_death2.wav",
+			"characters/skinz/skinz3_death3.wav"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"characters/skinz/skinz3_idle_answer1.wav",
+			"characters/skinz/skinz3_idle_answer2.wav",
+			"characters/skinz/skinz3_idle_answer3.wav",
+			"characters/skinz/skinz3_idle_answer4.wav",
+			"characters/skinz/skinz3_idle_answer5.wav",
+			"characters/skinz/skinz3_idle_answer6.wav",
+			"characters/skinz/skinz3_idle_answer7.wav",
+			"characters/skinz/skinz3_idle_answer8.wav"
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"characters/skinz/skinz3_idle_question1.wav",
+			"characters/skinz/skinz3_idle_question2.wav",
+			"characters/skinz/skinz3_idle_question3.wav"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"characters/skinz/skinz3_idle1.wav",
+			"characters/skinz/skinz3_idle2.wav",
+			"characters/skinz/skinz3_idle3.wav",
+			"characters/skinz/skinz3_idle4.wav",
+			"characters/skinz/skinz3_idle5.wav",
+			"characters/skinz/skinz3_idle6.wav",
+			"characters/skinz/skinz3_idle7.wav",
+			"characters/skinz/skinz3_idle8.wav",
+			"characters/skinz/skinz3_idle9.wav",
+			"characters/skinz/skinz3_idle10.wav",
+			"characters/skinz/skinz3_idle11.wav",
+			"characters/skinz/skinz3_idle12.wav",
+			"characters/skinz/skinz3_idle13.wav",
+			"characters/skinz/skinz3_idle14.wav",
+			"characters/skinz/skinz3_idle15.wav",
+			"characters/skinz/skinz3_idle16.wav",
+			"characters/skinz/skinz3_idle17.wav",
+			"characters/skinz/skinz3_idle18.wav",
+			"characters/skinz/skinz3_idle19.wav",
+			"characters/skinz/skinz3_idle20.wav",
+			"characters/skinz/skinz3_idle21.wav",
+			"characters/skinz/skinz3_idle22.wav",
+			"characters/skinz/skinz3_idle23.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"characters/skinz/skinz3_investigate1.wav",
+			"characters/skinz/skinz3_investigate2.wav",
+			"characters/skinz/skinz3_investigate3.wav",
+			"characters/skinz/skinz3_investigate4.wav",
+			"characters/skinz/skinz3_investigate5.wav",
+			"characters/skinz/skinz3_investigate6.wav",
+			"characters/skinz/skinz3_investigate7.wav",
+			"characters/skinz/skinz3_investigate8.wav",
+			"characters/skinz/skinz3_investigate9.wav",
+			"characters/skinz/skinz3_investigate10.wav",
+			"characters/skinz/skinz3_investigate11.wav",
+			"characters/skinz/skinz3_investigate12.wav"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"characters/skinz/skinz3_kill1.wav",
+			"characters/skinz/skinz3_kill2.wav",
+			"characters/skinz/skinz3_kill3.wav",
+			"characters/skinz/skinz3_kill4.wav",
+			"characters/skinz/skinz3_kill5.wav",
+			"characters/skinz/skinz3_kill6.wav"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"characters/skinz/skinz3_lost_enemy1.wav",
+			"characters/skinz/skinz3_lost_enemy2.wav",
+			"characters/skinz/skinz3_lost_enemy4.wav",
+			"characters/skinz/skinz3_lost_enemy5.wav",
+			"characters/skinz/skinz3_lost_enemy6.wav",
+			"characters/skinz/skinz3_lost_enemy7.wav",
+			"characters/skinz/skinz3_lost_enemy8.wav",
+			"characters/skinz/skinz3_lost_enemy9.wav",
+			"characters/skinz/skinz3_lost_enemy10.wav",
+			"characters/skinz/skinz3_lost_enemy11.wav",
+			"characters/skinz/skinz3_lost_enemy12.wav",
+			"characters/skinz/skinz3_lost_enemy13.wav"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"characters/skinz/skinz3_player_follow1.wav",
+			"characters/skinz/skinz3_player_follow2.wav",
+			"characters/skinz/skinz3_player_follow3.wav"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"characters/skinz/skinz3_player_hurtby1.wav",
+			"characters/skinz/skinz3_player_hurtby2.wav",
+			"characters/skinz/skinz3_player_hurtby3.wav"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"characters/skinz/skinz3_player_spot1.wav",
+			"characters/skinz/skinz3_player_spot2.wav",
+			"characters/skinz/skinz3_player_spot3.wav"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"characters/skinz/skinz3_player_unfollow1.wav",
+			"characters/skinz/skinz3_player_unfollow2.wav",
+			"characters/skinz/skinz3_player_unfollow3.wav",
+			"characters/skinz/skinz3_player_unfollow4.wav"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"characters/skinz/skinz3_suppressing1.wav",
+			"characters/skinz/skinz3_suppressing2.wav",
+			"characters/skinz/skinz3_suppressing3.wav",
+			"characters/skinz/skinz3_suppressing4.wav",
+			"characters/skinz/skinz3_suppressing5.wav",
+			"characters/skinz/skinz3_suppressing6.wav",
+			"characters/skinz/skinz3_suppressing7.wav",
+			"characters/skinz/skinz3_suppressing8.wav",
+			"characters/skinz/skinz3_suppressing9.wav",
+			"characters/skinz/skinz3_suppressing10.wav",
+			"characters/skinz/skinz3_suppressing11.wav",
+			"characters/skinz/skinz3_suppressing12.wav",
+			"characters/skinz/skinz3_suppressing13.wav",
+			"characters/skinz/skinz3_suppressing14.wav",
+			"characters/skinz/skinz3_suppressing15.wav",
+			"characters/skinz/skinz3_suppressing16.wav",
+			"characters/skinz/skinz3_suppressing17.wav",
+			"characters/skinz/skinz3_suppressing18.wav"
 		}
 	end
 end
