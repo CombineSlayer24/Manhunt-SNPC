@@ -15,7 +15,7 @@ Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying,
 
 ### DEMO ONLY:
 - This is a W.I.P preview pack, meaning I will only contain little bit of content in here
-Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 2 NPC Weapons (Light pistol, Light pistol 'ps2 version')
+Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 7 NPC Weapons (3 Melee weapons, 4 guns)
 
 Spawn Icons, and everything in this pack right now is bound to change.
 
