@@ -42,9 +42,9 @@ SWEP.Primary.Sound				= {"weapons/pistol/fire1.wav","weapons/pistol/fire2.wav"}
 SWEP.Primary.HasDistantSound	= true -- Does it have a distant sound when the gun is shot?
 SWEP.Primary.DistantSound		= {"weapons/pistol/echo1.wav","weapons/pistol/echo2.wav"}
 
-SWEP.Primary.DistantSoundLevel = 110 -- Distant sound level
+SWEP.Primary.DistantSoundLevel = 140 -- Distant sound level
 SWEP.Primary.DistantSoundPitch	= VJ_Set(90, 110) -- Distant sound pitch
-SWEP.Primary.DistantSoundVolume	= 1 -- Distant sound volume
+SWEP.Primary.DistantSoundVolume	= 0.9 -- Distant sound volume
 
 SWEP.PrimaryEffects_MuzzleAttachment = 1
 --SWEP.PrimaryEffects_ShellAttachment = 2

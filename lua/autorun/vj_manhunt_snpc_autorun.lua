@@ -17,9 +17,11 @@ if VJExists == true then
 
 	local vManhunt_Hunters_Cat = "Manhunt - Hunters"
 	local vManhunt_Misc_Cat = "Manhunt - Misc"
+	local vManhunt_EntityCat = "Manhunt - Entities"
 	
 	VJ.AddCategoryInfo(vManhunt_Hunters_Cat, {Icon = "vgui/mh_logo.png"})
 	VJ.AddCategoryInfo(vManhunt_Misc_Cat, {Icon = "vgui/mh_logo.png"})
+	VJ.AddCategoryInfo(vManhunt_EntityCat, {Icon = "vgui/mh_logo.png"})
 
 	local ManHunt_Skinz_Weapons =  {"weapon_vj_manhunt_glock","weapon_vj_manhunt_glockps2"}
 
@@ -43,7 +45,11 @@ if VJExists == true then
 	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Bat (Metal)", "weapon_vj_manhunt_melee_bat_m")
 	VJ.AddNPCWeapon("VJ_Manhunt_Melee_Bat (Wood)", "weapon_vj_manhunt_melee_bat_w")
 
-	VJ.AddEntity("Pills Pickup", "sent_vj_pills_pickup", "Pyri", false, 0, true, vEntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Painkillers", "sent_vj_pills_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Shotgun Ammo", "sent_vj_shotgun_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Pistol Ammo", "sent_vj_pistol_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Rifle Ammo", "sent_vj_rifle_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
+	-- VJ.AddEntity("Sniper Ammo", "sent_vj_pistol_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ Decals ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +69,7 @@ if VJExists == true then
 	util.PrecacheModel("models/manhunt/npc/hood2.mdl")
 	util.PrecacheModel("models/manhunt/npc/hood3.mdl")
 	------------------------------------------------------------------------------------------------------------------------------------------------------
-	// Add this later
+	-- // Add this later //
 	-- local AddConvars = {}
 	-- AddConvars["vj_gtalcs_additional_voicesets"] = 0
 	-- for k, v in pairs(AddConvars) do

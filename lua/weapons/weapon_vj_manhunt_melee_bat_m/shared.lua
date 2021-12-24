@@ -17,9 +17,9 @@ SWEP.NPC_BeforeFireSound = {"weapons/melee/mh_miss.wav"}
 SWEP.WorldModel = "models/Manhunt/weapons/w_mbat.mdl"
 SWEP.HoldType = "melee"
 	-- Primary Fire ---------------------------------------------------------------------------------------------------------------------------------------------
-SWEP.Primary.Damage = 24 -- Damage
+SWEP.Primary.Damage = 15 -- Damage
 SWEP.IsMeleeWeapon  = true -- Should this weapon be a melee weapon? 
-SWEP.Primary.Force = 16 -- Force applied on the object the bullet hits
+SWEP.Primary.Force = 12 -- Force applied on the object the bullet hits
 SWEP.Primary.Ammo	= "Null" -- Ammo type
 
 --[[ Nah, default anims looks better, looks close in manhunt game

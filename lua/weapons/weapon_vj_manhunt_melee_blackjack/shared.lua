@@ -17,6 +17,7 @@ SWEP.NPC_BeforeFireSound = {"weapons/melee/mh_melee_miss.wav"}
 SWEP.WorldModel = "models/Manhunt/weapons/w_blackjack.mdl"
 SWEP.HoldType = "melee"
 	-- Primary Fire ---------------------------------------------------------------------------------------------------------------------------------------------
-SWEP.Primary.Damage = 10 -- Damage
+SWEP.Primary.Damage = 9 -- Damage
 SWEP.IsMeleeWeapon  = true -- Should this weapon be a melee weapon? 
+SWEP.Primary.Force = 9 -- Force applied on the object the bullet hits
 SWEP.Primary.Ammo	= "Null" -- Ammo type

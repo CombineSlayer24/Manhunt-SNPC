@@ -40,23 +40,22 @@ function ENT:SpawnFunction(ply, tr)
         
         --[[Can't get this fucking sprite to delete itself after being picked up.--]]
 
-        -- self.CoronaOrb = ents.Create("env_sprite")
-        -- self.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
-        -- self.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
-        -- self.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
-        -- self.CoronaOrb:SetKeyValue("rendercolor","255 255 255")
-        -- self.CoronaOrb:SetKeyValue("renderfx","14")
-        -- self.CoronaOrb:SetKeyValue("rendermode","3")
-        -- self.CoronaOrb:SetKeyValue("renderamt","255")
-        -- self.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
-        -- self.CoronaOrb:SetKeyValue("mindxlevel","0")
-        -- self.CoronaOrb:SetKeyValue("maxdxlevel","0")
-        -- self.CoronaOrb:SetKeyValue("framerate","10.0")
-        -- self.CoronaOrb:SetKeyValue("spawnflags","0")
-        -- self.CoronaOrb:SetKeyValue("scale","0.5")
-        -- self.CoronaOrb:SetPos(SpawnPos)
-        -- self.CoronaOrb:Spawn()
-        -- self:DeleteOnRemove(self.CoronaOrb)
+--[[        self.CoronaOrb = ents.Create("env_sprite")
+        self.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
+        self.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
+        self.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
+        self.CoronaOrb:SetKeyValue("rendercolor","255 255 255")
+        self.CoronaOrb:SetKeyValue("renderfx","14")
+        self.CoronaOrb:SetKeyValue("rendermode","3")
+        self.CoronaOrb:SetKeyValue("renderamt","255")
+        self.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
+        self.CoronaOrb:SetKeyValue("mindxlevel","0")
+        self.CoronaOrb:SetKeyValue("maxdxlevel","0")
+        self.CoronaOrb:SetKeyValue("framerate","10.0")
+        self.CoronaOrb:SetKeyValue("spawnflags","0")
+        self.CoronaOrb:SetKeyValue("scale","0.5")
+        self.CoronaOrb:SetPos(SpawnPos)
+        self.CoronaOrb:Spawn()--]]
         return ent
     end
  
@@ -145,10 +144,10 @@ if CLIENT then -- Light glow code
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Use(activator) -- Gives health upon pressing "Use" key (Figure out how to limit it's max health.)
-	if activator:IsPlayer() then
-		self:EmitSound(Sound("weapons/pills_pickup.wav"), 70, 100)
-		activator:SetHealth(activator:Health() + math.random(25,65) )
-		activator:PrintMessage(HUD_PRINTTALK, "Pills taken." )
+    if ( activator:Health() < activator:GetMaxHealth() ) then
+        activator:SetHealth( math.Clamp( activator:Health() + 50, 0, activator:GetMaxHealth() ) )
+		activator:PrintMessage(HUD_PRINTTALK, "Painkillers" )
+        activator:EmitSound(Sound("weapons/pills_pickup.wav"), 70, 100)
 		self:Remove()
 	end
 end

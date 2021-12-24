@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/CJ_BULLETBOX3"
+ 
+ "$halflambert" "1" 
+ }
