@@ -23,7 +23,18 @@ if VJExists == true then
 	VJ.AddCategoryInfo(vManhunt_Misc_Cat, {Icon = "vgui/mh_logo.png"})
 	VJ.AddCategoryInfo(vManhunt_EntityCat, {Icon = "vgui/mh_logo.png"})
 
-	local ManHunt_Skinz_Weapons =  {"weapon_vj_manhunt_glock","weapon_vj_manhunt_glockps2"}
+--[[	Weapon Notes :
+	Hoods = (VANILLA: Fist, Bat (Wooden), Blackjack, Crowbar | BETA: Hammer, Fire Axe | CUSTOM: Revolver)
+	Skinz =  (VANILLA: Fist, Bat (Metal), Knife, Nailgun | BETA: Revolver, Sawn-off Shotgun | CUSTOM: Machete, Light Pistol)
+	Wardogs = (VANILLA: Machete, Shotgun, Sniper Rifle (?), Revolver | BETA: PSG-1 (?), Hunting Knife | CUSTOM: Fist, Assault Rifle)
+	Innocentz = (VANILLA: Fist, Revolver, Sawn-off Shotgun, Knife, Sickle, Axe, Bat (Wooden) | BETA: Bat (Spiked), Shotgun | CUSTOM: Heavy Pistol)
+	Smileys = (VANILLA: Fist, Meat Cleaver, Revolver, Shotgun, Light Pistol, Sawn-off Shotgun, Knife, Bat (Metal)| BETA: Hammer, Blackjack)
+	CCPD = (VANILLA: Revolver, Nightstick, Shotgun, Light Pistol, Heavy Pistol, Sub-Machine Gun)
+	CCPD Swat = (VANILLA: Shotgun, Heavy Pistol, Sub-Machine Gun | CUSTOM: Nightstick (RARE), Fist (RARE), Assault Rifle)
+	Cerberus = (VANILLA: Assault Rifle, Shotgun, Heavy Pistol, | CUSTOM: Fist, Nightstick)
+--]]
+
+	local ManHunt_Skinz_Weapons =  {"weapon_vj_manhunt_pistol_light","weapon_vj_manhunt_pistol_light_ps2"}
 
 	---------- Hunters ---------------------
 	VJ.AddNPC_HUMAN("Skinz Member","npc_vj_skin",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
