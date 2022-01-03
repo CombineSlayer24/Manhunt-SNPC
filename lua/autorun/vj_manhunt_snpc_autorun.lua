@@ -23,29 +23,102 @@ if VJExists == true then
 	VJ.AddCategoryInfo(vManhunt_Misc_Cat, {Icon = "vgui/mh_logo.png"})
 	VJ.AddCategoryInfo(vManhunt_EntityCat, {Icon = "vgui/mh_logo.png"})
 
---[[	Weapon Notes :
-	Hoods = (VANILLA: Fist, Bat (Wooden), Blackjack, Crowbar | BETA: Hammer, Fire Axe | CUSTOM: Revolver)
+--[[	Weapon Notes : (If your digging in here!)
+	Hoods = (VANILLA: Fist, Bat (Wooden), Blackjack, Crowbar | BETA: Hammer, Fire Axe | CUSTOM: Light Pistol, Revolver)
 	Skinz =  (VANILLA: Fist, Bat (Metal), Knife, Nailgun | BETA: Revolver, Sawn-off Shotgun | CUSTOM: Machete, Light Pistol)
-	Wardogs = (VANILLA: Machete, Shotgun, Sniper Rifle (?), Revolver | BETA: PSG-1 (?), Hunting Knife | CUSTOM: Fist, Assault Rifle)
+	Wardogs = (VANILLA: Machete, Shotgun, Sniper Rifle (?), Revolver | BETA: PSG-1 (?), Hunting Knife | CUSTOM: Fist, Bat (Wooden), Assault Rifle)
 	Innocentz = (VANILLA: Fist, Revolver, Sawn-off Shotgun, Knife, Sickle, Axe, Bat (Wooden) | BETA: Bat (Spiked), Shotgun | CUSTOM: Heavy Pistol)
-	Smileys = (VANILLA: Fist, Meat Cleaver, Revolver, Shotgun, Light Pistol, Sawn-off Shotgun, Knife, Bat (Metal)| BETA: Hammer, Blackjack)
-	CCPD = (VANILLA: Revolver, Nightstick, Shotgun, Light Pistol, Heavy Pistol, Sub-Machine Gun)
-	CCPD Swat = (VANILLA: Shotgun, Heavy Pistol, Sub-Machine Gun | CUSTOM: Nightstick (RARE), Fist (RARE), Assault Rifle)
-	Cerberus = (VANILLA: Assault Rifle, Shotgun, Heavy Pistol, | CUSTOM: Fist, Nightstick)
+	Smileys = (VANILLA: Fist, Meat Cleaver, Revolver, Shotgun, Light Pistol, Sawn-off Shotgun, Knife, Bat (Metal)| BETA: Hammer, Bat (Spiked), Blackjack, Sickle)
+	CCPD = (VANILLA: Revolver, Nightstick, Shotgun, Light Pistol, Heavy Pistol, Sub-Machine Gun | CUSTOM: Bat (Wooden), Fist
+	CCPD Swat = (VANILLA: Shotgun, Heavy Pistol, Sub-Machine Gun | CUSTOM: Nightstick, Fist, Assault Rifle)
+	Cerberus = (VANILLA: Assault Rifle, Shotgun, Heavy Pistol, | CUSTOM: Fist, Nightstick, Bat (Wooden), Light Pistol)
+
+	Item Rarites = 5 (very common), 4 (common), 3 (somewhat common), 2 (rare, 1 (extremely rare)
 --]]
 
-	local ManHunt_Skinz_Weapons =  {"weapon_vj_manhunt_pistol_light","weapon_vj_manhunt_pistol_light_ps2"}
+	local ManHunt_Hoods_Striker_Weapons =  
+	{	
+		"weapon_vj_manhunt_melee_blackjack",
+		"weapon_vj_manhunt_melee_blackjack",
+		"weapon_vj_manhunt_melee_blackjack",
+		"weapon_vj_manhunt_melee_blackjack",
+		"weapon_vj_manhunt_melee_blackjack",
+		--"weapon_vj_manhunt_melee_crowbar",
+		--"weapon_vj_manhunt_melee_crowbar",
+		--"weapon_vj_manhunt_melee_crowbar",
+		--"weapon_vj_manhunt_melee_crowbar",
+		--"weapon_vj_manhunt_melee_fire-axe",
+		--"weapon_vj_manhunt_melee_fire-axe",
+		--"weapon_vj_manhunt_melee_fire-axe",
+		--"weapon_vj_manhunt_melee_hammer",
+		--"weapon_vj_manhunt_melee_hammer",
+		"weapon_vj_manhunt_melee_bat_w",
+		"weapon_vj_manhunt_melee_bat_w",
+		"weapon_vj_manhunt_melee_bat_w"
+		--"weapon_vj_manhunt_melee_fists",
+		--"weapon_vj_manhunt_melee_fists",
+		--"weapon_vj_manhunt_melee_fists",
+	}
+
+	local ManHunt_Hoods_Gunman_Weapons =  
+	{	
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_light_ps2",
+		"weapon_vj_manhunt_pistol_light_ps2",
+		"weapon_vj_manhunt_pistol_light_ps2",
+		"weapon_vj_manhunt_pistol_light",
+		"weapon_vj_manhunt_pistol_light",
+		"weapon_vj_manhunt_pistol_light"
+	}
+
+	local ManHunt_Skinz_Striker_Weapons =  
+	{	
+		"weapon_vj_manhunt_melee_bat_m",
+		"weapon_vj_manhunt_melee_bat_m",
+		"weapon_vj_manhunt_melee_bat_m",
+		"weapon_vj_manhunt_melee_bat_m",
+		"weapon_vj_manhunt_melee_bat_m"
+		--"weapon_vj_manhunt_melee_knife",
+		--"weapon_vj_manhunt_melee_knife",
+		--"weapon_vj_manhunt_melee_knife",
+		--"weapon_vj_manhunt_melee_fists",
+		--"weapon_vj_manhunt_melee_fists",
+		--"weapon_vj_manhunt_melee_fists",
+		--"weapon_vj_manhunt_melee_machete",
+		--"weapon_vj_manhunt_melee_machete",
+	}
+	local ManHunt_Skinz_Gunman_Weapons =  
+	{	
+		"weapon_vj_manhunt_pistol_nailgun",
+		"weapon_vj_manhunt_pistol_nailgun",
+		"weapon_vj_manhunt_pistol_nailgun",
+		"weapon_vj_manhunt_pistol_nailgun",
+		"weapon_vj_manhunt_pistol_nailgun",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_38r",
+		"weapon_vj_manhunt_pistol_light",
+		"weapon_vj_manhunt_pistol_light",
+		"weapon_vj_manhunt_pistol_light_ps2",
+		"weapon_vj_manhunt_pistol_light_ps2"
+		--"weapon_vj_manhunt_shotgun_sawnoff",
+		--"weapon_vj_manhunt_shotgun_sawnoff"
+	}
 
 	---------- Hunters ---------------------
-	VJ.AddNPC_HUMAN("Skinz Member","npc_vj_skin",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
-	VJ.AddNPC_HUMAN("Skinz Member (Hostile)","npc_vj_skin_h",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Skinz Member (Friendly)","npc_vj_skin",ManHunt_Skinz_Striker_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Skinz Member","npc_vj_skin_h",ManHunt_Skinz_Striker_Weapons,vManhunt_Hunters_Cat)
 
-	VJ.AddNPC_HUMAN("Hoods Member","npc_vj_hood",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
-	VJ.AddNPC_HUMAN("Hoods Member (Hostile)","npc_vj_hood_h",ManHunt_Skinz_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Hood Member (Friendly)","npc_vj_hood",ManHunt_Hoods_Striker_Weapons,vManhunt_Hunters_Cat)
+	VJ.AddNPC_HUMAN("Hood Member","npc_vj_hood_h",ManHunt_Hoods_Striker_Weapons,vManhunt_Hunters_Cat)
 
 	---------- Misc ------------------------
-	VJ.AddNPC_HUMAN("James Earl Cash","npc_vj_cash",ManHunt_Skinz_Weapons,vManhunt_Misc_Cat)
-	VJ.AddNPC_HUMAN("James Earl Cash (Hostile)","npc_vj_cash_h",ManHunt_Skinz_Weapons,vManhunt_Misc_Cat)
+	VJ.AddNPC_HUMAN("James Earl Cash (Friendly)","npc_vj_cash",ManHunt_Hoods_Striker_Weapons,vManhunt_Misc_Cat)
+	VJ.AddNPC_HUMAN("James Earl Cash","npc_vj_cash_h",ManHunt_Hoods_Striker_Weapons,vManhunt_Misc_Cat)
 
 	---------- Weapons ---------------------
 	VJ.AddNPCWeapon("VJ_Manhunt_Pistol_Light", "weapon_vj_manhunt_pistol_light")
