@@ -17,7 +17,7 @@ if SERVER then
 		if not npcWepList[wepclassv] then -- do not copy the table
 			local wep = weapons.GetStored(wepclassv)
 
-			if wep and (wep.Spawnable and not wep.AdminOnly) and weapons.IsBasedOn(wep.ClassName, "weapon_vj_melee_base_v2") then
+			if wep and (wep.Spawnable and not wep.AdminOnly) and weapons.IsBasedOn(wep.ClassName, "weapon_vj_melee_base_manhunt_v2") then
 				npcWepList[wepclassv] = {
 					["class"] = wep.ClassName,
 					["title"] = wep.PrintName or wep.ClassName

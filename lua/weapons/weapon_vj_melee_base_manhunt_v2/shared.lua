@@ -509,7 +509,7 @@ if self.Owner:IsPlayer() then
 	damagedice = math.Rand(1,2)
 
 	pain = self.Primary.Damage * damagedice
-			self.Weapon:EmitSound("WeaponFrag.Roll")--slash in the wind sound here
+			self.Weapon:EmitSound("weapons/melee/mh_melee_miss.wav")--slash in the wind sound here
 				if SERVER and IsValid(self.Owner) then
 						local slash = {}
 						slash.start = pos
@@ -521,7 +521,7 @@ if self.Owner:IsPlayer() then
 						if slashtrace.Hit then
 							targ = slashtrace.Entity
 							if targ:IsPlayer() or targ:IsNPC() then	
-							self.Owner:EmitSound("npc/ministrider/flechette_flesh_impact1.wav",55,100)		
+							self.Owner:EmitSound("weapons/melee/mh_melee_miss.wav",55,100)		
 								paininfo = DamageInfo()
 								paininfo:SetDamage(pain)
 								paininfo:SetDamageType(DMG_SLASH)

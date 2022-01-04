@@ -14,14 +14,13 @@ Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying,
 - Satisfyingly fun to hide from
 
 ### DEMO ONLY:
-- This is a W.I.P preview pack, meaning I will only contain little bit of content in here
-Contains 1 NPC, 8 OST peices from the game (Born Again, Doorway to hell), 7 NPC Weapons (3 Melee weapons, 4 guns)
+- This is a W.I.P preview pack, NOT FULLY COMPLETE!
 
 Spawn Icons, and everything in this pack right now is bound to change.
 
 ### The included NPCs in this demo is:
 - [x] Skinz
-- [ ] CCPD (Police Officer) 
+- [x] CCPD (Police Officer) 
 - [x] Hoods
 - [x] James Earl Cash
 
@@ -53,7 +52,7 @@ Spawn Icons, and everything in this pack right now is bound to change.
 
 //
 - Carcer City Police (Police Officer)
-- [ ] Voiceset 1
+- [x] Voiceset 1
 - [ ] Voiceset 2
 - [ ] Voiceset 3
 - [ ] Voiceset 4
