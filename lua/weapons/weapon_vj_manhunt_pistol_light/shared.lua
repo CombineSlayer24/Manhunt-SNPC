@@ -51,7 +51,7 @@ SWEP.PrimaryEffects_ShellAttachment = 2
 SWEP.PrimaryEffects_ShellType = "VJ_Weapon_PistolShell1"
 	-- NPC Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_HasReloadSound = true -- Should it play a sound when the base detects the SNPC playing a reload animation?
-SWEP.NPC_ReloadSound = {"weapons/manhunt/pistol_reload.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
+SWEP.NPC_ReloadSound = {"weapons/manhunt/pistol/reload.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
 SWEP.NPC_ReloadSoundLevel = 75 -- How far does the sound go?
 
 SWEP.Reload_TimeUntilAmmoIsSet	= 2.1 -- Time until ammo is set to the weapon
