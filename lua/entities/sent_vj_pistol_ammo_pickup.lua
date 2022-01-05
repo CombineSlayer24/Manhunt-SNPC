@@ -178,9 +178,10 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
 	if activator:IsPlayer() then
-        caller:GiveAmmo(24, "Pistol", true)
-		activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
-		activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (24)" )
+        caller:GiveAmmo(6, "Pistol", true)
+        caller:GiveAmmo(18, "SMG1", true)
+        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+        activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6) & SMG Ammo (18)" )
 		self:Remove()
 	end
 end
