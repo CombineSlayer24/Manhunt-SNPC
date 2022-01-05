@@ -22,8 +22,9 @@ ENT.AdminOnly = false
 local color_white  = Color( 255, 255, 255 )
 
 hook.Add( "PreDrawHalos", "AddPillsHalo", function()
-	halo.Add( ents.FindByClass( "sent_vj_pills_pickup*" ), color_white, 8, 8, 5 )
+    halo.Add( ents.FindByClass( "sent_vj_pills_pickup*" ), color_white, 8, 8, 5 )
 end )
+
 
 function ENT:SpawnFunction(ply, tr)
  
@@ -37,25 +38,73 @@ function ENT:SpawnFunction(ply, tr)
         ent:Activate()
         ent.Planted = false
 
-        
-        --[[Can't get this fucking sprite to delete itself after being picked up.--]]
+        ent.PickupGlow = ents.Create("light_dynamic")
+        ent.PickupGlow:SetKeyValue("brightness", "5")
+        ent.PickupGlow:SetKeyValue("distance", "90")
+        ent.PickupGlow:SetLocalPos(ent:GetPos())
+        ent.PickupGlow:SetLocalAngles(ent:GetAngles())
+        ent.PickupGlow:Fire("Color", "255 255 255")
+        ent.PickupGlow:SetParent(ent)
+        ent.PickupGlow:Spawn()
+        ent.PickupGlow:Activate()
+        ent.PickupGlow:SetParent(ent)
+        ent.PickupGlow:Fire("TurnOn", "", 0)
+        ent:DeleteOnRemove(ent.PickupGlow)
 
---[[        self.CoronaOrb = ents.Create("env_sprite")
-        self.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
-        self.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
-        self.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
-        self.CoronaOrb:SetKeyValue("rendercolor","255 255 255")
-        self.CoronaOrb:SetKeyValue("renderfx","14")
-        self.CoronaOrb:SetKeyValue("rendermode","3")
-        self.CoronaOrb:SetKeyValue("renderamt","255")
-        self.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
-        self.CoronaOrb:SetKeyValue("mindxlevel","0")
-        self.CoronaOrb:SetKeyValue("maxdxlevel","0")
-        self.CoronaOrb:SetKeyValue("framerate","10.0")
-        self.CoronaOrb:SetKeyValue("spawnflags","0")
-        self.CoronaOrb:SetKeyValue("scale","0.5")
-        self.CoronaOrb:SetPos(SpawnPos)
-        self.CoronaOrb:Spawn()--]]
+        ent.CoronaOrb = ents.Create("env_sprite")
+        ent.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
+        ent.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
+        ent.CoronaOrb:SetKeyValue("rendercolor","255 255 255")
+        ent.CoronaOrb:SetKeyValue("renderfx","14")
+        ent.CoronaOrb:SetKeyValue("rendermode","3")
+        ent.CoronaOrb:SetKeyValue("renderamt","255")
+        ent.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
+        ent.CoronaOrb:SetKeyValue("mindxlevel","0")
+        ent.CoronaOrb:SetKeyValue("maxdxlevel","0")
+        ent.CoronaOrb:SetKeyValue("framerate","10.0")
+        ent.CoronaOrb:SetKeyValue("spawnflags","0")
+        ent.CoronaOrb:SetKeyValue("scale","0.5")
+        ent.CoronaOrb:SetPos(SpawnPos)
+        ent.CoronaOrb:Spawn()
+        ent:DeleteOnRemove(ent.CoronaOrb)
+
+        ent.CoronaOrb2 = ents.Create("env_sprite")
+        ent.CoronaOrb2:SetKeyValue("model","sprites/manhunt/halo.vmt")
+        ent.CoronaOrb2:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb2:SetKeyValue("HDRColorScale","1.0")
+        ent.CoronaOrb2:SetKeyValue("rendercolor","255 255 255")
+        ent.CoronaOrb2:SetKeyValue("renderfx","14")
+        ent.CoronaOrb2:SetKeyValue("rendermode","3")
+        ent.CoronaOrb2:SetKeyValue("renderamt","255")
+        ent.CoronaOrb2:SetKeyValue("disablereceiveshadows","0")
+        ent.CoronaOrb2:SetKeyValue("mindxlevel","0")
+        ent.CoronaOrb2:SetKeyValue("maxdxlevel","0")
+        ent.CoronaOrb2:SetKeyValue("framerate","10.0")
+        ent.CoronaOrb2:SetKeyValue("spawnflags","0")
+        ent.CoronaOrb2:SetKeyValue("scale","0.6")
+        ent.CoronaOrb2:SetPos(SpawnPos)
+        ent.CoronaOrb2:Spawn()
+        ent:DeleteOnRemove(ent.CoronaOrb2)
+
+        ent.CoronaOrb3 = ents.Create("env_sprite")
+        ent.CoronaOrb3:SetKeyValue("model","sprites/manhunt/sphere.vmt")
+        ent.CoronaOrb3:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb3:SetKeyValue("HDRColorScale","1.0")
+        ent.CoronaOrb3:SetKeyValue("rendercolor","255 255 255")
+        ent.CoronaOrb3:SetKeyValue("renderfx","14")
+        ent.CoronaOrb3:SetKeyValue("rendermode","3")
+        ent.CoronaOrb3:SetKeyValue("renderamt","255")
+        ent.CoronaOrb3:SetKeyValue("disablereceiveshadows","0")
+        ent.CoronaOrb3:SetKeyValue("mindxlevel","0")
+        ent.CoronaOrb3:SetKeyValue("maxdxlevel","0")
+        ent.CoronaOrb3:SetKeyValue("framerate","10.0")
+        ent.CoronaOrb3:SetKeyValue("spawnflags","0")
+        ent.CoronaOrb3:SetKeyValue("scale","0.5")
+        ent.CoronaOrb3:SetPos(SpawnPos)
+        ent.CoronaOrb3:Spawn()
+        ent:DeleteOnRemove(ent.CoronaOrb3)
+
         return ent
     end
  
@@ -99,7 +148,6 @@ function ENT:PhysicsCollide(data, physobj)
                 self.Entity:EmitSound(Sound(""))
         end
 end
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if CLIENT then -- Spinning code
         function ENT:Initialize()
@@ -127,26 +175,10 @@ if CLIENT then -- Spinning code
         end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-if CLIENT then -- Light glow code
-		function ENT:Think()
-		local dlight = DynamicLight( self:EntIndex() )
-		if ( dlight ) then
-		dlight.Pos = self:GetPos()
-		dlight.r = 255
-		dlight.g = 255
-		dlight.b = 255
-		dlight.Brightness = 1.5
-		dlight.Size = 200
-		dlight.Decay = 0
-		dlight.DieTime = CurTime() + 0
-	   end
-    end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Use(activator) -- Gives health upon pressing "Use" key (Figure out how to limit it's max health.)
+function ENT:Use(activator) -- Gives health upon pressing "Use" key
     if ( activator:Health() < activator:GetMaxHealth() ) then
         activator:SetHealth( math.Clamp( activator:Health() + 50, 0, activator:GetMaxHealth() ) )
-		activator:PrintMessage(HUD_PRINTTALK, "Painkillers" )
+		activator:PrintMessage(HUD_PRINTTALK, "Painkillers (50% health restored)" )
         activator:EmitSound(Sound("weapons/pills_pickup.wav"), 70, 100)
 		self:Remove()
 	end
