@@ -5,7 +5,6 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/manhunt/npc/skin1.mdl","models/manhunt/npc/skin2.mdl","models/manhunt/npc/skin3.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
 ENT.StartHealth = 325 -- The starting health of the NPC
 ENT.HullType = HULL_HUMAN
 	-- ====== Sight & Speed Variables ====== --
@@ -72,8 +71,9 @@ ENT.SoundTbl_Pain = {"shared_sfx_hunters/pain1.wav","shared_sfx_hunters/pain2.wa
 
 -- ^^ ARE SHARED ^^ // Down below isnt --
 function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawned, however, they will all have Footsteps, Pained and Death sounds.
-    local voices = math.random(1,3)
-        if voices == 1 then -- Skinz 1 voices
+    local voices = math.random(1,5)
+    if voices == 1 then -- Skinz 1 voices
+    	self.Model = {"models/manhunt/npc/skin2.mdl"}
 		self.SoundTbl_Alert = 
 		{
 			"characters/skinz/skinz1_alert1.wav",
@@ -280,6 +280,7 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 --			"characters/skinz/skinz1_call_for_help_reply3.wav"
 --		}
 	elseif voices == 2 then -- Skinz 2 voices
+		self.Model = {"models/manhunt/npc/skin2.mdl"}
 		self.SoundTbl_Alert = 
 		{
 			"characters/skinz/skinz2_alert1.wav",
@@ -478,6 +479,7 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz2_call_for_help4.wav"
 		}
 	elseif voices == 3 then -- Skinz 3 voices
+		self.Model = {"models/manhunt/npc/skin3.mdl"}
 		self.SuppressingSoundChance = 5
 		self.SoundTbl_Alert = 
 		{
@@ -666,6 +668,411 @@ function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawn
 			"characters/skinz/skinz3_suppressing16.wav",
 			"characters/skinz/skinz3_suppressing17.wav",
 			"characters/skinz/skinz3_suppressing18.wav"
+		}
+	elseif voices == 4 then -- Skinz 4 voices
+		self.Model = {"models/manhunt/npc/skin3.mdl"}
+		self.SoundTbl_Alert = 
+		{
+			"characters/skinz/skinz4_alert1.wav",
+			"characters/skinz/skinz4_alert2.wav",
+			"characters/skinz/skinz4_alert3.wav",
+			"characters/skinz/skinz4_alert4.wav",
+			"characters/skinz/skinz4_alert5.wav",
+			"characters/skinz/skinz4_alert6.wav",
+			"characters/skinz/skinz4_alert7.wav",
+			"characters/skinz/skinz4_alert8.wav",
+			"characters/skinz/skinz4_alert9.wav",
+			"characters/skinz/skinz4_alert10.wav",
+			"characters/skinz/skinz4_alert11.wav",
+			"characters/skinz/skinz4_alert12.wav",
+			"characters/skinz/skinz4_alert13.wav",
+			"characters/skinz/skinz4_alert14.wav",
+			"characters/skinz/skinz4_alert15.wav"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"characters/skinz/skinz4_ally_death1.wav",
+			"characters/skinz/skinz4_ally_death2.wav",
+			"characters/skinz/skinz4_ally_death3.wav"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"characters/skinz/skinz4_fight15.wav",
+			"characters/skinz/skinz4_grenade_spot3.wav"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"characters/skinz/skinz4_fight1.wav",
+			"characters/skinz/skinz4_fight2.wav",
+			"characters/skinz/skinz4_fight3.wav",
+			"characters/skinz/skinz4_fight4.wav",
+			"characters/skinz/skinz4_fight5.wav",
+			"characters/skinz/skinz4_fight6.wav",
+			"characters/skinz/skinz4_fight7.wav",
+			"characters/skinz/skinz4_fight8.wav",
+			"characters/skinz/skinz4_fight9.wav",
+			"characters/skinz/skinz4_fight10.wav",
+			"characters/skinz/skinz4_fight11.wav",
+			"characters/skinz/skinz4_fight12.wav",
+			"characters/skinz/skinz4_fight13.wav",
+			"characters/skinz/skinz4_fight14.wav",
+			"characters/skinz/skinz4_fight15.wav",
+			"characters/skinz/skinz4_fight16.wav",
+			"characters/skinz/skinz4_fight17.wav",
+			"characters/skinz/skinz4_fight18.wav"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"characters/skinz/skinz4_grenade_spot1.wav",
+			"characters/skinz/skinz4_grenade_spot2.wav",
+			"characters/skinz/skinz4_grenade_spot3.wav",
+			"characters/skinz/skinz4_death1.wav",
+			"characters/skinz/skinz4_death2.wav"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"characters/skinz/skinz4_idle_answer1.wav",
+			"characters/skinz/skinz4_idle_answer2.wav",
+			"characters/skinz/skinz4_idle_answer3.wav",
+			"characters/skinz/skinz4_idle_answer4.wav",
+			"characters/skinz/skinz4_idle_answer5.wav",
+			"characters/skinz/skinz4_idle_answer6.wav",
+			"characters/skinz/skinz4_idle_answer7.wav",
+			"characters/skinz/skinz4_idle_answer8.wav"
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"characters/skinz/skinz4_idle_question1.wav",
+			"characters/skinz/skinz4_idle_question2.wav",
+			"characters/skinz/skinz4_idle_question3.wav",
+			"characters/skinz/skinz4_idle_question4.wav",
+			"characters/skinz/skinz4_idle_question5.wav",
+			"characters/skinz/skinz4_idle_question6.wav"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"characters/skinz/skinz4_idle1.wav",
+			"characters/skinz/skinz4_idle2.wav",
+			"characters/skinz/skinz4_idle3.wav",
+			"characters/skinz/skinz4_idle4.wav",
+			"characters/skinz/skinz4_idle5.wav",
+			"characters/skinz/skinz4_idle6.wav",
+			"characters/skinz/skinz4_idle7.wav",
+			"characters/skinz/skinz4_idle8.wav",
+			"characters/skinz/skinz4_idle9.wav",
+			"characters/skinz/skinz4_idle10.wav",
+			"characters/skinz/skinz4_idle11.wav",
+			"characters/skinz/skinz4_idle12.wav",
+			"characters/skinz/skinz4_idle13.wav",
+			"characters/skinz/skinz4_idle14.wav",
+			"characters/skinz/skinz4_idle15.wav",
+			"characters/skinz/skinz4_idle16.wav",
+			"characters/skinz/skinz4_idle17.wav",
+			"characters/skinz/skinz4_idle18.wav",
+			"characters/skinz/skinz4_idle19.wav",
+			"characters/skinz/skinz4_idle20.wav",
+			"characters/skinz/skinz4_idle21.wav",
+			"characters/skinz/skinz4_idle22.wav",
+			"characters/skinz/skinz4_idle23.wav",
+			"characters/skinz/skinz4_idle24.wav",
+			"characters/skinz/skinz4_idle25.wav",
+			"characters/skinz/skinz4_idle26.wav",
+			"characters/skinz/skinz4_idle27.wav",
+			"characters/skinz/skinz4_idle28.wav",
+			"characters/skinz/skinz4_idle29.wav",
+			"characters/skinz/skinz4_idle30.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"characters/skinz/skinz4_investigate1.wav",
+			"characters/skinz/skinz4_investigate2.wav",
+			"characters/skinz/skinz4_investigate3.wav",
+			"characters/skinz/skinz4_investigate4.wav",
+			"characters/skinz/skinz4_investigate5.wav",
+			"characters/skinz/skinz4_investigate6.wav",
+			"characters/skinz/skinz4_investigate7.wav",
+			"characters/skinz/skinz4_investigate8.wav",
+			"characters/skinz/skinz4_investigate9.wav",
+			"characters/skinz/skinz4_investigate10.wav",
+			"characters/skinz/skinz4_investigate11.wav",
+			"characters/skinz/skinz4_investigate12.wav",
+			"characters/skinz/skinz4_investigate13.wav",
+			"characters/skinz/skinz4_investigate14.wav",
+			"characters/skinz/skinz4_investigate15.wav"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"characters/skinz/skinz4_kill1.wav",
+			"characters/skinz/skinz4_kill2.wav",
+			"characters/skinz/skinz4_kill3.wav",
+			"characters/skinz/skinz4_kill4.wav",
+			"characters/skinz/skinz4_kill5.wav",
+			"characters/skinz/skinz4_kill6.wav",
+			"characters/skinz/skinz4_kill7.wav",
+			"characters/skinz/skinz4_kill8.wav",
+			"characters/skinz/skinz4_kill9.wav"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"characters/skinz/skinz4_lost_enemy1.wav",
+			"characters/skinz/skinz4_lost_enemy2.wav",
+			"characters/skinz/skinz4_lost_enemy4.wav",
+			"characters/skinz/skinz4_lost_enemy5.wav",
+			"characters/skinz/skinz4_lost_enemy6.wav",
+			"characters/skinz/skinz4_lost_enemy7.wav",
+			"characters/skinz/skinz4_lost_enemy8.wav",
+			"characters/skinz/skinz4_lost_enemy9.wav",
+			"characters/skinz/skinz4_lost_enemy10.wav",
+			"characters/skinz/skinz4_lost_enemy11.wav",
+			"characters/skinz/skinz4_lost_enemy12.wav",
+			"characters/skinz/skinz4_lost_enemy13.wav"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"characters/skinz/skinz4_player_follow1.wav",
+			"characters/skinz/skinz4_player_follow2.wav",
+			"characters/skinz/skinz4_player_follow3.wav"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"characters/skinz/skinz4_player_hurtby1.wav",
+			"characters/skinz/skinz4_player_hurtby2.wav",
+			"characters/skinz/skinz4_player_hurtby3.wav"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"characters/skinz/skinz4_player_spot1.wav",
+			"characters/skinz/skinz4_player_spot2.wav"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"characters/skinz/skinz4_player_unfollow1.wav",
+			"characters/skinz/skinz4_player_unfollow2.wav",
+			"characters/skinz/skinz4_player_unfollow3.wav"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"characters/skinz/skinz4_suppressing1.wav",
+			"characters/skinz/skinz4_suppressing2.wav",
+			"characters/skinz/skinz4_suppressing3.wav",
+			"characters/skinz/skinz4_suppressing4.wav",
+			"characters/skinz/skinz4_suppressing5.wav",
+			"characters/skinz/skinz4_suppressing6.wav",
+			"characters/skinz/skinz4_suppressing7.wav",
+			"characters/skinz/skinz4_suppressing8.wav",
+			"characters/skinz/skinz4_suppressing9.wav",
+			"characters/skinz/skinz4_suppressing10.wav",
+			"characters/skinz/skinz4_suppressing11.wav",
+			"characters/skinz/skinz4_suppressing12.wav",
+			"characters/skinz/skinz4_suppressing13.wav",
+			"characters/skinz/skinz4_suppressing14.wav",
+			"characters/skinz/skinz4_suppressing15.wav",
+			"characters/skinz/skinz4_suppressing16.wav",
+			"characters/skinz/skinz4_suppressing17.wav",
+			"characters/skinz/skinz4_suppressing18.wav",
+			"characters/skinz/skinz4_suppressing19.wav",
+			"characters/skinz/skinz4_suppressing20.wav"
+		}
+	elseif voices == 5 then -- Skinz 5 voices
+		self.Model = {"models/manhunt/npc/skin1.mdl"}
+		self.SuppressingSoundChance = 5
+		self.SoundTbl_Alert = 
+		{
+			"characters/skinz/skinz5_alert1.wav",
+			"characters/skinz/skinz5_alert2.wav",
+			"characters/skinz/skinz5_alert3.wav",
+			"characters/skinz/skinz5_alert4.wav",
+			"characters/skinz/skinz5_alert5.wav",
+			"characters/skinz/skinz5_alert6.wav",
+			"characters/skinz/skinz5_alert7.wav",
+			"characters/skinz/skinz5_alert8.wav",
+			"characters/skinz/skinz5_alert9.wav",
+			"characters/skinz/skinz5_alert10.wav",
+			"characters/skinz/skinz5_alert11.wav",
+			"characters/skinz/skinz5_alert12.wav",
+			"characters/skinz/skinz5_alert13.wav",
+			"characters/skinz/skinz5_alert14.wav",
+			"characters/skinz/skinz5_alert15.wav",
+			"characters/skinz/skinz5_alert16.wav",
+			"characters/skinz/skinz5_alert17.wav"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"characters/skinz/skinz5_ally_death1.wav",
+			"characters/skinz/skinz5_ally_death2.wav",
+			"characters/skinz/skinz5_ally_death3.wav",
+			"characters/skinz/skinz5_ally_death4.wav",
+			"characters/skinz/skinz5_ally_death5.wav"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"characters/skinz/skinz5_bump1.wav",
+			"characters/skinz/skinz5_bump2.wav"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"characters/skinz/skinz5_fight1.wav",
+			"characters/skinz/skinz5_fight2.wav",
+			"characters/skinz/skinz5_fight3.wav",
+			"characters/skinz/skinz5_fight4.wav",
+			"characters/skinz/skinz5_fight5.wav",
+			"characters/skinz/skinz5_fight6.wav",
+			"characters/skinz/skinz5_fight7.wav",
+			"characters/skinz/skinz5_fight8.wav",
+			"characters/skinz/skinz5_fight9.wav",
+			"characters/skinz/skinz5_fight10.wav",
+			"characters/skinz/skinz5_fight11.wav",
+			"characters/skinz/skinz5_fight12.wav",
+			"characters/skinz/skinz5_fight13.wav",
+			"characters/skinz/skinz5_fight14.wav",
+			"characters/skinz/skinz5_fight15.wav",
+			"characters/skinz/skinz5_fight16.wav",
+			"characters/skinz/skinz5_fight17.wav",
+			"characters/skinz/skinz5_fight18.wav",
+			"characters/skinz/skinz5_fight19.wav"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"characters/skinz/skinz5_grenade_spot1.wav",
+			"characters/skinz/skinz5_grenade_spot2.wav",
+			"characters/skinz/skinz5_death1.wav",
+			"characters/skinz/skinz5_death2.wav",
+			"characters/skinz/skinz5_death3.wav"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"characters/skinz/skinz5_idle_answer1.wav",
+			"characters/skinz/skinz5_idle_answer2.wav",
+			"characters/skinz/skinz5_idle_answer3.wav",
+			"characters/skinz/skinz5_idle_answer4.wav",
+			"characters/skinz/skinz5_idle_answer5.wav",
+			"characters/skinz/skinz5_idle_answer6.wav",
+			"characters/skinz/skinz5_idle_answer7.wav"
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"characters/skinz/skinz5_idle_question1.wav",
+			"characters/skinz/skinz5_idle_question2.wav",
+			"characters/skinz/skinz5_idle_question3.wav",
+			"characters/skinz/skinz5_idle_question4.wav",
+			"characters/skinz/skinz5_idle_question5.wav"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"characters/skinz/skinz5_idle1.wav",
+			"characters/skinz/skinz5_idle2.wav",
+			"characters/skinz/skinz5_idle3.wav",
+			"characters/skinz/skinz5_idle4.wav",
+			"characters/skinz/skinz5_idle5.wav",
+			"characters/skinz/skinz5_idle6.wav",
+			"characters/skinz/skinz5_idle7.wav",
+			"characters/skinz/skinz5_idle8.wav",
+			"characters/skinz/skinz5_idle9.wav",
+			"characters/skinz/skinz5_idle10.wav",
+			"characters/skinz/skinz5_idle11.wav",
+			"characters/skinz/skinz5_idle12.wav",
+			"characters/skinz/skinz5_idle13.wav",
+			"characters/skinz/skinz5_idle14.wav",
+			"characters/skinz/skinz5_idle15.wav",
+			"characters/skinz/skinz5_idle16.wav",
+			"characters/skinz/skinz5_idle17.wav",
+			"characters/skinz/skinz5_idle18.wav",
+			"characters/skinz/skinz5_idle19.wav",
+			"characters/skinz/skinz5_idle20.wav",
+			"characters/skinz/skinz5_idle21.wav",
+			"characters/skinz/skinz5_idle22.wav",
+			"characters/skinz/skinz5_idle23.wav",
+			"characters/skinz/skinz5_idle24.wav",
+			"characters/skinz/skinz5_idle25.wav",
+			"characters/skinz/skinz5_idle26.wav",
+			"characters/skinz/skinz5_idle27.wav",
+			"characters/skinz/skinz5_idle28.wav",
+			"characters/skinz/skinz5_idle29.wav",
+			"characters/skinz/skinz5_idle30.wav",
+			"characters/skinz/skinz5_idle31.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"characters/skinz/skinz5_investigate1.wav",
+			"characters/skinz/skinz5_investigate2.wav",
+			"characters/skinz/skinz5_investigate3.wav",
+			"characters/skinz/skinz5_investigate4.wav",
+			"characters/skinz/skinz5_investigate5.wav",
+			"characters/skinz/skinz5_investigate6.wav",
+			"characters/skinz/skinz5_investigate7.wav",
+			"characters/skinz/skinz5_investigate8.wav",
+			"characters/skinz/skinz5_investigate9.wav",
+			"characters/skinz/skinz5_investigate10.wav",
+			"characters/skinz/skinz5_investigate11.wav",
+			"characters/skinz/skinz5_investigate12.wav",
+			"characters/skinz/skinz5_investigate13.wav",
+			"characters/skinz/skinz5_investigate14.wav",
+			"characters/skinz/skinz5_investigate15.wav"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"characters/skinz/skinz5_kill1.wav",
+			"characters/skinz/skinz5_kill2.wav",
+			"characters/skinz/skinz5_kill3.wav",
+			"characters/skinz/skinz5_kill4.wav",
+			"characters/skinz/skinz5_kill5.wav",
+			"characters/skinz/skinz5_kill6.wav"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"characters/skinz/skinz5_lost_enemy1.wav",
+			"characters/skinz/skinz5_lost_enemy2.wav",
+			"characters/skinz/skinz5_lost_enemy4.wav",
+			"characters/skinz/skinz5_lost_enemy5.wav",
+			"characters/skinz/skinz5_lost_enemy6.wav",
+			"characters/skinz/skinz5_lost_enemy7.wav",
+			"characters/skinz/skinz5_lost_enemy8.wav",
+			"characters/skinz/skinz5_lost_enemy9.wav",
+			"characters/skinz/skinz5_lost_enemy10.wav",
+			"characters/skinz/skinz5_lost_enemy11.wav"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"characters/skinz/skinz5_player_follow1.wav",
+			"characters/skinz/skinz5_player_follow2.wav",
+			"characters/skinz/skinz5_player_follow3.wav"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"characters/skinz/skinz5_player_hurtby1.wav",
+			"characters/skinz/skinz5_player_hurtby2.wav"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"characters/skinz/skinz5_player_spot1.wav",
+			"characters/skinz/skinz5_player_spot2.wav"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"characters/skinz/skinz5_idle_answer1.wav",
+			"characters/skinz/skinz5_idle31.wav",
+			"characters/skinz/skinz5_lost_enemy11.wav"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"characters/skinz/skinz5_suppressing1.wav",
+			"characters/skinz/skinz5_suppressing2.wav",
+			"characters/skinz/skinz5_suppressing3.wav",
+			"characters/skinz/skinz5_suppressing4.wav",
+			"characters/skinz/skinz5_suppressing5.wav",
+			"characters/skinz/skinz5_suppressing6.wav",
+			"characters/skinz/skinz5_suppressing7.wav",
+			"characters/skinz/skinz5_suppressing8.wav",
+			"characters/skinz/skinz5_suppressing9.wav",
+			"characters/skinz/skinz5_suppressing10.wav",
+			"characters/skinz/skinz5_suppressing11.wav",
+			"characters/skinz/skinz5_suppressing12.wav",
+			"characters/skinz/skinz5_suppressing13.wav",
+			"characters/skinz/skinz5_suppressing14.wav",
+			"characters/skinz/skinz5_suppressing15.wav",
+			"characters/skinz/skinz5_suppressing16.wav",
+			"characters/skinz/skinz5_suppressing17.wav",
+			"characters/skinz/skinz5_suppressing18.wav"
 		}
 	end
 end

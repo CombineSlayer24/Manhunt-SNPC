@@ -324,8 +324,8 @@ function ENT:CustomOnThink_AIEnabled()
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
--- Credit to HLR.
-function ENT:CustomOnAlert(ent)
+-- Credit to HLR. (right now, needs more work)
+--[[function ENT:CustomOnAlert(ent)
 	if math.random(1, 2) == 1 then
 		if ent:IsNPC() then
 			if math.random(1, 2) == 1 then
@@ -337,10 +337,10 @@ function ENT:CustomOnAlert(ent)
 					end
 				end
 			end
-			self:PlaySoundSystem("Alert", {"characters/cops/cop1_spot_cash.wav"}) -- make sure it plays this specific sound if the regular alert snds dont.
+			self:PlaySoundSystem("Alert", {"characters/cops/cop1_alert1.wav","characters/cops/cop1_alert2.wav","characters/cops/cop1_alert3.wav","characters/cops/cop1_alert4.wav","characters/cops/cop1_alert5.wav","characters/cops/cop1_alert6.wav","characters/cops/cop1_alert7.wav","characters/cops/cop1_alert8.wav","characters/cops/cop1_alert9.wav","characters/cops/cop1_alert10.wav","characters/cops/cop1_alert11.wav","characters/cops/cop1_alert12.wav","characters/cops/cop1_alert13.wav","characters/cops/cop1_alert14.wav","characters/cops/cop1_alert15.wav"}) -- make sure it plays this specific sound if the regular alert snds dont.
 		end
 	end
-end
+end--]]
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize()
 	self:SetSkin(math.random(0,2))

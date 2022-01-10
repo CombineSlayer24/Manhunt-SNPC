@@ -39,8 +39,8 @@ function ENT:SpawnFunction(ply, tr)
         ent.Planted = false
 
         ent.PickupGlow = ents.Create("light_dynamic")
-        ent.PickupGlow:SetKeyValue("brightness", "5")
-        ent.PickupGlow:SetKeyValue("distance", "90")
+        ent.PickupGlow:SetKeyValue("brightness", "5.25")
+        ent.PickupGlow:SetKeyValue("distance", "105")
         ent.PickupGlow:SetLocalPos(ent:GetPos())
         ent.PickupGlow:SetLocalAngles(ent:GetAngles())
         ent.PickupGlow:Fire("Color", "255 255 255")

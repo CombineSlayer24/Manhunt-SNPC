@@ -24,18 +24,24 @@ if VJExists == true then
 	VJ.AddCategoryInfo(vManhunt_EntityCat, {Icon = "vgui/mh_logo.png"})
 
 --[[	Weapon Notes : (If your digging in here!)
-	Hoods = (VANILLA: Fist, Bat (Wooden), Blackjack, Crowbar | BETA: Hammer, Fire Axe | CUSTOM: Light Pistol, Revolver)
-	Skinz =  (VANILLA: Fist, Bat (Metal), Knife, Nailgun | BETA: Revolver, Sawn-off Shotgun | CUSTOM: Machete, Light Pistol)
-	Wardogs = (VANILLA: Machete, Shotgun, Sniper Rifle (?), Revolver | BETA: PSG-1 (?), Hunting Knife | CUSTOM: Fist, Bat (Wooden), Assault Rifle)
-	Innocentz = (VANILLA: Fist, Revolver, Sawn-off Shotgun, Knife, Sickle, Axe, Bat (Wooden) | BETA: Bat (Spiked), Shotgun | CUSTOM: Heavy Pistol)
-	Smileys = (VANILLA: Fist, Meat Cleaver, Revolver, Shotgun, Light Pistol, Sawn-off Shotgun, Knife, Bat (Metal)| BETA: Hammer, Bat (Spiked), Blackjack, Sickle)
-	CCPD = (VANILLA: Revolver, Nightstick, Shotgun, Light Pistol, Heavy Pistol, Sub-Machine Gun | CUSTOM: Bat (Wooden), Fist)
-	CCPD Swat = (VANILLA: Shotgun, Heavy Pistol, Sub-Machine Gun | CUSTOM: Nightstick, Fist, Assault Rifle)
-	Cerberus = (VANILLA: Assault Rifle, Shotgun, Heavy Pistol, | CUSTOM: Fist, Nightstick, Bat (Wooden), Light Pistol)
-
-	Item Rarites = 5 (very common), 4 (common), 3 (somewhat common), 2 (rare, 1 (extremely rare)
-	Striker = Melee welder (325)
-	Gunman = Gun welder (150)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///	Hoods = (VANILLA: Fist, Bat (Wooden), Blackjack, Crowbar | BETA: Hammer, Fire Axe | CUSTOM: Light Pistol, Revolver)
+///	Skinz =  (VANILLA: Fist, Bat (Metal), Knife, Nailgun | BETA: Revolver, Sawn-off Shotgun | CUSTOM: Machete, Light Pistol)
+///	Wardogs = (VANILLA: Machete, Shotgun, Sniper Rifle, Revolver | BETA: PSG-1, Hunting Knife | CUSTOM: Fist, Bat (Wooden), Assault Rifle)
+///	Innocentz = (VANILLA: Fist, Revolver, Sawn-off Shotgun, Knife, Sickle, Axe, Bat (Wooden) | BETA: Bat (Spiked), Shotgun | CUSTOM: Heavy Pistol)
+///	Smileys = (VANILLA: Fist, Meat Cleaver, Revolver, Shotgun, Light Pistol, Sawn-off Shotgun, Knife, Bat (Metal)| BETA: Hammer, Bat (Spiked), Blackjack, Sickle)
+///	CCPD = (VANILLA: Revolver, Nightstick, Shotgun, Light Pistol, Heavy Pistol, Sub-Machine Gun, Sniper Rifle | CUSTOM: Bat (Wooden), Fist)
+///	CCPD Swat = (VANILLA: Shotgun, Heavy Pistol, Sub-Machine Gun | CUSTOM: Nightstick, Fist, Assault Rifle)
+///	Cerberus = (VANILLA: Assault Rifle, Shotgun, Heavy Pistol | CUSTOM: Fist, Nightstick, Bat (Wooden), Light Pistol)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///	James Earl Cash = (All)
+///	Rameriez (Boss) = (VANILLA: Sniper Rifle, Shotgun | CUSTOM: Assault Rifle, Heavy Pistol)
+///	Bunny (Boss) (?)
+///	Cerberus Leader (Boss) (Same loadout as Cerberus)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///	Item Rarites = 5 (very common), 4 (common), 3 (somewhat common), 2 (rare), 1 (extremely rare)
+///	Striker = Melee welder (325)
+///	Gunman = Gun welder (150)
 --]]
 
 	local ManHunt_Hoods_Striker_Weapons =  
@@ -181,6 +187,7 @@ if VJExists == true then
 	VJ.AddEntity("Painkillers", "sent_vj_pills_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 	VJ.AddEntity("Shotgun Ammo", "sent_vj_shotgun_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 	VJ.AddEntity("Pistol Ammo", "sent_vj_pistol_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
+	VJ.AddEntity("Pistol + SMG Ammo", "sent_vj_pis_smg_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 	VJ.AddEntity("Rifle Ammo", "sent_vj_rifle_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 	-- VJ.AddEntity("Sniper Ammo", "sent_vj_pistol_ammo_pickup", "Pyri", false, 0, true, vManhunt_EntityCat) -- Adds an entity to the spawnmenu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

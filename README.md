@@ -37,8 +37,8 @@ Spawn Icons, and everything in this pack right now is bound to change.
 - [x] Voiceset 1
 - [x] Voiceset 2
 - [x] Voiceset 3
-- [ ] Voiceset 4
-- [ ] Voiceset 5
+- [x] Voiceset 4
+- [x] Voiceset 5
 - [ ] Voiceset 6
 
 //

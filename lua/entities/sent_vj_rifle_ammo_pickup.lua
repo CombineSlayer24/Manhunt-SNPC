@@ -53,7 +53,7 @@ function ENT:SpawnFunction(ply, tr)
 
         ent.CoronaOrb = ents.Create("env_sprite")
         ent.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
-        ent.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb:SetKeyValue("GlowProxySize","4.0")
         ent.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb:SetKeyValue("renderfx","14")
@@ -65,13 +65,13 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb:SetKeyValue("framerate","10.0")
         ent.CoronaOrb:SetKeyValue("spawnflags","0")
         ent.CoronaOrb:SetKeyValue("scale","0.36")
-        ent.CoronaOrb:SetLocalPos(ent:GetPos() + ent:GetUp()*-5)
+        ent.CoronaOrb:SetPos(SpawnPos)
         ent.CoronaOrb:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb)
 
         ent.CoronaOrb2 = ents.Create("env_sprite")
         ent.CoronaOrb2:SetKeyValue("model","sprites/manhunt/halo.vmt")
-        ent.CoronaOrb2:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb2:SetKeyValue("GlowProxySize","4.0")
         ent.CoronaOrb2:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb2:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb2:SetKeyValue("renderfx","14")
@@ -83,13 +83,13 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb2:SetKeyValue("framerate","10.0")
         ent.CoronaOrb2:SetKeyValue("spawnflags","0")
         ent.CoronaOrb2:SetKeyValue("scale","0.52")
-        ent.CoronaOrb2:SetLocalPos(ent:GetPos() + ent:GetUp()*-5)
+        ent.CoronaOrb2:SetPos(SpawnPos)
         ent.CoronaOrb2:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb2)
 
         ent.CoronaOrb3 = ents.Create("env_sprite")
         ent.CoronaOrb3:SetKeyValue("model","sprites/manhunt/sphere.vmt")
-        ent.CoronaOrb3:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb3:SetKeyValue("GlowProxySize","4.0")
         ent.CoronaOrb3:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb3:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb3:SetKeyValue("renderfx","14")
@@ -101,7 +101,7 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb3:SetKeyValue("framerate","10.0")
         ent.CoronaOrb3:SetKeyValue("spawnflags","0")
         ent.CoronaOrb3:SetKeyValue("scale","0.36")
-        ent.CoronaOrb3:SetLocalPos(ent:GetPos() + ent:GetUp()*-5)
+        ent.CoronaOrb3:SetPos(SpawnPos)
         ent.CoronaOrb3:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb3)
 
@@ -133,7 +133,7 @@ function ENT:Initialize()
  
         self.Entity:SetUseType(SIMPLE_USE)
        
-        timer.Create("delay_rotating_unq"..self.Entity:GetCreationID(), 0.15, 1, function()  
+        timer.Create("delay_rotating_unq"..self.Entity:GetCreationID(), 0, 1, function()  
                 self.Entity:SetMoveType(MOVETYPE_NONE)
         end)
        
@@ -177,9 +177,60 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
 	if activator:IsPlayer() then
-        caller:GiveAmmo(32, "AR2", true)
-		activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
-		activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (32)" )
+                local ammo_random = math.random(1,13)
+                if ammo_random == 1 then
+                        caller:GiveAmmo(6, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (6)" )
+                elseif ammo_random == 2 then
+                        caller:GiveAmmo(6, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (6)" )
+                elseif ammo_random == 3 then
+                        caller:GiveAmmo(7, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (7)" )
+                elseif ammo_random == 4 then
+                        caller:GiveAmmo(7, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (7)" )
+                elseif ammo_random == 5 then
+                        caller:GiveAmmo(9, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (9)" )
+                elseif ammo_random == 6 then
+                        caller:GiveAmmo(10, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (10)" )
+                elseif ammo_random == 7 then
+                        caller:GiveAmmo(10, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (10)" )
+                elseif ammo_random == 8 then
+                        caller:GiveAmmo(12, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (12)" )
+                elseif ammo_random == 9 then
+                        caller:GiveAmmo(14, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (14)" )
+                elseif ammo_random == 10 then
+                        caller:GiveAmmo(15, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (15)" )
+                elseif ammo_random == 11 then
+                        caller:GiveAmmo(16, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (16)" )
+                elseif ammo_random == 12 then
+                        caller:GiveAmmo(22, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (22)" )
+                elseif ammo_random == 13 then
+                        caller:GiveAmmo(24, "AR2", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Rifle Ammo (32)" )
+                end
 		self:Remove()
 	end
 end

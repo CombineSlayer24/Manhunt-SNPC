@@ -53,7 +53,7 @@ function ENT:SpawnFunction(ply, tr)
 
         ent.CoronaOrb = ents.Create("env_sprite")
         ent.CoronaOrb:SetKeyValue("model","sprites/manhunt/corona2.vmt")
-        ent.CoronaOrb:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb:SetKeyValue("GlowProxySize","3.0")
         ent.CoronaOrb:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb:SetKeyValue("renderfx","14")
@@ -65,13 +65,13 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb:SetKeyValue("framerate","10.0")
         ent.CoronaOrb:SetKeyValue("spawnflags","0")
         ent.CoronaOrb:SetKeyValue("scale","0.36")
-        ent.CoronaOrb:SetLocalPos(ent:GetPos() + ent:GetUp()*1)
+        ent.CoronaOrb:SetPos(SpawnPos)
         ent.CoronaOrb:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb)
 
         ent.CoronaOrb2 = ents.Create("env_sprite")
         ent.CoronaOrb2:SetKeyValue("model","sprites/manhunt/halo.vmt")
-        ent.CoronaOrb2:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb2:SetKeyValue("GlowProxySize","4.0")
         ent.CoronaOrb2:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb2:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb2:SetKeyValue("renderfx","14")
@@ -83,13 +83,13 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb2:SetKeyValue("framerate","10.0")
         ent.CoronaOrb2:SetKeyValue("spawnflags","0")
         ent.CoronaOrb2:SetKeyValue("scale","0.52")
-        ent.CoronaOrb2:SetLocalPos(ent:GetPos() + ent:GetUp()*1)
+        ent.CoronaOrb2:SetPos(SpawnPos)
         ent.CoronaOrb2:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb2)
 
         ent.CoronaOrb3 = ents.Create("env_sprite")
         ent.CoronaOrb3:SetKeyValue("model","sprites/manhunt/sphere.vmt")
-        ent.CoronaOrb3:SetKeyValue("GlowProxySize","2.0")
+        ent.CoronaOrb3:SetKeyValue("GlowProxySize","3.0")
         ent.CoronaOrb3:SetKeyValue("HDRColorScale","1.0")
         ent.CoronaOrb3:SetKeyValue("rendercolor","255 128 0")
         ent.CoronaOrb3:SetKeyValue("renderfx","14")
@@ -101,7 +101,7 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb3:SetKeyValue("framerate","10.0")
         ent.CoronaOrb3:SetKeyValue("spawnflags","0")
         ent.CoronaOrb3:SetKeyValue("scale","0.36")
-        ent.CoronaOrb3:SetLocalPos(ent:GetPos() + ent:GetUp()*1)
+        ent.CoronaOrb3:SetPos(SpawnPos)
         ent.CoronaOrb3:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb3)
         return ent
@@ -167,11 +167,11 @@ if CLIENT then -- Spinning code
 			local Pos = MyPos + Forward * i * 0.1
 		end
                 self:DrawModel()
-                self.Spin = self.Spin + RealFrameTime()*-46
+                self.Spin = self.Spin + RealFrameTime()*-48
                 if self.Spin >= 360 then
                         self.Spin = -360
                 end
-                self:SetAngles(Angle(0,self.Spin,0))
+                self:SetAngles(Angle(36,self.Spin,0))
         end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -180,6 +180,55 @@ function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
         caller:GiveAmmo(8, "Buckshot", true)
 		activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
 		activator:PrintMessage(HUD_PRINTTALK, "Shotgun Shells (8)" )
+		self:Remove()
+	end
+end
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
+	if activator:IsPlayer() then
+                local ammo_random = math.random(1,10)
+                if ammo_random == 1 then
+                        caller:GiveAmmo(4, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (4)" )
+                elseif ammo_random == 2 then
+                        caller:GiveAmmo(4, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (4)" )
+                elseif ammo_random == 3 then
+                        caller:GiveAmmo(5, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
+                elseif ammo_random == 4 then
+                        caller:GiveAmmo(5, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
+                elseif ammo_random == 5 then
+                        caller:GiveAmmo(6, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+                elseif ammo_random == 6 then
+                        caller:GiveAmmo(6, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+                elseif ammo_random == 7 then
+                        caller:GiveAmmo(6, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+                elseif ammo_random == 8 then
+                        caller:GiveAmmo(7, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (7)" )
+                elseif ammo_random == 9 then
+                        caller:GiveAmmo(8, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
+                elseif ammo_random == 10 then
+                        caller:GiveAmmo(8, "Buckshot", true)
+                        activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
+                        activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
+                end
 		self:Remove()
 	end
 end
