@@ -8,18 +8,17 @@ include('shared.lua')
 ENT.StartHealth = 325 -- The starting health of the NPC
 ENT.HullType = HULL_HUMAN
 	-- ====== Sight & Speed Variables ====== --
---ENT.SightDistance = 6000 -- How far it can see
---ENT.SightAngle = 90 -- The sight angle | Example: 180 would make the it see all around it | Measured in degrees and then converted to radians
+ENT.SightDistance = 6000 -- How far it can see
+ENT.SightAngle = 80 -- The sight angle | Example: 180 would make the it see all around it | Measured in degrees and then converted to radians
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ AI / Relationship Variables ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ENT.CanOpenDoors = true -- Can it open doors?
-ENT.VJ_NPC_Class = {"CLASS_MANHUNT_SKINZ","CLASS_MANHUNT_WARDOGS"} -- NPCs with the same class with be allied to each other
 ENT.HasAllies = true -- Put to false if you want it not to have any allies
 ENT.FriendsWithAllPlayerAllies = false -- Should this SNPC be friends with all other player allies that are running on VJ Base?
 ENT.MoveOutOfFriendlyPlayersWay = true -- Should the SNPC move out of the way when a friendly player comes close to it?
 ENT.BecomeEnemyToPlayer = true -- Should the friendly SNPC become enemy towards the player if it's damaged by it or it witnesses another ally killed by it
-ENT.BecomeEnemyToPlayerLevel = 2 -- Any time the player does something bad, the NPC's anger level raises by 1, if it surpasses this, it will become enemy!
+ENT.BecomeEnemyToPlayerLevel = 1 -- Any time the player does something bad, the NPC's anger level raises by 1, if it surpasses this, it will become enemy!
 ENT.PlayerFriendly = false -- Makes the SNPC friendly to the player and HL2 Resistance
 	-- ====== On Player Sight Variables ====== --
 ENT.HasOnPlayerSight = false -- Should do something when it sees the enemy? Example: Play a sound
@@ -56,1023 +55,1583 @@ ENT.CallForBackUpOnDamageAnimation = {ACT_SIGNAL_GROUP} -- Animation used if the
 ENT.GibOnDeathDamagesTable = {"All"} -- Damages that it gibs from | "UseDefault" = Uses default damage types | "All" = Gib from any damage
 ENT.FootStepTimeRun = 0.3-- Next foot step sound when it is running
 ENT.FootStepTimeWalk = 0.5 -- Next foot step sound when it is walking
+	-- ====== Medic Variables ====== --
+ENT.AnimTbl_Medic_GiveHealth = {"ThrowItem"}
+ENT.Medic_CheckDistance = 600 -- How far does it check for allies that are hurt? | World units
+ENT.Medic_HealDistance = 100 -- How close does it have to be until it stops moving and heals its ally?
+ENT.Medic_HealthAmount = 50 -- How health does it give?
+ENT.Medic_NextHealTime = VJ_Set(10, 15) -- How much time until it can give health to an ally again
+ENT.Medic_SpawnPropOnHeal = true -- Should it spawn a prop, such as small health vial at a attachment when healing an ally?
 
 ENT.DeathSoundPitch = VJ_Set(100,100)
 ENT.PainSoundPitch = VJ_Set(100,100)
 ENT.IdleSoundChance = 2
 ENT.OnPlayerSightSoundChance = 4
-ENT.SuppressingSoundChance = 3 -- to prevent suppressing quotes overlapping fight quotes
+ENT.SuppressingSoundChance = 4 -- to prevent suppressing quotes overlapping fight quotes
 ENT.NextSoundTime_Idle = VJ_Set(8, 20)
 ENT.OnPlayerSightNextTime = VJ_Set(15, 20)
 -----------------GLOBAL SOUNDS-------------------
-ENT.SoundTbl_FootStep = {"shared_sfx_hunters/footstep1.wav","shared_sfx_hunters/footstep2.wav","shared_sfx_hunters/footstep3.wav","shared_sfx_hunters/footstep4.wav","shared_sfx_hunters/footstep5.wav"}
-ENT.SoundTbl_Death = {"shared_sfx_hunters/death1.wav","shared_sfx_hunters/death2.wav","shared_sfx_hunters/death3.wav","shared_sfx_hunters/death4.wav","shared_sfx_hunters/death5.wav","shared_sfx_hunters/death6.wav","shared_sfx_hunters/death7.wav","shared_sfx_hunters/death8.wav","shared_sfx_hunters/death9.wav","shared_sfx_hunters/death10.wav","shared_sfx_hunters/death11.wav","shared_sfx_hunters/death12.wav","shared_sfx_hunters/death13.wav","shared_sfx_hunters/death14.wav","shared_sfx_hunters/death15.wav","shared_sfx_hunters/death16.wav","shared_sfx_hunters/death17.wav","shared_sfx_hunters/death18.wav","shared_sfx_hunters/death19.wav","shared_sfx_hunters/death20.wav","shared_sfx_hunters/death21.wav","shared_sfx_hunters/death22.wav","shared_sfx_hunters/death23.wav","shared_sfx_hunters/death24.wav","shared_sfx_hunters/death25.wav","shared_sfx_hunters/death26.wav","shared_sfx_hunters/death27.wav","shared_sfx_hunters/death28.wav","shared_sfx_hunters/death29.wav","shared_sfx_hunters/death30.wav","shared_sfx_hunters/death31.wav","shared_sfx_hunters/death32.wav","shared_sfx_hunters/death33.wav","shared_sfx_hunters/death34.wav","shared_sfx_hunters/death35.wav","shared_sfx_hunters/death36.wav","shared_sfx_hunters/death37.wav","shared_sfx_hunters/death38.wav"}
-ENT.SoundTbl_Pain = {"shared_sfx_hunters/pain1.wav","shared_sfx_hunters/pain2.wav","shared_sfx_hunters/pain3.wav","shared_sfx_hunters/pain4.wav","shared_sfx_hunters/pain5.wav","shared_sfx_hunters/pain6.wav","shared_sfx_hunters/pain7.wav","shared_sfx_hunters/pain8.wav","shared_sfx_hunters/pain9.wav","shared_sfx_hunters/pain10.wav","shared_sfx_hunters/pain11.wav","shared_sfx_hunters/pain12.wav","shared_sfx_hunters/pain13.wav","shared_sfx_hunters/pain14.wav","shared_sfx_hunters/pain15.wav","shared_sfx_hunters/pain16.wav","shared_sfx_hunters/pain17.wav","shared_sfx_hunters/pain18.wav","shared_sfx_hunters/pain19.wav","shared_sfx_hunters/pain20.wav","shared_sfx_hunters/pain21.wav","shared_sfx_hunters/pain22.wav","shared_sfx_hunters/pain23.wav","shared_sfx_hunters/pain24.wav","shared_sfx_hunters/pain_low1.wav","shared_sfx_hunters/pain_low2.wav","shared_sfx_hunters/pain_low3.wav","shared_sfx_hunters/pain_low4.wav","shared_sfx_hunters/pain_low5.wav","shared_sfx_hunters/pain_low6.wav","shared_sfx_hunters/pain_low7.wav","shared_sfx_hunters/pain_low8.wav","shared_sfx_hunters/pain_low9.wav","shared_sfx_hunters/pain_low10.wav","shared_sfx_hunters/pain_low11.wav","shared_sfx_hunters/pain_low12.wav","shared_sfx_hunters/pain_low13.wav","shared_sfx_hunters/pain_low14.wav","shared_sfx_hunters/pain_low15.wav","shared_sfx_hunters/pain_low16.wav","shared_sfx_hunters/pain_low17.wav","shared_sfx_hunters/pain_low18.wav","shared_sfx_hunters/pain_low19.wav","shared_sfx_hunters/pain_low20.wav","shared_sfx_hunters/pain_low21.wav","shared_sfx_hunters/pain_low22.wav","shared_sfx_hunters/pain_low23.wav","shared_sfx_hunters/pain_low24.wav","shared_sfx_hunters/pain_low25.wav","shared_sfx_hunters/pain_low26.wav","shared_sfx_hunters/pain_low27.wav","shared_sfx_hunters/pain_low28.wav","shared_sfx_hunters/pain_low29.wav","shared_sfx_hunters/pain_low30.wav","shared_sfx_hunters/pain_low31.wav"}
+ENT.SoundTbl_FootStep = {"vocals/shared_sfx_hunters/footstep1.wav","vocals/shared_sfx_hunters/footstep2.wav","vocals/shared_sfx_hunters/footstep3.wav","vocals/shared_sfx_hunters/footstep4.wav","vocals/shared_sfx_hunters/footstep5.wav"}
+ENT.SoundTbl_Death = {"vocals/shared_sfx_hunters/death1.wav","vocals/shared_sfx_hunters/death2.wav","vocals/shared_sfx_hunters/death3.wav","vocals/shared_sfx_hunters/death4.wav","vocals/shared_sfx_hunters/death5.wav","vocals/shared_sfx_hunters/death6.wav","vocals/shared_sfx_hunters/death7.wav","vocals/shared_sfx_hunters/death8.wav","vocals/shared_sfx_hunters/death9.wav","vocals/shared_sfx_hunters/death10.wav","vocals/shared_sfx_hunters/death11.wav","vocals/shared_sfx_hunters/death12.wav","vocals/shared_sfx_hunters/death13.wav","vocals/shared_sfx_hunters/death14.wav","vocals/shared_sfx_hunters/death15.wav","vocals/shared_sfx_hunters/death16.wav","vocals/shared_sfx_hunters/death17.wav","vocals/shared_sfx_hunters/death18.wav","vocals/shared_sfx_hunters/death19.wav","vocals/shared_sfx_hunters/death20.wav","vocals/shared_sfx_hunters/death21.wav","vocals/shared_sfx_hunters/death22.wav","vocals/shared_sfx_hunters/death23.wav","vocals/shared_sfx_hunters/death24.wav","vocals/shared_sfx_hunters/death25.wav","vocals/shared_sfx_hunters/death26.wav","vocals/shared_sfx_hunters/death27.wav","vocals/shared_sfx_hunters/death28.wav","vocals/shared_sfx_hunters/death29.wav","vocals/shared_sfx_hunters/death30.wav","vocals/shared_sfx_hunters/death31.wav","vocals/shared_sfx_hunters/death32.wav","vocals/shared_sfx_hunters/death33.wav","vocals/shared_sfx_hunters/death34.wav","vocals/shared_sfx_hunters/death35.wav","vocals/shared_sfx_hunters/death36.wav","vocals/shared_sfx_hunters/death37.wav","vocals/shared_sfx_hunters/death38.wav"}
+ENT.SoundTbl_Pain = {"vocals/shared_sfx_hunters/pain1.wav","vocals/shared_sfx_hunters/pain2.wav","vocals/shared_sfx_hunters/pain3.wav","vocals/shared_sfx_hunters/pain4.wav","vocals/shared_sfx_hunters/pain5.wav","vocals/shared_sfx_hunters/pain6.wav","vocals/shared_sfx_hunters/pain7.wav","vocals/shared_sfx_hunters/pain8.wav","vocals/shared_sfx_hunters/pain9.wav","vocals/shared_sfx_hunters/pain10.wav","vocals/shared_sfx_hunters/pain11.wav","vocals/shared_sfx_hunters/pain12.wav","vocals/shared_sfx_hunters/pain13.wav","vocals/shared_sfx_hunters/pain14.wav","vocals/shared_sfx_hunters/pain15.wav","vocals/shared_sfx_hunters/pain16.wav","vocals/shared_sfx_hunters/pain17.wav","vocals/shared_sfx_hunters/pain18.wav","vocals/shared_sfx_hunters/pain19.wav","vocals/shared_sfx_hunters/pain20.wav","vocals/shared_sfx_hunters/pain21.wav","vocals/shared_sfx_hunters/pain22.wav","vocals/shared_sfx_hunters/pain23.wav","vocals/shared_sfx_hunters/pain24.wav","vocals/shared_sfx_hunters/pain_low1.wav","vocals/shared_sfx_hunters/pain_low2.wav","vocals/shared_sfx_hunters/pain_low3.wav","vocals/shared_sfx_hunters/pain_low4.wav","vocals/shared_sfx_hunters/pain_low5.wav","vocals/shared_sfx_hunters/pain_low6.wav","vocals/shared_sfx_hunters/pain_low7.wav","vocals/shared_sfx_hunters/pain_low8.wav","vocals/shared_sfx_hunters/pain_low9.wav","vocals/shared_sfx_hunters/pain_low10.wav","vocals/shared_sfx_hunters/pain_low11.wav","vocals/shared_sfx_hunters/pain_low12.wav","vocals/shared_sfx_hunters/pain_low13.wav","vocals/shared_sfx_hunters/pain_low14.wav","vocals/shared_sfx_hunters/pain_low15.wav","vocals/shared_sfx_hunters/pain_low16.wav","vocals/shared_sfx_hunters/pain_low17.wav","vocals/shared_sfx_hunters/pain_low18.wav","vocals/shared_sfx_hunters/pain_low19.wav","vocals/shared_sfx_hunters/pain_low20.wav","vocals/shared_sfx_hunters/pain_low21.wav","vocals/shared_sfx_hunters/pain_low22.wav","vocals/shared_sfx_hunters/pain_low23.wav","vocals/shared_sfx_hunters/pain_low24.wav","vocals/shared_sfx_hunters/pain_low25.wav","vocals/shared_sfx_hunters/pain_low26.wav","vocals/shared_sfx_hunters/pain_low27.wav","vocals/shared_sfx_hunters/pain_low28.wav","vocals/shared_sfx_hunters/pain_low29.wav","vocals/shared_sfx_hunters/pain_low30.wav","vocals/shared_sfx_hunters/pain_low31.wav"}
 
--- ^^ ARE SHARED ^^ // Down below isnt --
-function ENT:CustomOnPreInitialize() -- Picks random voices once a SNPC is spawned, however, they will all have Footsteps, Pained and Death sounds.
-    local voices = math.random(1,5)
-    if voices == 1 then -- Skinz 1 voices
+local SoundTbl_DeathGib =
+{
+	"weapons/head_explode1.wav",
+	"weapons/head_explode2.wav",
+	"weapons/head_explode3.wav",
+	"weapons/head_explode4.wav",
+	"weapons/head_explode5.wav",
+	"weapons/head_explode6.wav",
+	"weapons/head_explode7.wav",
+	"weapons/head_explode8.wav",
+	"weapons/head_explode9.wav",
+	"weapons/head_explode10.wav"
+} -- When the npc gibs, play a dramatic death sound instead of a generic death 
+
+function ENT:CustomOnInitialize()
+	if math.random(1,15) == 1 then self.IsMedicSNPC = true end
+	if GetConVarNumber("vj_manhunt_hunters_allied") == 0 then
+		self.VJ_NPC_Class = {"CLASS_MANHUNT_SKINZ","CLASS_MANHUNT_WARDOGS"}
+	end
+	if GetConVarNumber("vj_manhunt_hunters_allied") == 1 then
+		self.VJ_NPC_Class = 
+		{
+			"CLASS_MANHUNT_HOODS",
+			"CLASS_MANHUNT_SKINZ",
+			"CLASS_MANHUNT_WARDOGS",
+			"CLASS_MANHUNT_INNOCENTZ",
+			"CLASS_MANHUNT_SMILIES",
+			"CLASS_MANHUNT_CERBERUS",
+			"CLASS_MANHUNT_CCPD",
+			"CLASS_MANHUNT_MONKEY"
+		}
+	end
+end
+
+function ENT:CustomOnPreInitialize() -- This will pick a random voiceset for the npc to use. Death/Pain/Gib/Footstep sounds are shared.
+    local voices = math.random(1,6)
+    if voices == 1 then -- Skinz voiceset 1
     	self.Model = {"models/manhunt/npc/skin2.mdl"}
 		self.SoundTbl_Alert = 
 		{
-			"characters/skinz/skinz1_alert1.wav",
-			"characters/skinz/skinz1_alert2.wav",
-			"characters/skinz/skinz1_alert3.wav",
-			"characters/skinz/skinz1_alert4.wav",
-			"characters/skinz/skinz1_alert5.wav",
-			"characters/skinz/skinz1_alert6.wav",
-			"characters/skinz/skinz1_alert7.wav",
-			"characters/skinz/skinz1_alert8.wav",
-			"characters/skinz/skinz1_alert9.wav",
-			"characters/skinz/skinz1_alert10.wav",
-			"characters/skinz/skinz1_alert11.wav",
-			"characters/skinz/skinz1_alert12.wav",
-			"characters/skinz/skinz1_alert13.wav"
+			"vocals/characters/skinz/k1v1cfa6.mp3",
+			"vocals/characters/skinz/k1v1cfh1.mp3",
+			"vocals/characters/skinz/k1v1ct1.mp3",
+			"vocals/characters/skinz/k1v1ct2.mp3",
+			"vocals/characters/skinz/k1v1ct4.mp3",
+			"vocals/characters/skinz/k1v1ds1.mp3",
+			"vocals/characters/skinz/k1v1ds2.mp3",
+			"vocals/characters/skinz/k1v1ds3.mp3",
+			"vocals/characters/skinz/k1v1ds4.mp3",
+			"vocals/characters/skinz/k1v1ptc1.mp3",
+			"vocals/characters/skinz/k1v1rti1.mp3",
+			"vocals/characters/skinz/k1v1rti3.mp3",
+			"vocals/characters/skinz/k1v1rti4.mp3",
+			"vocals/characters/skinz/k1v1sur6.mp3",
+			"vocals/characters/skinz/k1v1tc5.mp3"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"vocals/characters/skinz/k1v1dbs1.mp3",
+			"vocals/characters/skinz/k1v1dbs2.mp3",
+			"vocals/characters/skinz/k1v1dbs3.mp3",
+			"vocals/characters/skinz/k1v1dbs4.mp3",
+			"vocals/characters/skinz/k1v1dbs5.mp3",
+			"vocals/characters/skinz/k1v1dbs6.mp3"
 		}
 		self.SoundTbl_MoveOutOfPlayersWay = 
 		{
-			"characters/skinz/skinz1_bump1.wav",
-			"characters/skinz/skinz1_bump2.wav",
-			"characters/skinz/skinz1_bump3.wav",
-			"characters/skinz/skinz1_bump4.wav"
+			"vocals/characters/skinz/k1v1cse3.mp3",
+			"vocals/characters/skinz/k1v1prs5.mp3",
+			"vocals/characters/skinz/k1v1sur1.mp3",
+			"vocals/characters/skinz/k1v1sur2.mp3",
+			"vocals/characters/skinz/k1v1sur3.mp3",
+			"vocals/characters/skinz/k1v1sur4.mp3",
+			"vocals/characters/skinz/k1v1sur5.mp3"
 		}
---[[		self.SoundTbl_CallForHelp = 
+		self.SoundTbl_BecomeEnemyToPlayer = 
 		{
-			"characters/skinz/skinz1_call_for_help1.wav",
-			"characters/skinz/skinz1_call_for_help2.wav",
-			"characters/skinz/skinz1_call_for_help3.wav",
-			"characters/skinz/skinz1_call_for_help4.wav"
-		}--]]
+			"vocals/characters/skinz/k1v1tsh3.mp3",
+			"vocals/characters/skinz/k1v1tse1.mp3",
+			"vocals/characters/skinz/k1v1tb3.mp3",
+			"vocals/characters/skinz/k1v1tb1.mp3",
+			"vocals/characters/skinz/k1v1sur1.mp3",
+			"vocals/characters/skinz/k1v1sur6.mp3",
+			"vocals/characters/skinz/k1v1ds5.mp3"
+		}
+		self.SoundTbl_MedicBeforeHeal = 
+		{
+			"vocals/characters/skinz/k1v1dbs1.mp3",
+			"vocals/characters/skinz/k1v1dbs2.mp3",
+			"vocals/characters/skinz/k1v1wti3.mp3",
+			"vocals/characters/skinz/k1v1dbs3.mp3"
+		}
+		self.SoundTbl_MedicReceiveHeal = 
+		{
+			"vocals/characters/skinz/k1v1ja1.mp3",
+			"vocals/characters/skinz/k1v1cst3.mp3",
+			"vocals/characters/skinz/k1v1cst9.mp3"
+		}
 		self.SoundTbl_CombatIdle = 
 		{
-			"characters/skinz/skinz1_fight1.wav",
-			"characters/skinz/skinz1_fight2.wav",
-			"characters/skinz/skinz1_fight3.wav",
-			"characters/skinz/skinz1_fight4.wav",
-			"characters/skinz/skinz1_fight5.wav",
-			"characters/skinz/skinz1_fight6.wav",
-			"characters/skinz/skinz1_fight7.wav",
-			"characters/skinz/skinz1_fight8.wav",
-			"characters/skinz/skinz1_fight9.wav",
-			"characters/skinz/skinz1_fight10.wav",
-			"characters/skinz/skinz1_fight11.wav",
-			"characters/skinz/skinz1_fight12.wav",
-			"characters/skinz/skinz1_fight13.wav",
-			"characters/skinz/skinz1_fight14.wav",
-			"characters/skinz/skinz1_fight15.wav"
+			"vocals/characters/skinz/k1v1bp2.mp3",
+			"vocals/characters/skinz/k1v1cfh4.mp3",
+			"vocals/characters/skinz/k1v1bp6.mp3",
+			"vocals/characters/skinz/k1v1cfh5.mp3",
+			"vocals/characters/skinz/k1v1ds5.mp3",
+			"vocals/characters/skinz/k1v1ds6.mp3",
+			"vocals/characters/skinz/k1v1ntc2.mp3",
+			"vocals/characters/skinz/k1v1prs1.mp3",
+			"vocals/characters/skinz/k1v1prs3.mp3",
+			"vocals/characters/skinz/k1v1prs4.mp3",
+			"vocals/characters/skinz/k1v1ptc2.mp3",
+			"vocals/characters/skinz/k1v1tc4.mp3",
+			"vocals/characters/skinz/k1v1tpd5.mp3",
+			"vocals/characters/skinz/k1v1tsh1.mp3",
+			"vocals/characters/skinz/k1v1tsh2.mp3",
+			"vocals/characters/skinz/k1v1tsh3.mp3",
+			"vocals/characters/skinz/k1v1tsh4.mp3",
+			"vocals/characters/skinz/k1v1tsh5.mp3",
+			"vocals/characters/skinz/k1v1tsh6.mp3",
+			"vocals/characters/skinz/k1v1tsz3.mp3"
 		}
 		self.SoundTbl_OnGrenadeSight  = 
 		{
-			"characters/skinz/skinz1_grenade_spot1.wav",
-			"characters/skinz/skinz1_grenade_spot2.wav",
-			"characters/skinz/skinz1_death1.wav",
-			"characters/skinz/skinz1_death2.wav",
-			"characters/skinz/skinz1_death3.wav"
+			"vocals/characters/skinz/k1v1pln1.mp3",
+			"vocals/characters/skinz/k1v1pln2.mp3",
+			"vocals/characters/skinz/k1v1pln3.mp3",
+			"vocals/characters/skinz/k1v1sur2.mp3",
+			"vocals/characters/skinz/k1v1sur3.mp3"
 		}
 		self.SoundTbl_IdleDialogueAnswer = 
 		{
-			"characters/skinz/skinz1_idle_answer1.wav",
-			"characters/skinz/skinz1_idle_answer2.wav",
-			"characters/skinz/skinz1_idle_answer3.wav",
-			"characters/skinz/skinz1_idle_answer4.wav",
-			"characters/skinz/skinz1_idle_answer5.wav",
-			"characters/skinz/skinz1_idle_answer6.wav",
-			"characters/skinz/skinz1_idle_answer7.wav",
-			"characters/skinz/skinz1_idle_answer8.wav",
-			"characters/skinz/skinz1_idle_answer9.wav"
+			"vocals/characters/skinz/k1v1cin1.mp3",
+			"vocals/characters/skinz/k1v1cin2.mp3",
+			"vocals/characters/skinz/k1v1cin3.mp3",
+			"vocals/characters/skinz/k1v1cnr3.mp3",
+			"vocals/characters/skinz/k1v1cse1.mp3",
+			"vocals/characters/skinz/k1v1cst2.mp3",
+			"vocals/characters/skinz/k1v1nsr2.mp3",
+			"vocals/characters/skinz/k1v1nsr3.mp3",
+			"vocals/characters/skinz/k1v1nsr4.mp3",
+			"vocals/characters/skinz/k1v1wti6.mp3",
+			"vocals/characters/skinz/k1v1cst6.mp3",
+			"vocals/characters/skinz/k1v1cst7.mp3"
 		}
 		self.SoundTbl_IdleDialogue = 
 		{
-			"characters/skinz/skinz1_idle_question1.wav",
-			"characters/skinz/skinz1_idle_question2.wav",
-			"characters/skinz/skinz1_idle_question3.wav",
-			"characters/skinz/skinz1_idle_question4.wav",
-			"characters/skinz/skinz1_idle_question5.wav",
-			"characters/skinz/skinz1_idle_question6.wav"
+			"vocals/characters/skinz/k1v1cfa5.mp3",
+			"vocals/characters/skinz/k1v1ncr2.mp3",
+			"vocals/characters/skinz/k1v1cst3.mp3",
+			"vocals/characters/skinz/k1v1nsr5.mp3",
+			"vocals/characters/skinz/k1v1prs3.mp3",
+			"vocals/characters/skinz/k1v1rti2.mp3"
 		}
 		self.SoundTbl_Idle = 
 		{
-			"characters/skinz/skinz1_idle1.wav",
-			"characters/skinz/skinz1_idle2.wav",
-			"characters/skinz/skinz1_idle3.wav",
-			"characters/skinz/skinz1_idle4.wav",
-			"characters/skinz/skinz1_idle5.wav",
-			"characters/skinz/skinz1_idle6.wav",
-			"characters/skinz/skinz1_idle7.wav",
-			"characters/skinz/skinz1_idle8.wav",
-			"characters/skinz/skinz1_idle9.wav",
-			"characters/skinz/skinz1_idle10.wav",
-			"characters/skinz/skinz1_idle11.wav",
-			"characters/skinz/skinz1_idle12.wav",
-			"characters/skinz/skinz1_idle13.wav",
-			"characters/skinz/skinz1_idle14.wav",
-			"characters/skinz/skinz1_idle15.wav",
-			"characters/skinz/skinz1_idle16.wav",
-			"characters/skinz/skinz1_idle17.wav",
-			"characters/skinz/skinz1_idle18.wav",
-			"characters/skinz/skinz1_idle19.wav",
-			"characters/skinz/skinz1_idle20.wav",
-			"characters/skinz/skinz1_idle21.wav",
-			"characters/skinz/skinz1_idle22.wav"
+			"vocals/characters/skinz/k1v1cnr1.mp3",
+			"vocals/characters/skinz/k1v1cnr2.mp3",
+			"vocals/characters/skinz/k1v1cnr4.mp3",
+			"vocals/characters/skinz/k1v1cnr5.mp3",
+			"vocals/characters/skinz/k1v1cnr6.mp3",
+			"vocals/characters/skinz/k1v1cse2.mp3",
+			"vocals/characters/skinz/k1v1cst3.mp3",
+			"vocals/characters/skinz/k1v1cst4.mp3",
+			"vocals/characters/skinz/k1v1cst5.mp3",
+			"vocals/characters/skinz/k1v1cst6.mp3",
+			"vocals/characters/skinz/k1v1cst7.mp3",
+			"vocals/characters/skinz/k1v1cst8.mp3",
+			"vocals/characters/skinz/k1v1cst10.mp3",
+			"vocals/characters/skinz/k1v1gic1.mp3",
+			"vocals/characters/skinz/k1v1gic2.mp3",
+			"vocals/characters/skinz/k1v1gic3.mp3",
+			"vocals/characters/skinz/k1v1gic4.mp3",
+			"vocals/characters/skinz/k1v1gic5.mp3",
+			"vocals/characters/skinz/k1v1gic6.mp3",
+			"vocals/characters/skinz/k1v1gic7.mp3",
+			"vocals/characters/skinz/k1v1gic8.mp3",
+			"vocals/characters/skinz/k1v1gic9.mp3",
+			"vocals/characters/skinz/k1v1gic10.mp3",
+			"vocals/characters/skinz/k1v1nsr1.mp3",
+			"vocals/characters/skinz/k1v1nsr5.mp3",
+			"vocals/characters/skinz/k1v1nsr6.mp3",
+			"vocals/characters/skinz/k1v1rti2.mp3",
+			"vocals/characters/skinz/k1v1tse2.mp3",
+			"vocals/characters/skinz/k1v1tse3.mp3",
+			"vocals/characters/skinz/k1v1tse4.mp3",
+			"vocals/characters/skinz/k1v1tse5.mp3",
+			"vocals/characters/skinz/k1v1tsz2.mp3",
+			"vocals/characters/skinz/k1v1wti2.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
 		}
 		self.SoundTbl_Investigate = 
 		{
-			"characters/skinz/skinz1_investigate1.wav",
-			"characters/skinz/skinz1_investigate2.wav",
-			"characters/skinz/skinz1_investigate3.wav",
-			"characters/skinz/skinz1_investigate4.wav",
-			"characters/skinz/skinz1_investigate5.wav",
-			"characters/skinz/skinz1_investigate6.wav",
-			"characters/skinz/skinz1_investigate7.wav",
-			"characters/skinz/skinz1_investigate8.wav",
-			"characters/skinz/skinz1_investigate9.wav",
-			"characters/skinz/skinz1_investigate10.wav",
-			"characters/skinz/skinz1_investigate11.wav",
-			"characters/skinz/skinz1_investigate12.wav",
-			"characters/skinz/skinz1_investigate13.wav",
-			"characters/skinz/skinz1_investigate14.wav",
-			"characters/skinz/skinz1_investigate15.wav"
+			"vocals/characters/skinz/k1v1bp1.mp3",
+			"vocals/characters/skinz/k1v1cfa1.mp3",
+			"vocals/characters/skinz/k1v1cfa2.mp3",
+			"vocals/characters/skinz/k1v1cfa3.mp3",
+			"vocals/characters/skinz/k1v1cfa4.mp3",
+			"vocals/characters/skinz/k1v1cfa5.mp3",
+			"vocals/characters/skinz/k1v1ct6.mp3",
+			"vocals/characters/skinz/k1v1rti5.mp3",
+			"vocals/characters/skinz/k1v1rti6.mp3",
+			"vocals/characters/skinz/k1v1sal1.mp3",
+			"vocals/characters/skinz/k1v1sal2.mp3",
+			"vocals/characters/skinz/k1v1sal4.mp3",
+			"vocals/characters/skinz/k1v1tse6.mp3",
+			"vocals/characters/skinz/k1v1tsz1.mp3",
+			"vocals/characters/skinz/k1v1wti1.mp3",
+			"vocals/characters/skinz/k1v1wti3.mp3",
+			"vocals/characters/skinz/k1v1wti4.mp3",
+			"vocals/characters/skinz/k1v1wti5.mp3"
 		}
 		self.SoundTbl_OnKilledEnemy = 
 		{
-			"characters/skinz/skinz1_kill1.wav",
-			"characters/skinz/skinz1_kill2.wav",
-			"characters/skinz/skinz1_kill3.wav",
-			"characters/skinz/skinz1_kill4.wav",
-			"characters/skinz/skinz1_kill5.wav",
-			"characters/skinz/skinz1_kill6.wav",
-			"characters/skinz/skinz1_kill7.wav",
-			"characters/skinz/skinz1_kill8.wav",
-			"characters/skinz/skinz1_kill9.wav"
+			"vocals/characters/skinz/k1v1bp4.mp3",
+			"vocals/characters/skinz/k1v1dbs1.mp3",
+			"vocals/characters/skinz/k1v1dbs2.mp3",
+			"vocals/characters/skinz/k1v1dbs3.mp3",
+			"vocals/characters/skinz/k1v1dbs4.mp3",
+			"vocals/characters/skinz/k1v1dbs5.mp3",
+			"vocals/characters/skinz/k1v1dbs6.mp3",
+			"vocals/characters/skinz/k1v1ptc3.mp3",
+			"vocals/characters/skinz/k1v1ptc4.mp3",
+			"vocals/characters/skinz/k1v1sal5.mp3",
+			"vocals/characters/skinz/k1v1sal6.mp3",
+			"vocals/characters/skinz/k1v1tpd1.mp3",
+			"vocals/characters/skinz/k1v1tpd2.mp3",
+			"vocals/characters/skinz/k1v1tpd3.mp3",
+			"vocals/characters/skinz/k1v1tpd4.mp3",
+			"vocals/characters/skinz/k1v1tpd6.mp3"
 		}
 		self.SoundTbl_LostEnemy = 
 		{
-			"characters/skinz/skinz1_lost_enemy1.wav",
-			"characters/skinz/skinz1_lost_enemy2.wav",
-			"characters/skinz/skinz1_lost_enemy4.wav",
-			"characters/skinz/skinz1_lost_enemy5.wav",
-			"characters/skinz/skinz1_lost_enemy6.wav",
-			"characters/skinz/skinz1_lost_enemy7.wav",
-			"characters/skinz/skinz1_lost_enemy8.wav",
-			"characters/skinz/skinz1_lost_enemy9.wav",
-			"characters/skinz/skinz1_lost_enemy10.wav",
-			"characters/skinz/skinz1_lost_enemy11.wav",
-			"characters/skinz/skinz1_lost_enemy12.wav"
-		}
-		self.SoundTbl_FollowPlayer = 
-		{
-			"characters/skinz/skinz1_player_follow1.wav",
-			"characters/skinz/skinz1_player_follow2.wav",
-			"characters/skinz/skinz1_player_follow3.wav",
-			"characters/skinz/skinz1_player_follow4.wav"
+			"vocals/characters/skinz/k1v1ncr1.mp3",
+			"vocals/characters/skinz/k1v1ncr2.mp3",
+			"vocals/characters/skinz/k1v1ncr3.mp3",
+			"vocals/characters/skinz/k1v1ncr4.mp3",
+			"vocals/characters/skinz/k1v1ncr5.mp3",
+			"vocals/characters/skinz/k1v1ncr6.mp3",
+			"vocals/characters/skinz/k1v1tb1.mp3",
+			"vocals/characters/skinz/k1v1tb2.mp3",
+			"vocals/characters/skinz/k1v1tb3.mp3"
 		}
 		self.SoundTbl_DamageByPlayer = 
 		{
-			"characters/skinz/skinz1_player_hurtby1.wav",
-			"characters/skinz/skinz1_player_hurtby2.wav",
-			"characters/skinz/skinz1_player_hurtby3.wav"
+			"vocals/characters/skinz/k1v1bp3.mp3",
+			"vocals/characters/skinz/k1v1ct3.mp3",
+			"vocals/characters/skinz/k1v1ct5.mp3",
+			"vocals/characters/skinz/k1v1prs6.mp3",
+			"vocals/characters/skinz/k1v1sal3.mp3"
 		}
 		self.SoundTbl_OnPlayerSight = 
 		{
-			"characters/skinz/skinz1_player_spot1.wav",
-			"characters/skinz/skinz1_player_spot2.wav",
-			"characters/skinz/skinz1_player_spot3.wav"
+			"vocals/characters/skinz/k1v1gr1.mp3",
+			"vocals/characters/skinz/k1v1gr2.mp3",
+			"vocals/characters/skinz/k1v1gr3.mp3"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k1v1cst1.mp3",
+			"vocals/characters/skinz/k1v1cst9.mp3"
 		}
 		self.SoundTbl_UnFollowPlayer = 
 		{
-			"characters/skinz/skinz1_player_unfollow1.wav",
-			"characters/skinz/skinz1_player_unfollow2.wav",
-			"characters/skinz/skinz1_player_unfollow3.wav",
-			"characters/skinz/skinz1_player_unfollow4.wav"
+			"vocals/characters/skinz/k1v1tse1.mp3",
+			"vocals/characters/skinz/k1v1ptc4.mp3"
 		}
 		self.SoundTbl_Suppressing = 
 		{
-			"characters/skinz/skinz1_suppressing1.wav",
-			"characters/skinz/skinz1_suppressing2.wav",
-			"characters/skinz/skinz1_suppressing3.wav",
-			"characters/skinz/skinz1_suppressing4.wav",
-			"characters/skinz/skinz1_suppressing5.wav",
-			"characters/skinz/skinz1_suppressing6.wav",
-			"characters/skinz/skinz1_suppressing7.wav",
-			"characters/skinz/skinz1_suppressing8.wav",
-			"characters/skinz/skinz1_suppressing9.wav",
-			"characters/skinz/skinz1_suppressing10.wav",
-			"characters/skinz/skinz1_suppressing11.wav",
-			"characters/skinz/skinz1_suppressing12.wav",
-			"characters/skinz/skinz1_suppressing13.wav",
-			"characters/skinz/skinz1_suppressing14.wav",
-			"characters/skinz/skinz1_suppressing15.wav",
-			"characters/skinz/skinz1_suppressing16.wav",
-			"characters/skinz/skinz1_call_for_help_reply1.wav",
-			"characters/skinz/skinz1_call_for_help_reply2.wav",
-			"characters/skinz/skinz1_call_for_help_reply3.wav",
-			"characters/skinz/skinz1_call_for_help1.wav",
-			"characters/skinz/skinz1_call_for_help2.wav",
-			"characters/skinz/skinz1_call_for_help3.wav",
-			"characters/skinz/skinz1_call_for_help4.wav"
+			"vocals/characters/skinz/k1v1bp5.mp3",
+			"vocals/characters/skinz/k1v1cfh2.mp3",
+			"vocals/characters/skinz/k1v1cfh3.mp3",
+			"vocals/characters/skinz/k1v1cfh6.mp3",
+			"vocals/characters/skinz/k1v1ja1.mp3",
+			"vocals/characters/skinz/k1v1ja2.mp3",
+			"vocals/characters/skinz/k1v1ja3.mp3",
+			"vocals/characters/skinz/k1v1ja4.mp3",
+			"vocals/characters/skinz/k1v1ja5.mp3",
+			"vocals/characters/skinz/k1v1ja6.mp3",
+			"vocals/characters/skinz/k1v1ntc1.mp3",
+			"vocals/characters/skinz/k1v1ntc3.mp3",
+			"vocals/characters/skinz/k1v1ntc4.mp3",
+			"vocals/characters/skinz/k1v1ntc5.mp3",
+			"vocals/characters/skinz/k1v1ntc6.mp3",
+			"vocals/characters/skinz/k1v1prs2.mp3",
+			"vocals/characters/skinz/k1v1ptc5.mp3",
+			"vocals/characters/skinz/k1v1ptc6.mp3",
+			"vocals/characters/skinz/k1v1tc1.mp3",
+			"vocals/characters/skinz/k1v1tc2.mp3",
+			"vocals/characters/skinz/k1v1tc3.mp3",
+			"vocals/characters/skinz/k1v1tc6.mp3"
 		}
-		--[[I thought that OnReceiveOrder is responding to CallForHelp, but it's for the SNPC controller--]]
---		self.SoundTbl_OnReceiveOrder = 
---		{
---			"characters/skinz/skinz1_call_for_help_reply1.wav",
---			"characters/skinz/skinz1_call_for_help_reply2.wav",
---			"characters/skinz/skinz1_call_for_help_reply3.wav"
---		}
-	elseif voices == 2 then -- Skinz 2 voices
+	elseif voices == 2 then -- Skinz voiceset 2
 		self.Model = {"models/manhunt/npc/skin2.mdl"}
 		self.SoundTbl_Alert = 
 		{
-			"characters/skinz/skinz2_alert1.wav",
-			"characters/skinz/skinz2_alert2.wav",
-			"characters/skinz/skinz2_alert3.wav",
-			"characters/skinz/skinz2_alert4.wav",
-			"characters/skinz/skinz2_alert5.wav",
-			"characters/skinz/skinz2_alert6.wav",
-			"characters/skinz/skinz2_alert7.wav",
-			"characters/skinz/skinz2_alert8.wav",
-			"characters/skinz/skinz2_alert9.wav",
-			"characters/skinz/skinz2_alert10.wav",
-			"characters/skinz/skinz2_alert11.wav",
-			"characters/skinz/skinz2_alert12.wav",
-			"characters/skinz/skinz2_alert13.wav",
-			"characters/skinz/skinz2_alert14.wav"
+			"vocals/characters/skinz/k1v2bp1.mp3",
+			"vocals/characters/skinz/k1v2cfa4.mp3",
+			"vocals/characters/skinz/k1v2cfa6.mp3",
+			"vocals/characters/skinz/k1v2cnr3.mp3",
+			"vocals/characters/skinz/k1v2ct1.mp3",
+			"vocals/characters/skinz/k1v2ct2.mp3",
+			"vocals/characters/skinz/k1v2ct3.mp3",
+			"vocals/characters/skinz/k1v2ds1.mp3",
+			"vocals/characters/skinz/k1v2ds2.mp3",
+			"vocals/characters/skinz/k1v2ds3.mp3",
+			"vocals/characters/skinz/k1v2ds4.mp3",
+			"vocals/characters/skinz/k1v2ds5.mp3",
+			"vocals/characters/skinz/k1v2ds6.mp3",
+			"vocals/characters/skinz/k1v2ntc6.mp3",
+			"vocals/characters/skinz/k1v2rti2.mp3",
+			"vocals/characters/skinz/k1v2rti3.mp3",
+			"vocals/characters/skinz/k1v2rti6.mp3"
 		}
 		self.SoundTbl_MoveOutOfPlayersWay = 
 		{
-			"characters/skinz/skinz2_bump1.wav",
-			"characters/skinz/skinz2_bump2.wav"
+			"vocals/characters/skinz/k1v2sur1.mp3",
+			"vocals/characters/skinz/k1v2sur2.mp3",
+			"vocals/characters/skinz/k1v2sur3.mp3",
+			"vocals/characters/skinz/k1v2sur4.mp3",
+			"vocals/characters/skinz/k1v2sur5.mp3",
+			"vocals/characters/skinz/k1v2sur6.mp3"
 		}
---[[		self.SoundTbl_CallForHelp = 
+		self.SoundTbl_BecomeEnemyToPlayer = 
 		{
-			"characters/skinz/skinz2_call_for_help1.wav",
-			"characters/skinz/skinz2_call_for_help2.wav",
-			"characters/skinz/skinz2_call_for_help3.wav",
-			"characters/skinz/skinz2_call_for_help4.wav"
-		}--]]
-		self.SoundTbl_CombatIdle = 
-		{
-			"characters/skinz/skinz2_fight1.wav",
-			"characters/skinz/skinz2_fight2.wav",
-			"characters/skinz/skinz2_fight3.wav",
-			"characters/skinz/skinz2_fight4.wav",
-			"characters/skinz/skinz2_fight5.wav",
-			"characters/skinz/skinz2_fight6.wav",
-			"characters/skinz/skinz2_fight7.wav",
-			"characters/skinz/skinz2_fight8.wav",
-			"characters/skinz/skinz2_fight9.wav",
-			"characters/skinz/skinz2_fight10.wav",
-			"characters/skinz/skinz2_fight11.wav",
-			"characters/skinz/skinz2_fight12.wav",
-			"characters/skinz/skinz2_fight13.wav",
-			"characters/skinz/skinz2_fight14.wav",
-			"characters/skinz/skinz2_fight15.wav",
-			"characters/skinz/skinz2_fight16.wav",
-			"characters/skinz/skinz2_fight17.wav",
-			"characters/skinz/skinz2_fight18.wav",
-			"characters/skinz/skinz2_fight19.wav",
-			"characters/skinz/skinz2_fight20.wav"
+			"vocals/characters/skinz/k1v2bp4.mp3",
+			"vocals/characters/skinz/k1v2bp2.mp3",
+			"vocals/characters/skinz/k1v2wti1.mp3",
+			"vocals/characters/skinz/k1v2sal6.mp3",
+			"vocals/characters/skinz/k1v2rti1.mp3",
+			"vocals/characters/skinz/k1v2ptc1.mp3",
+			"vocals/characters/skinz/k1v2cnr3.mp3",
+			"vocals/characters/skinz/k1v2cnr3.mp3",
+			"vocals/characters/skinz/k1v2cnr3.mp3",
+			"vocals/characters/skinz/k1v2cnr3.mp3"
 		}
-		self.SoundTbl_OnGrenadeSight  = 
+		self.SoundTbl_MedicBeforeHeal = 
 		{
-			"characters/skinz/skinz2_grenade_spot1.wav",
-			"characters/skinz/skinz2_death1.wav",
-			"characters/skinz/skinz2_death2.wav",
-			"characters/skinz/skinz2_death3.wav"
+			"vocals/characters/skinz/k1v2cfh2.mp3",
+			"vocals/characters/skinz/k1v2ncr1.mp3",
+			"vocals/characters/skinz/k1v2wti4.mp3",
+			"vocals/characters/skinz/k1v2wti5.mp3"
 		}
-		self.SoundTbl_IdleDialogueAnswer = 
+		self.SoundTbl_MedicReceiveHeal = 
 		{
-			"characters/skinz/skinz2_idle_answer1.wav",
-			"characters/skinz/skinz2_idle_answer2.wav",
-			"characters/skinz/skinz2_idle_answer3.wav",
-			"characters/skinz/skinz2_idle_answer4.wav",
-			"characters/skinz/skinz2_idle_answer5.wav",
-			"characters/skinz/skinz2_idle_answer6.wav",
-			"characters/skinz/skinz2_idle_answer7.wav",
-			"characters/skinz/skinz2_idle_answer8.wav",
-			"characters/skinz/skinz2_idle_answer9.wav"
-		}
-		self.SoundTbl_IdleDialogue = 
-		{
-			"characters/skinz/skinz2_idle_question1.wav",
-			"characters/skinz/skinz2_idle_question2.wav",
-			"characters/skinz/skinz2_idle_question3.wav",
-			"characters/skinz/skinz2_idle_question4.wav",
-			"characters/skinz/skinz2_idle_question5.wav",
-			"characters/skinz/skinz2_idle_question6.wav",
-			"characters/skinz/skinz2_idle_question7.wav"
-		}
-		self.SoundTbl_Idle = 
-		{
-			"characters/skinz/skinz2_idle1.wav",
-			"characters/skinz/skinz2_idle2.wav",
-			"characters/skinz/skinz2_idle3.wav",
-			"characters/skinz/skinz2_idle4.wav",
-			"characters/skinz/skinz2_idle5.wav",
-			"characters/skinz/skinz2_idle6.wav",
-			"characters/skinz/skinz2_idle7.wav",
-			"characters/skinz/skinz2_idle8.wav",
-			"characters/skinz/skinz2_idle9.wav",
-			"characters/skinz/skinz2_idle10.wav",
-			"characters/skinz/skinz2_idle11.wav",
-			"characters/skinz/skinz2_idle12.wav",
-			"characters/skinz/skinz2_idle13.wav",
-			"characters/skinz/skinz2_idle14.wav",
-			"characters/skinz/skinz2_idle15.wav",
-			"characters/skinz/skinz2_idle16.wav",
-			"characters/skinz/skinz2_idle17.wav",
-			"characters/skinz/skinz2_idle18.wav",
-			"characters/skinz/skinz2_idle19.wav",
-			"characters/skinz/skinz2_idle20.wav",
-			"characters/skinz/skinz2_idle21.wav",
-			"characters/skinz/skinz2_idle22.wav",
-			"characters/skinz/skinz2_idle23.wav",
-			"characters/skinz/skinz2_idle24.wav"
-		}
-		self.SoundTbl_Investigate = 
-		{
-			"characters/skinz/skinz2_investigate1.wav",
-			"characters/skinz/skinz2_investigate2.wav",
-			"characters/skinz/skinz2_investigate3.wav",
-			"characters/skinz/skinz2_investigate4.wav",
-			"characters/skinz/skinz2_investigate5.wav",
-			"characters/skinz/skinz2_investigate6.wav",
-			"characters/skinz/skinz2_investigate7.wav",
-			"characters/skinz/skinz2_investigate8.wav",
-			"characters/skinz/skinz2_investigate9.wav",
-			"characters/skinz/skinz2_investigate10.wav",
-			"characters/skinz/skinz2_investigate11.wav",
-			"characters/skinz/skinz2_investigate12.wav",
-			"characters/skinz/skinz2_investigate13.wav",
-			"characters/skinz/skinz2_investigate14.wav",
-			"characters/skinz/skinz2_investigate15.wav"
-		}
-		self.SoundTbl_OnKilledEnemy = 
-		{
-			"characters/skinz/skinz2_kill1.wav",
-			"characters/skinz/skinz2_kill2.wav",
-			"characters/skinz/skinz2_kill3.wav",
-			"characters/skinz/skinz2_kill4.wav",
-			"characters/skinz/skinz2_kill5.wav",
-			"characters/skinz/skinz2_kill6.wav",
-			"characters/skinz/skinz2_kill7.wav",
-			"characters/skinz/skinz2_kill8.wav",
-			"characters/skinz/skinz2_kill9.wav"
-		}
-		self.SoundTbl_LostEnemy = 
-		{
-			"characters/skinz/skinz2_lost_enemy1.wav",
-			"characters/skinz/skinz2_lost_enemy2.wav",
-			"characters/skinz/skinz2_lost_enemy4.wav",
-			"characters/skinz/skinz2_lost_enemy5.wav",
-			"characters/skinz/skinz2_lost_enemy6.wav",
-			"characters/skinz/skinz2_lost_enemy7.wav",
-			"characters/skinz/skinz2_lost_enemy8.wav",
-			"characters/skinz/skinz2_lost_enemy9.wav",
-			"characters/skinz/skinz2_lost_enemy10.wav",
-			"characters/skinz/skinz2_lost_enemy11.wav",
-			"characters/skinz/skinz2_lost_enemy12.wav"
-		}
-		self.SoundTbl_FollowPlayer = 
-		{
-			"characters/skinz/skinz2_player_follow1.wav",
-			"characters/skinz/skinz2_player_follow2.wav"
-		}
-		self.SoundTbl_DamageByPlayer = 
-		{
-			"characters/skinz/skinz2_player_hurtby1.wav",
-			"characters/skinz/skinz2_player_hurtby2.wav",
-			"characters/skinz/skinz2_player_hurtby3.wav"
-		}
-		self.SoundTbl_OnPlayerSight = 
-		{
-			"characters/skinz/skinz2_player_spot1.wav",
-			"characters/skinz/skinz2_player_spot2.wav",
-			"characters/skinz/skinz2_player_spot3.wav"
-		}
-		self.SoundTbl_UnFollowPlayer = 
-		{
-			"characters/skinz/skinz2_player_unfollow1.wav",
-			"characters/skinz/skinz2_player_unfollow2.wav",
-			"characters/skinz/skinz2_player_unfollow3.wav"
-		}
-		self.SoundTbl_Suppressing = 
-		{
-			"characters/skinz/skinz2_suppressing1.wav",
-			"characters/skinz/skinz2_suppressing2.wav",
-			"characters/skinz/skinz2_suppressing3.wav",
-			"characters/skinz/skinz2_suppressing4.wav",
-			"characters/skinz/skinz2_suppressing5.wav",
-			"characters/skinz/skinz2_suppressing6.wav",
-			"characters/skinz/skinz2_suppressing7.wav",
-			"characters/skinz/skinz2_suppressing8.wav",
-			"characters/skinz/skinz2_suppressing9.wav",
-			"characters/skinz/skinz2_suppressing10.wav",
-			"characters/skinz/skinz2_suppressing11.wav",
-			"characters/skinz/skinz2_suppressing12.wav",
-			"characters/skinz/skinz2_suppressing13.wav",
-			"characters/skinz/skinz2_suppressing14.wav",
-			"characters/skinz/skinz2_suppressing15.wav",
-			"characters/skinz/skinz2_call_for_help1.wav",
-			"characters/skinz/skinz2_call_for_help2.wav",
-			"characters/skinz/skinz2_call_for_help3.wav",
-			"characters/skinz/skinz2_call_for_help4.wav"
-		}
-	elseif voices == 3 then -- Skinz 3 voices
-		self.Model = {"models/manhunt/npc/skin3.mdl"}
-		self.SuppressingSoundChance = 5
-		self.SoundTbl_Alert = 
-		{
-			"characters/skinz/skinz3_alert1.wav",
-			"characters/skinz/skinz3_alert2.wav",
-			"characters/skinz/skinz3_alert3.wav",
-			"characters/skinz/skinz3_alert4.wav",
-			"characters/skinz/skinz3_alert5.wav",
-			"characters/skinz/skinz3_alert6.wav",
-			"characters/skinz/skinz3_alert7.wav",
-			"characters/skinz/skinz3_alert8.wav",
-			"characters/skinz/skinz3_alert9.wav",
-			"characters/skinz/skinz3_alert10.wav",
-			"characters/skinz/skinz3_alert11.wav",
-			"characters/skinz/skinz3_alert12.wav",
-			"characters/skinz/skinz3_alert13.wav"
+			"vocals/characters/skinz/k1v2cst6.mp3",
+			"vocals/characters/skinz/k1v2ja2.mp3",
+			"vocals/characters/skinz/k1v2rti1.mp3",
+			"vocals/characters/skinz/k1v2sal2.mp3"
 		}
 		self.SoundTbl_AllyDeath =
 		{
-			"characters/skinz/skinz3_ally_death1.wav",
-			"characters/skinz/skinz3_ally_death2.wav",
-			"characters/skinz/skinz3_ally_death3.wav",
-			"characters/skinz/skinz3_ally_death4.wav"
-		}
-		self.SoundTbl_MoveOutOfPlayersWay = 
-		{
-			"characters/skinz/skinz3_bump1.wav",
-			"characters/skinz/skinz3_bump2.wav"
+			"vocals/characters/skinz/k1v2dbs1.mp3",
+			"vocals/characters/skinz/k1v2dbs2.mp3",
+			"vocals/characters/skinz/k1v2dbs3.mp3",
+			"vocals/characters/skinz/k1v2dbs4.mp3",
+			"vocals/characters/skinz/k1v2dbs5.mp3",
+			"vocals/characters/skinz/k1v2dbs6.mp3"
 		}
 		self.SoundTbl_CombatIdle = 
 		{
-			"characters/skinz/skinz3_fight1.wav",
-			"characters/skinz/skinz3_fight2.wav",
-			"characters/skinz/skinz3_fight3.wav",
-			"characters/skinz/skinz3_fight4.wav",
-			"characters/skinz/skinz3_fight5.wav",
-			"characters/skinz/skinz3_fight6.wav",
-			"characters/skinz/skinz3_fight7.wav",
-			"characters/skinz/skinz3_fight8.wav",
-			"characters/skinz/skinz3_fight9.wav",
-			"characters/skinz/skinz3_fight10.wav",
-			"characters/skinz/skinz3_fight11.wav",
-			"characters/skinz/skinz3_fight12.wav",
-			"characters/skinz/skinz3_fight13.wav",
-			"characters/skinz/skinz3_fight14.wav",
-			"characters/skinz/skinz3_fight15.wav",
-			"characters/skinz/skinz3_fight16.wav",
-			"characters/skinz/skinz3_fight17.wav",
-			"characters/skinz/skinz3_fight18.wav",
-			"characters/skinz/skinz3_fight19.wav"
+			"vocals/characters/skinz/k1v2bp2.mp3",
+			"vocals/characters/skinz/k1v2bp4.mp3",
+			"vocals/characters/skinz/k1v2cfh3.mp3",
+			"vocals/characters/skinz/k1v2cfh4.mp3",
+			"vocals/characters/skinz/k1v2ntc1.mp3",
+			"vocals/characters/skinz/k1v2ntc2.mp3",
+			"vocals/characters/skinz/k1v2ntc3.mp3",
+			"vocals/characters/skinz/k1v2ptc2.mp3",
+			"vocals/characters/skinz/k1v2rti4.mp3",
+			"vocals/characters/skinz/k1v2tc1.mp3",
+			"vocals/characters/skinz/k1v2tc2.mp3",
+			"vocals/characters/skinz/k1v2tc3.mp3",
+			"vocals/characters/skinz/k1v2tsh1.mp3",
+			"vocals/characters/skinz/k1v2tsh2.mp3",
+			"vocals/characters/skinz/k1v2tsh3.mp3",
+			"vocals/characters/skinz/k1v2tsh4.mp3",
+			"vocals/characters/skinz/k1v2tsh5.mp3",
+			"vocals/characters/skinz/k1v2tsh6.mp3"
 		}
 		self.SoundTbl_OnGrenadeSight  = 
 		{
-			"characters/skinz/skinz3_grenade_spot1.wav",
-			"characters/skinz/skinz3_grenade_spot2.wav",
-			"characters/skinz/skinz3_grenade_spot3.wav",
-			"characters/skinz/skinz3_grenade_spot4.wav",
-			"characters/skinz/skinz3_death1.wav",
-			"characters/skinz/skinz3_death2.wav",
-			"characters/skinz/skinz3_death3.wav"
+			"vocals/characters/skinz/k1v2pln1.mp3",
+			"vocals/characters/skinz/k1v2pln2.mp3",
+			"vocals/characters/skinz/k1v2pln3.mp3",
+			"vocals/characters/skinz/k1v2sur1.mp3",
+			"vocals/characters/skinz/k1v2sur2.mp3",
+			"vocals/characters/skinz/k1v2sur3.mp3"
 		}
 		self.SoundTbl_IdleDialogueAnswer = 
 		{
-			"characters/skinz/skinz3_idle_answer1.wav",
-			"characters/skinz/skinz3_idle_answer2.wav",
-			"characters/skinz/skinz3_idle_answer3.wav",
-			"characters/skinz/skinz3_idle_answer4.wav",
-			"characters/skinz/skinz3_idle_answer5.wav",
-			"characters/skinz/skinz3_idle_answer6.wav",
-			"characters/skinz/skinz3_idle_answer7.wav",
-			"characters/skinz/skinz3_idle_answer8.wav"
+			"vocals/characters/skinz/k1v2cin1.mp3",
+			"vocals/characters/skinz/k1v2cin2.mp3",
+			"vocals/characters/skinz/k1v2cin3.mp3",
+			"vocals/characters/skinz/k1v2cnr1.mp3",
+			"vocals/characters/skinz/k1v2cse1.mp3",
+			"vocals/characters/skinz/k1v2nsr5.mp3",
+			"vocals/characters/skinz/k1v2tse5.mp3"
 		}
 		self.SoundTbl_IdleDialogue = 
 		{
-			"characters/skinz/skinz3_idle_question1.wav",
-			"characters/skinz/skinz3_idle_question2.wav",
-			"characters/skinz/skinz3_idle_question3.wav"
+			"vocals/characters/skinz/k1v2cse2.mp3",
+			"vocals/characters/skinz/k1v2gr3.mp3",
+			"vocals/characters/skinz/k1v2nsr1.mp3",
+			"vocals/characters/skinz/k1v2nsr2.mp3",
+			"vocals/characters/skinz/k1v2nsr3.mp3",
+			"vocals/characters/skinz/k1v2tse6.mp3"
 		}
 		self.SoundTbl_Idle = 
 		{
-			"characters/skinz/skinz3_idle1.wav",
-			"characters/skinz/skinz3_idle2.wav",
-			"characters/skinz/skinz3_idle3.wav",
-			"characters/skinz/skinz3_idle4.wav",
-			"characters/skinz/skinz3_idle5.wav",
-			"characters/skinz/skinz3_idle6.wav",
-			"characters/skinz/skinz3_idle7.wav",
-			"characters/skinz/skinz3_idle8.wav",
-			"characters/skinz/skinz3_idle9.wav",
-			"characters/skinz/skinz3_idle10.wav",
-			"characters/skinz/skinz3_idle11.wav",
-			"characters/skinz/skinz3_idle12.wav",
-			"characters/skinz/skinz3_idle13.wav",
-			"characters/skinz/skinz3_idle14.wav",
-			"characters/skinz/skinz3_idle15.wav",
-			"characters/skinz/skinz3_idle16.wav",
-			"characters/skinz/skinz3_idle17.wav",
-			"characters/skinz/skinz3_idle18.wav",
-			"characters/skinz/skinz3_idle19.wav",
-			"characters/skinz/skinz3_idle20.wav",
-			"characters/skinz/skinz3_idle21.wav",
-			"characters/skinz/skinz3_idle22.wav",
-			"characters/skinz/skinz3_idle23.wav"
+			"vocals/characters/skinz/k1v2cnr4.mp3",
+			"vocals/characters/skinz/k1v2cnr5.mp3",
+			"vocals/characters/skinz/k1v2cst1.mp3",
+			"vocals/characters/skinz/k1v2cst2.mp3",
+			"vocals/characters/skinz/k1v2cst3.mp3",
+			"vocals/characters/skinz/k1v2cst4.mp3",
+			"vocals/characters/skinz/k1v2cst5.mp3",
+			"vocals/characters/skinz/k1v2cst6.mp3",
+			"vocals/characters/skinz/k1v2cst7.mp3",
+			"vocals/characters/skinz/k1v2cst8.mp3",
+			"vocals/characters/skinz/k1v2cst9.mp3",
+			"vocals/characters/skinz/k1v2cst10.mp3",
+			"vocals/characters/skinz/k1v2ct6.mp3",
+			"vocals/characters/skinz/k1v2gic1.mp3",
+			"vocals/characters/skinz/k1v2gic2.mp3",
+			"vocals/characters/skinz/k1v2gic3.mp3",
+			"vocals/characters/skinz/k1v2gic4.mp3",
+			"vocals/characters/skinz/k1v2gic5.mp3",
+			"vocals/characters/skinz/k1v2gic6.mp3",
+			"vocals/characters/skinz/k1v2gic7.mp3",
+			"vocals/characters/skinz/k1v2gic8.mp3",
+			"vocals/characters/skinz/k1v2gic9.mp3",
+			"vocals/characters/skinz/k1v2gic10.mp3",
+			"vocals/characters/skinz/k1v2ncr2.mp3",
+			"vocals/characters/skinz/k1v2tse1.mp3",
+			"vocals/characters/skinz/k1v2tse4.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
 		}
 		self.SoundTbl_Investigate = 
 		{
-			"characters/skinz/skinz3_investigate1.wav",
-			"characters/skinz/skinz3_investigate2.wav",
-			"characters/skinz/skinz3_investigate3.wav",
-			"characters/skinz/skinz3_investigate4.wav",
-			"characters/skinz/skinz3_investigate5.wav",
-			"characters/skinz/skinz3_investigate6.wav",
-			"characters/skinz/skinz3_investigate7.wav",
-			"characters/skinz/skinz3_investigate8.wav",
-			"characters/skinz/skinz3_investigate9.wav",
-			"characters/skinz/skinz3_investigate10.wav",
-			"characters/skinz/skinz3_investigate11.wav",
-			"characters/skinz/skinz3_investigate12.wav"
+			"vocals/characters/skinz/k1v2cfa1.mp3",
+			"vocals/characters/skinz/k1v2cfa2.mp3",
+			"vocals/characters/skinz/k1v2cfa3.mp3",
+			"vocals/characters/skinz/k1v2cfa5.mp3",
+			"vocals/characters/skinz/k1v2cnr2.mp3",
+			"vocals/characters/skinz/k1v2cse3.mp3",
+			"vocals/characters/skinz/k1v2rti5.mp3",
+			"vocals/characters/skinz/k1v2sal1.mp3",
+			"vocals/characters/skinz/k1v2sal2.mp3",
+			"vocals/characters/skinz/k1v2sal3.mp3",
+			"vocals/characters/skinz/k1v2sal4.mp3",
+			"vocals/characters/skinz/k1v2sal5.mp3",
+			"vocals/characters/skinz/k1v2sal6.mp3",
+			"vocals/characters/skinz/k1v2tc5.mp3",
+			"vocals/characters/skinz/k1v2wti1.mp3",
+			"vocals/characters/skinz/k1v2wti2.mp3",
+			"vocals/characters/skinz/k1v2wti3.mp3",
+			"vocals/characters/skinz/k1v2wti4.mp3",
+			"vocals/characters/skinz/k1v2wti5.mp3",
+			"vocals/characters/skinz/k1v2wti6.mp3"
 		}
 		self.SoundTbl_OnKilledEnemy = 
 		{
-			"characters/skinz/skinz3_kill1.wav",
-			"characters/skinz/skinz3_kill2.wav",
-			"characters/skinz/skinz3_kill3.wav",
-			"characters/skinz/skinz3_kill4.wav",
-			"characters/skinz/skinz3_kill5.wav",
-			"characters/skinz/skinz3_kill6.wav"
+			"vocals/characters/skinz/k1v2ct4.mp3",
+			"vocals/characters/skinz/k1v2dbs5.mp3",
+			"vocals/characters/skinz/k1v2dbs6.mp3",
+			"vocals/characters/skinz/k1v2ncr3.mp3",
+			"vocals/characters/skinz/k1v2ncr4.mp3",
+			"vocals/characters/skinz/k1v2ncr5.mp3",
+			"vocals/characters/skinz/k1v2ptc6.mp3",
+			"vocals/characters/skinz/k1v2ptd2.mp3",
+			"vocals/characters/skinz/k1v2ptd3.mp3",
+			"vocals/characters/skinz/k1v2ptd4.mp3",
+			"vocals/characters/skinz/k1v2ptd5.mp3"
 		}
 		self.SoundTbl_LostEnemy = 
 		{
-			"characters/skinz/skinz3_lost_enemy1.wav",
-			"characters/skinz/skinz3_lost_enemy2.wav",
-			"characters/skinz/skinz3_lost_enemy4.wav",
-			"characters/skinz/skinz3_lost_enemy5.wav",
-			"characters/skinz/skinz3_lost_enemy6.wav",
-			"characters/skinz/skinz3_lost_enemy7.wav",
-			"characters/skinz/skinz3_lost_enemy8.wav",
-			"characters/skinz/skinz3_lost_enemy9.wav",
-			"characters/skinz/skinz3_lost_enemy10.wav",
-			"characters/skinz/skinz3_lost_enemy11.wav",
-			"characters/skinz/skinz3_lost_enemy12.wav",
-			"characters/skinz/skinz3_lost_enemy13.wav"
-		}
-		self.SoundTbl_FollowPlayer = 
-		{
-			"characters/skinz/skinz3_player_follow1.wav",
-			"characters/skinz/skinz3_player_follow2.wav",
-			"characters/skinz/skinz3_player_follow3.wav"
+			"vocals/characters/skinz/k1v2bp5.mp3",
+			"vocals/characters/skinz/k1v2bp6.mp3",
+			"vocals/characters/skinz/k1v2cnr6.mp3",
+			"vocals/characters/skinz/k1v2nsr1.mp3",
+			"vocals/characters/skinz/k1v2nsr4.mp3",
+			"vocals/characters/skinz/k1v2nsr6.mp3",
+			"vocals/characters/skinz/k1v2prs2.mp3",
+			"vocals/characters/skinz/k1v2prs3.mp3",
+			"vocals/characters/skinz/k1v2prs4.mp3",
+			"vocals/characters/skinz/k1v2prs5.mp3",
+			"vocals/characters/skinz/k1v2tc4.mp3",
+			"vocals/characters/skinz/k1v2tc6.mp3"
 		}
 		self.SoundTbl_DamageByPlayer = 
 		{
-			"characters/skinz/skinz3_player_hurtby1.wav",
-			"characters/skinz/skinz3_player_hurtby2.wav",
-			"characters/skinz/skinz3_player_hurtby3.wav"
+			"vocals/characters/skinz/k1v2ct5.mp3",
+			"vocals/characters/skinz/k1v2ntc4.mp3",
+			"vocals/characters/skinz/k1v2ntc5.mp3"
 		}
 		self.SoundTbl_OnPlayerSight = 
 		{
-			"characters/skinz/skinz3_player_spot1.wav",
-			"characters/skinz/skinz3_player_spot2.wav",
-			"characters/skinz/skinz3_player_spot3.wav"
+			"vocals/characters/skinz/k1v2gr1.mp3",
+			"vocals/characters/skinz/k1v2gr2.mp3",
+			"vocals/characters/skinz/k1v2gr3.mp3"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k1v2ptc3.mp3",
+			"vocals/characters/skinz/k1v2tb1.mp3",
+			"vocals/characters/skinz/k1v2tb3.mp3",
+			"vocals/characters/skinz/k1v2tse2.mp3"
 		}
 		self.SoundTbl_UnFollowPlayer = 
 		{
-			"characters/skinz/skinz3_player_unfollow1.wav",
-			"characters/skinz/skinz3_player_unfollow2.wav",
-			"characters/skinz/skinz3_player_unfollow3.wav",
-			"characters/skinz/skinz3_player_unfollow4.wav"
+			"vocals/characters/skinz/k1v2ncr1.mp3",
+			"vocals/characters/skinz/k1v2ptc1.mp3",
+			"vocals/characters/skinz/k1v2nsr2.mp3",
+			"vocals/characters/skinz/scripted/k1v2scb2.mp3",
+			"vocals/characters/skinz/k1v2tse3.mp3"
 		}
 		self.SoundTbl_Suppressing = 
 		{
-			"characters/skinz/skinz3_suppressing1.wav",
-			"characters/skinz/skinz3_suppressing2.wav",
-			"characters/skinz/skinz3_suppressing3.wav",
-			"characters/skinz/skinz3_suppressing4.wav",
-			"characters/skinz/skinz3_suppressing5.wav",
-			"characters/skinz/skinz3_suppressing6.wav",
-			"characters/skinz/skinz3_suppressing7.wav",
-			"characters/skinz/skinz3_suppressing8.wav",
-			"characters/skinz/skinz3_suppressing9.wav",
-			"characters/skinz/skinz3_suppressing10.wav",
-			"characters/skinz/skinz3_suppressing11.wav",
-			"characters/skinz/skinz3_suppressing12.wav",
-			"characters/skinz/skinz3_suppressing13.wav",
-			"characters/skinz/skinz3_suppressing14.wav",
-			"characters/skinz/skinz3_suppressing15.wav",
-			"characters/skinz/skinz3_suppressing16.wav",
-			"characters/skinz/skinz3_suppressing17.wav",
-			"characters/skinz/skinz3_suppressing18.wav"
+			"vocals/characters/skinz/k1v2bp3.mp3",
+			"vocals/characters/skinz/k1v2cfh1.mp3",
+			"vocals/characters/skinz/k1v2cfh2.mp3",
+			"vocals/characters/skinz/k1v2cfh5.mp3",
+			"vocals/characters/skinz/k1v2cfh6.mp3",
+			"vocals/characters/skinz/k1v2ja1.mp3",
+			"vocals/characters/skinz/k1v2ja2.mp3",
+			"vocals/characters/skinz/k1v2ja3.mp3",
+			"vocals/characters/skinz/k1v2ja4.mp3",
+			"vocals/characters/skinz/k1v2ja5.mp3",
+			"vocals/characters/skinz/k1v2ja6.mp3",
+			"vocals/characters/skinz/k1v2ncr6.mp3",
+			"vocals/characters/skinz/k1v2prs1.mp3",
+			"vocals/characters/skinz/k1v2prs6.mp3",
+			"vocals/characters/skinz/k1v2ptc4.mp3",
+			"vocals/characters/skinz/k1v2ptc5.mp3",
+			"vocals/characters/skinz/k1v2rti1.mp3",
+			"vocals/characters/skinz/k1v2tb2.mp3",
+			"vocals/characters/skinz/k1v2ptd1.mp3",
+			"vocals/characters/skinz/k1v2ptd6.mp3",
+			"vocals/characters/skinz/k1v2tsz1.mp3",
+			"vocals/characters/skinz/k1v2tsz2.mp3",
+			"vocals/characters/skinz/k1v2tsz3.mp3"
 		}
-	elseif voices == 4 then -- Skinz 4 voices
+	elseif voices == 3 then -- Skinz voiceset 3
 		self.Model = {"models/manhunt/npc/skin3.mdl"}
+		self.SuppressingSoundChance = 6
 		self.SoundTbl_Alert = 
 		{
-			"characters/skinz/skinz4_alert1.wav",
-			"characters/skinz/skinz4_alert2.wav",
-			"characters/skinz/skinz4_alert3.wav",
-			"characters/skinz/skinz4_alert4.wav",
-			"characters/skinz/skinz4_alert5.wav",
-			"characters/skinz/skinz4_alert6.wav",
-			"characters/skinz/skinz4_alert7.wav",
-			"characters/skinz/skinz4_alert8.wav",
-			"characters/skinz/skinz4_alert9.wav",
-			"characters/skinz/skinz4_alert10.wav",
-			"characters/skinz/skinz4_alert11.wav",
-			"characters/skinz/skinz4_alert12.wav",
-			"characters/skinz/skinz4_alert13.wav",
-			"characters/skinz/skinz4_alert14.wav",
-			"characters/skinz/skinz4_alert15.wav"
+			"vocals/characters/skinz/k2v1cfa2.mp3",
+			"vocals/characters/skinz/k2v1cfa5.mp3",
+			"vocals/characters/skinz/k2v1ct1.mp3",
+			"vocals/characters/skinz/k2v1ct4.mp3",
+			"vocals/characters/skinz/k2v1ct6.mp3",
+			"vocals/characters/skinz/k2v1ds1.mp3",
+			"vocals/characters/skinz/k2v1ds2.mp3",
+			"vocals/characters/skinz/k2v1ds3.mp3",
+			"vocals/characters/skinz/k2v1ds4.mp3",
+			"vocals/characters/skinz/k2v1ds5.mp3",
+			"vocals/characters/skinz/k2v1ds6.mp3",
+			"vocals/characters/skinz/k2v1tsz3.mp3",
+			"vocals/characters/skinz/scripted/k2v1sca2.mp3",
+			"vocals/characters/skinz/scripted/k2v1sca5.mp3",
+			"vocals/characters/skinz/scripted/k2v1sca6.mp3",
+			"vocals/characters/skinz/scripted/k2v1sca7.mp3"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"vocals/characters/skinz/k2v1wti1.mp3",
+			"vocals/characters/skinz/k2v1sur4.mp3",
+			"vocals/characters/skinz/k2v1sur5.mp3",
+			"vocals/characters/skinz/k2v1sur6.mp3",
+			"vocals/characters/skinz/k2v1wti2.mp3"
+		}
+		self.SoundTbl_BecomeEnemyToPlayer = 
+		{
+			"vocals/characters/skinz/k2v1ct5.mp3",
+			"vocals/characters/skinz/k2v1tse3.mp3",
+			"vocals/characters/skinz/k2v1tse4.mp3"
+		}
+		self.SoundTbl_MedicBeforeHeal = 
+		{
+			"vocals/characters/skinz/k2v1cfh1.mp3",
+			"vocals/characters/skinz/k2v1cin1.mp3",
+			"vocals/characters/skinz/k2v1cin3.mp3",
+			"vocals/characters/skinz/k2v1cst4.mp3",
+			"vocals/characters/skinz/k2v1wti4.mp3",
+		}
+		self.SoundTbl_MedicReceiveHeal = 
+		{
+			"vocals/characters/skinz/k2v1cse1.mp3",
+			"vocals/characters/skinz/k2v1cst6.mp3",
+			"vocals/characters/skinz/k2v1cst8.mp3",
+			"vocals/characters/skinz/k2v1ja1.mp3",
+			"vocals/characters/skinz/k2v1tb3.mp3",
 		}
 		self.SoundTbl_AllyDeath =
 		{
-			"characters/skinz/skinz4_ally_death1.wav",
-			"characters/skinz/skinz4_ally_death2.wav",
-			"characters/skinz/skinz4_ally_death3.wav"
-		}
-		self.SoundTbl_MoveOutOfPlayersWay = 
-		{
-			"characters/skinz/skinz4_fight15.wav",
-			"characters/skinz/skinz4_grenade_spot3.wav"
+			"vocals/characters/skinz/k2v1dbs1.mp3",
+			"vocals/characters/skinz/k2v1dbs2.mp3",
+			"vocals/characters/skinz/k2v1dbs3.mp3",
+			"vocals/characters/skinz/k2v1dbs4.mp3",
+			"vocals/characters/skinz/k2v1dbs5.mp3",
+			"vocals/characters/skinz/k2v1dbs6.mp3"
 		}
 		self.SoundTbl_CombatIdle = 
 		{
-			"characters/skinz/skinz4_fight1.wav",
-			"characters/skinz/skinz4_fight2.wav",
-			"characters/skinz/skinz4_fight3.wav",
-			"characters/skinz/skinz4_fight4.wav",
-			"characters/skinz/skinz4_fight5.wav",
-			"characters/skinz/skinz4_fight6.wav",
-			"characters/skinz/skinz4_fight7.wav",
-			"characters/skinz/skinz4_fight8.wav",
-			"characters/skinz/skinz4_fight9.wav",
-			"characters/skinz/skinz4_fight10.wav",
-			"characters/skinz/skinz4_fight11.wav",
-			"characters/skinz/skinz4_fight12.wav",
-			"characters/skinz/skinz4_fight13.wav",
-			"characters/skinz/skinz4_fight14.wav",
-			"characters/skinz/skinz4_fight15.wav",
-			"characters/skinz/skinz4_fight16.wav",
-			"characters/skinz/skinz4_fight17.wav",
-			"characters/skinz/skinz4_fight18.wav"
+			"vocals/characters/skinz/k2v1cfa3.mp3",
+			"vocals/characters/skinz/k2v1cfa6.mp3",
+			"vocals/characters/skinz/k2v1cfh3.mp3",
+			"vocals/characters/skinz/k2v1cfh5.mp3",
+			"vocals/characters/skinz/k2v1ja1.mp3",
+			"vocals/characters/skinz/k2v1ja4.mp3",
+			"vocals/characters/skinz/k2v1ja5.mp3",
+			"vocals/characters/skinz/k2v1ja6.mp3",
+			"vocals/characters/skinz/k2v1ntc4.mp3",
+			"vocals/characters/skinz/k2v1ntc5.mp3",
+			"vocals/characters/skinz/k2v1ntc6.mp3",
+			"vocals/characters/skinz/k2v1ptc1.mp3",
+			"vocals/characters/skinz/k2v1tsh1.mp3",
+			"vocals/characters/skinz/k2v1tsh2.mp3",
+			"vocals/characters/skinz/k2v1tsh3.mp3",
+			"vocals/characters/skinz/k2v1tsh4.mp3",
+			"vocals/characters/skinz/k2v1tsh5.mp3",
+			"vocals/characters/skinz/k2v1tsh6.mp3"
 		}
 		self.SoundTbl_OnGrenadeSight  = 
 		{
-			"characters/skinz/skinz4_grenade_spot1.wav",
-			"characters/skinz/skinz4_grenade_spot2.wav",
-			"characters/skinz/skinz4_grenade_spot3.wav",
-			"characters/skinz/skinz4_death1.wav",
-			"characters/skinz/skinz4_death2.wav"
+			"vocals/characters/skinz/k2v1pln1.mp3",
+			"vocals/characters/skinz/k2v1pln2.mp3",
+			"vocals/characters/skinz/k2v1pln3.mp3",
+			"vocals/characters/skinz/k2v1sur1.mp3",
+			"vocals/characters/skinz/k2v1sur2.mp3",
+			"vocals/characters/skinz/k2v1sur3.mp3",
+			"vocals/characters/skinz/k2v1sur4.mp3",
+			"vocals/characters/skinz/k2v1sur5.mp3",
+			"vocals/characters/skinz/k2v1sur6.mp3"
 		}
 		self.SoundTbl_IdleDialogueAnswer = 
 		{
-			"characters/skinz/skinz4_idle_answer1.wav",
-			"characters/skinz/skinz4_idle_answer2.wav",
-			"characters/skinz/skinz4_idle_answer3.wav",
-			"characters/skinz/skinz4_idle_answer4.wav",
-			"characters/skinz/skinz4_idle_answer5.wav",
-			"characters/skinz/skinz4_idle_answer6.wav",
-			"characters/skinz/skinz4_idle_answer7.wav",
-			"characters/skinz/skinz4_idle_answer8.wav"
+			"vocals/characters/skinz/k2v1cin1.mp3",
+			"vocals/characters/skinz/k2v1cin2.mp3",
+			"vocals/characters/skinz/k2v1cse1.mp3",
+			"vocals/characters/skinz/k2v1cse2.mp3",
+			"vocals/characters/skinz/k2v1cse3.mp3"
 		}
 		self.SoundTbl_IdleDialogue = 
 		{
-			"characters/skinz/skinz4_idle_question1.wav",
-			"characters/skinz/skinz4_idle_question2.wav",
-			"characters/skinz/skinz4_idle_question3.wav",
-			"characters/skinz/skinz4_idle_question4.wav",
-			"characters/skinz/skinz4_idle_question5.wav",
-			"characters/skinz/skinz4_idle_question6.wav"
+			"vocals/characters/skinz/k2v1cfh4.mp3",
+			"vocals/characters/skinz/k2v1cst4.mp3",
+			"vocals/characters/skinz/k2v1cst5.mp3",
+			"vocals/characters/skinz/k2v1gic4.mp3",
+			"vocals/characters/skinz/k2v1gic6.mp3"
 		}
 		self.SoundTbl_Idle = 
 		{
-			"characters/skinz/skinz4_idle1.wav",
-			"characters/skinz/skinz4_idle2.wav",
-			"characters/skinz/skinz4_idle3.wav",
-			"characters/skinz/skinz4_idle4.wav",
-			"characters/skinz/skinz4_idle5.wav",
-			"characters/skinz/skinz4_idle6.wav",
-			"characters/skinz/skinz4_idle7.wav",
-			"characters/skinz/skinz4_idle8.wav",
-			"characters/skinz/skinz4_idle9.wav",
-			"characters/skinz/skinz4_idle10.wav",
-			"characters/skinz/skinz4_idle11.wav",
-			"characters/skinz/skinz4_idle12.wav",
-			"characters/skinz/skinz4_idle13.wav",
-			"characters/skinz/skinz4_idle14.wav",
-			"characters/skinz/skinz4_idle15.wav",
-			"characters/skinz/skinz4_idle16.wav",
-			"characters/skinz/skinz4_idle17.wav",
-			"characters/skinz/skinz4_idle18.wav",
-			"characters/skinz/skinz4_idle19.wav",
-			"characters/skinz/skinz4_idle20.wav",
-			"characters/skinz/skinz4_idle21.wav",
-			"characters/skinz/skinz4_idle22.wav",
-			"characters/skinz/skinz4_idle23.wav",
-			"characters/skinz/skinz4_idle24.wav",
-			"characters/skinz/skinz4_idle25.wav",
-			"characters/skinz/skinz4_idle26.wav",
-			"characters/skinz/skinz4_idle27.wav",
-			"characters/skinz/skinz4_idle28.wav",
-			"characters/skinz/skinz4_idle29.wav",
-			"characters/skinz/skinz4_idle30.wav"
+			"vocals/characters/skinz/k2v1cnr1.mp3",
+			"vocals/characters/skinz/k2v1cnr2.mp3",
+			"vocals/characters/skinz/k2v1cnr3.mp3",
+			"vocals/characters/skinz/k2v1cnr4.mp3",
+			"vocals/characters/skinz/k2v1cnr5.mp3",
+			"vocals/characters/skinz/k2v1cst1.mp3",
+			"vocals/characters/skinz/k2v1cst2.mp3",
+			"vocals/characters/skinz/k2v1cst3.mp3",
+			"vocals/characters/skinz/k2v1cst4.mp3",
+			"vocals/characters/skinz/k2v1cst5.mp3",
+			"vocals/characters/skinz/k2v1cst6.mp3",
+			"vocals/characters/skinz/k2v1cst7.mp3",
+			"vocals/characters/skinz/k2v1cst8.mp3",
+			"vocals/characters/skinz/k2v1cst9.mp3",
+			"vocals/characters/skinz/k2v1cst10.mp3",
+			"vocals/characters/skinz/k2v1gic1.mp3",
+			"vocals/characters/skinz/k2v1gic2.mp3",
+			"vocals/characters/skinz/k2v1gic3.mp3",
+			"vocals/characters/skinz/k2v1gic4.mp3",
+			"vocals/characters/skinz/k2v1gic5.mp3",
+			"vocals/characters/skinz/k2v1gic6.mp3",
+			"vocals/characters/skinz/k2v1gic7.mp3",
+			"vocals/characters/skinz/k2v1gic8.mp3",
+			"vocals/characters/skinz/k2v1gic9.mp3",
+			"vocals/characters/skinz/k2v1gic10.mp3",
+			"vocals/characters/skinz/k2v1prs2.mp3",
+			"vocals/characters/skinz/k2v1tse2.mp3",
+			"vocals/characters/skinz/k2v1tse5.mp3",
+			"vocals/characters/skinz/k2v1tse6.mp3",
+			"vocals/characters/skinz/k2v1wti3.mp3",
+			"vocals/characters/skinz/k2v1wti4.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
 		}
 		self.SoundTbl_Investigate = 
 		{
-			"characters/skinz/skinz4_investigate1.wav",
-			"characters/skinz/skinz4_investigate2.wav",
-			"characters/skinz/skinz4_investigate3.wav",
-			"characters/skinz/skinz4_investigate4.wav",
-			"characters/skinz/skinz4_investigate5.wav",
-			"characters/skinz/skinz4_investigate6.wav",
-			"characters/skinz/skinz4_investigate7.wav",
-			"characters/skinz/skinz4_investigate8.wav",
-			"characters/skinz/skinz4_investigate9.wav",
-			"characters/skinz/skinz4_investigate10.wav",
-			"characters/skinz/skinz4_investigate11.wav",
-			"characters/skinz/skinz4_investigate12.wav",
-			"characters/skinz/skinz4_investigate13.wav",
-			"characters/skinz/skinz4_investigate14.wav",
-			"characters/skinz/skinz4_investigate15.wav"
+			"vocals/characters/skinz/k2v1cfa4.mp3",
+			"vocals/characters/skinz/k2v1prs1.mp3",
+			"vocals/characters/skinz/k2v1rti1.mp3",
+			"vocals/characters/skinz/k2v1rti2.mp3",
+			"vocals/characters/skinz/k2v1rti3.mp3",
+			"vocals/characters/skinz/k2v1rti4.mp3",
+			"vocals/characters/skinz/k2v1rti5.mp3",
+			"vocals/characters/skinz/k2v1rti6.mp3",
+			"vocals/characters/skinz/k2v1sal1.mp3",
+			"vocals/characters/skinz/k2v1sal2.mp3",
+			"vocals/characters/skinz/k2v1sal3.mp3",
+			"vocals/characters/skinz/k2v1sal4.mp3",
+			"vocals/characters/skinz/k2v1sal5.mp3",
+			"vocals/characters/skinz/k2v1sal6.mp3",
+			"vocals/characters/skinz/k2v1tse1.mp3",
+			"vocals/characters/skinz/k2v1wti5.mp3",
+			"vocals/characters/skinz/scripted/k2v1sca1.mp3"
 		}
 		self.SoundTbl_OnKilledEnemy = 
 		{
-			"characters/skinz/skinz4_kill1.wav",
-			"characters/skinz/skinz4_kill2.wav",
-			"characters/skinz/skinz4_kill3.wav",
-			"characters/skinz/skinz4_kill4.wav",
-			"characters/skinz/skinz4_kill5.wav",
-			"characters/skinz/skinz4_kill6.wav",
-			"characters/skinz/skinz4_kill7.wav",
-			"characters/skinz/skinz4_kill8.wav",
-			"characters/skinz/skinz4_kill9.wav"
+			"vocals/characters/skinz/k2v1ct2.mp3",
+			"vocals/characters/skinz/k2v1ct3.mp3",
+			"vocals/characters/skinz/k2v1tpd1.mp3",
+			"vocals/characters/skinz/k2v1tpd2.mp3",
+			"vocals/characters/skinz/k2v1tpd3.mp3",
+			"vocals/characters/skinz/k2v1tpd4.mp3",
+			"vocals/characters/skinz/k2v1tpd5.mp3",
+			"vocals/characters/skinz/k2v1tpd6.mp3"
 		}
 		self.SoundTbl_LostEnemy = 
 		{
-			"characters/skinz/skinz4_lost_enemy1.wav",
-			"characters/skinz/skinz4_lost_enemy2.wav",
-			"characters/skinz/skinz4_lost_enemy4.wav",
-			"characters/skinz/skinz4_lost_enemy5.wav",
-			"characters/skinz/skinz4_lost_enemy6.wav",
-			"characters/skinz/skinz4_lost_enemy7.wav",
-			"characters/skinz/skinz4_lost_enemy8.wav",
-			"characters/skinz/skinz4_lost_enemy9.wav",
-			"characters/skinz/skinz4_lost_enemy10.wav",
-			"characters/skinz/skinz4_lost_enemy11.wav",
-			"characters/skinz/skinz4_lost_enemy12.wav",
-			"characters/skinz/skinz4_lost_enemy13.wav"
-		}
-		self.SoundTbl_FollowPlayer = 
-		{
-			"characters/skinz/skinz4_player_follow1.wav",
-			"characters/skinz/skinz4_player_follow2.wav",
-			"characters/skinz/skinz4_player_follow3.wav"
+			"vocals/characters/skinz/k2v1cnr6.mp3",
+			"vocals/characters/skinz/k2v1ncr1.mp3",
+			"vocals/characters/skinz/k2v1ncr2.mp3",
+			"vocals/characters/skinz/k2v1ncr3.mp3",
+			"vocals/characters/skinz/k2v1ncr4.mp3",
+			"vocals/characters/skinz/k2v1ncr5.mp3",
+			"vocals/characters/skinz/k2v1ncr6.mp3",
+			"vocals/characters/skinz/k2v1nsr1.mp3",
+			"vocals/characters/skinz/k2v1nsr2.mp3",
+			"vocals/characters/skinz/k2v1nsr3.mp3",
+			"vocals/characters/skinz/k2v1nsr4.mp3",
+			"vocals/characters/skinz/k2v1nsr5.mp3",
+			"vocals/characters/skinz/k2v1nsr6.mp3",
+			"vocals/characters/skinz/k2v1prs4.mp3",
+			"vocals/characters/skinz/k2v1prs5.mp3"
 		}
 		self.SoundTbl_DamageByPlayer = 
 		{
-			"characters/skinz/skinz4_player_hurtby1.wav",
-			"characters/skinz/skinz4_player_hurtby2.wav",
-			"characters/skinz/skinz4_player_hurtby3.wav"
+			"vocals/characters/skinz/k2v1bp2.mp3",
+			"vocals/characters/skinz/k2v1ntc1.mp3",
+			"vocals/characters/skinz/k2v1ntc2.mp3",
+			"vocals/characters/skinz/k2v1ntc3.mp3"
 		}
 		self.SoundTbl_OnPlayerSight = 
 		{
-			"characters/skinz/skinz4_player_spot1.wav",
-			"characters/skinz/skinz4_player_spot2.wav"
+			"vocals/characters/skinz/k2v1gr1.mp3",
+			"vocals/characters/skinz/k2v1gr2.mp3",
+			"vocals/characters/skinz/k2v1gr3.mp3"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k2v1bp3.mp3",
+			"vocals/characters/skinz/k2v1bp5.mp3",
+			"vocals/characters/skinz/k2v1cfh1.mp3",
+			"vocals/characters/skinz/k2v1cin3.mp3",
+			"vocals/characters/skinz/k2v1tb1.mp3",
+			"vocals/characters/skinz/k2v1tb2.mp3"
 		}
 		self.SoundTbl_UnFollowPlayer = 
 		{
-			"characters/skinz/skinz4_player_unfollow1.wav",
-			"characters/skinz/skinz4_player_unfollow2.wav",
-			"characters/skinz/skinz4_player_unfollow3.wav"
+			"vocals/characters/skinz/k2v1bp4.mp3",
+			"vocals/characters/skinz/k2v1ptc6.mp3",
+			"vocals/characters/skinz/k2v1tb3.mp3",
+			"vocals/characters/skinz/k2v1tsz2.mp3"
 		}
 		self.SoundTbl_Suppressing = 
 		{
-			"characters/skinz/skinz4_suppressing1.wav",
-			"characters/skinz/skinz4_suppressing2.wav",
-			"characters/skinz/skinz4_suppressing3.wav",
-			"characters/skinz/skinz4_suppressing4.wav",
-			"characters/skinz/skinz4_suppressing5.wav",
-			"characters/skinz/skinz4_suppressing6.wav",
-			"characters/skinz/skinz4_suppressing7.wav",
-			"characters/skinz/skinz4_suppressing8.wav",
-			"characters/skinz/skinz4_suppressing9.wav",
-			"characters/skinz/skinz4_suppressing10.wav",
-			"characters/skinz/skinz4_suppressing11.wav",
-			"characters/skinz/skinz4_suppressing12.wav",
-			"characters/skinz/skinz4_suppressing13.wav",
-			"characters/skinz/skinz4_suppressing14.wav",
-			"characters/skinz/skinz4_suppressing15.wav",
-			"characters/skinz/skinz4_suppressing16.wav",
-			"characters/skinz/skinz4_suppressing17.wav",
-			"characters/skinz/skinz4_suppressing18.wav",
-			"characters/skinz/skinz4_suppressing19.wav",
-			"characters/skinz/skinz4_suppressing20.wav"
+			"vocals/characters/skinz/k2v1bp1.mp3",
+			"vocals/characters/skinz/k2v1bp6.mp3",
+			"vocals/characters/skinz/k2v1cfa1.mp3",
+			"vocals/characters/skinz/k2v1cfh2.mp3",
+			"vocals/characters/skinz/k2v1cfh4.mp3",
+			"vocals/characters/skinz/k2v1cfh6.mp3",
+			"vocals/characters/skinz/k2v1ja2.mp3",
+			"vocals/characters/skinz/k2v1ja3.mp3",
+			"vocals/characters/skinz/k2v1prs3.mp3",
+			"vocals/characters/skinz/k2v1prs6.mp3",
+			"vocals/characters/skinz/k2v1ptc5.mp3",
+			"vocals/characters/skinz/k2v1ptc2.mp3",
+			"vocals/characters/skinz/k2v1ptc3.mp3",
+			"vocals/characters/skinz/k2v1ptc4.mp3",
+			"vocals/characters/skinz/k2v1tc1.mp3",
+			"vocals/characters/skinz/k2v1tc2.mp3",
+			"vocals/characters/skinz/k2v1tc3.mp3",
+			"vocals/characters/skinz/k2v1tc4.mp3",
+			"vocals/characters/skinz/k2v1tc5.mp3",
+			"vocals/characters/skinz/k2v1tc6.mp3",
+			"vocals/characters/skinz/k2v1tsz1.mp3",
+			"vocals/characters/skinz/k2v1wti6.mp3"
 		}
-	elseif voices == 5 then -- Skinz 5 voices
+	elseif voices == 4 then -- Skinz voiceset 4
+		self.Model = {"models/manhunt/npc/skin3.mdl"}
+		self.SoundTbl_Alert = 
+		{
+			"vocals/characters/skinz/k2v2cfa2.mp3",
+			"vocals/characters/skinz/k2v2ct2.mp3",
+			"vocals/characters/skinz/k2v2ct3.mp3",
+			"vocals/characters/skinz/k2v2ct4.mp3",
+			"vocals/characters/skinz/k2v2ct6.mp3",
+			"vocals/characters/skinz/k2v2ds1.mp3",
+			"vocals/characters/skinz/k2v2ds2.mp3",
+			"vocals/characters/skinz/k2v2ds3.mp3",
+			"vocals/characters/skinz/k2v2ds4.mp3",
+			"vocals/characters/skinz/k2v2ds5.mp3",
+			"vocals/characters/skinz/k2v2ds6.mp3",
+			"vocals/characters/skinz/k2v2prs3.mp3",
+			"vocals/characters/skinz/k2v2ptc1.mp3",
+			"vocals/characters/skinz/k2v2ptc5.mp3",
+			"vocals/characters/skinz/k2v2sur1.mp3"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"vocals/characters/skinz/k2v2prs1.mp3",
+			"vocals/characters/skinz/k2v2rti6.mp3",
+			"vocals/characters/skinz/k2v2ntc1.mp3",
+			"vocals/characters/skinz/k2v2sur2.mp3"
+		}
+		self.SoundTbl_BecomeEnemyToPlayer = 
+		{
+			"vocals/characters/skinz/k2v2ct1.mp3",
+			"vocals/characters/skinz/k2v2prs4.mp3",
+			"vocals/characters/skinz/k2v2ptc6.mp3"
+		}
+		self.SoundTbl_MedicBeforeHeal = 
+		{
+			"vocals/characters/skinz/k2v2cin3.mp3",
+			"vocals/characters/skinz/k2v2cnr3.mp3",
+			"vocals/characters/skinz/k2v2dbs3.mp3",
+			"vocals/characters/skinz/k2v2dbs4.mp3",
+			"vocals/characters/skinz/k2v2dbs6.mp3",
+			"vocals/characters/skinz/k2v2ntc2.mp3"
+		}
+		self.SoundTbl_MedicReceiveHeal = 
+		{
+			"vocals/characters/skinz/k2v2cnr4.mp3",
+			"vocals/characters/skinz/k2v2cst2.mp3",
+			"vocals/characters/skinz/k2v2cst3.mp3",
+			"vocals/characters/skinz/k2v2cst10.mp3",
+			"vocals/characters/skinz/k2v2gic6.mp3",
+			"vocals/characters/skinz/k2v2ja4.mp3"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"vocals/characters/skinz/k2v2dbs1.mp3",
+			"vocals/characters/skinz/k2v2dbs2.mp3",
+			"vocals/characters/skinz/k2v2dbs3.mp3",
+			"vocals/characters/skinz/k2v2dbs4.mp3",
+			"vocals/characters/skinz/k2v2dbs5.mp3",
+			"vocals/characters/skinz/k2v2dbs6.mp3"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"vocals/characters/skinz/k2v2cfh1.mp3",
+			"vocals/characters/skinz/k2v2cfh4.mp3",
+			"vocals/characters/skinz/k2v2cfh5.mp3",
+			"vocals/characters/skinz/k2v2cfh6.mp3",
+			"vocals/characters/skinz/k2v2ntc4.mp3",
+			"vocals/characters/skinz/k2v2ntc5.mp3",
+			"vocals/characters/skinz/k2v2prs4.mp3",
+			"vocals/characters/skinz/k2v2prs6.mp3",
+			"vocals/characters/skinz/k2v2ptc2.mp3",
+			"vocals/characters/skinz/k2v2tsh1.mp3",
+			"vocals/characters/skinz/k2v2tsh2.mp3",
+			"vocals/characters/skinz/k2v2tsh3.mp3",
+			"vocals/characters/skinz/k2v2tsh4.mp3",
+			"vocals/characters/skinz/k2v2tsh5.mp3",
+			"vocals/characters/skinz/k2v2tsh6.mp3"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"vocals/characters/skinz/k2v2pln1.mp3",
+			"vocals/characters/skinz/k2v2pln2.mp3",
+			"vocals/characters/skinz/k2v2pln3.mp3",
+			"vocals/characters/skinz/k2v2sur4.mp3",
+			"vocals/characters/skinz/k2v2sur5.mp3",
+			"vocals/characters/skinz/k2v2sur6.mp3"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"vocals/characters/skinz/k2v2cin1.mp3",
+			"vocals/characters/skinz/k2v2cin2.mp3",
+			"vocals/characters/skinz/k2v2cin3.mp3",
+			"vocals/characters/skinz/k2v2cse3.mp3",
+			"vocals/characters/skinz/k2v2nsr4.mp3",
+			"vocals/characters/skinz/k2v2sur3.mp3"
+
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"vocals/characters/skinz/k2v2cse2.mp3",
+			"vocals/characters/skinz/k2v2prs5.mp3",
+			"vocals/characters/skinz/k2v2tsz1.mp3",
+			"vocals/characters/skinz/k2v2tsz3.mp3"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"vocals/characters/skinz/k2v2cnr4.mp3",
+			"vocals/characters/skinz/k2v2cnr5.mp3",
+			"vocals/characters/skinz/k2v2cnr6.mp3",
+			"vocals/characters/skinz/k2v2cse1.mp3",
+			"vocals/characters/skinz/k2v2cst1.mp3",
+			"vocals/characters/skinz/k2v2cst2.mp3",
+			"vocals/characters/skinz/k2v2cst3.mp3",
+			"vocals/characters/skinz/k2v2cst4.mp3",
+			"vocals/characters/skinz/k2v2cst5.mp3",
+			"vocals/characters/skinz/k2v2cst6.mp3",
+			"vocals/characters/skinz/k2v2cst7.mp3",
+			"vocals/characters/skinz/k2v2cst8.mp3",
+			"vocals/characters/skinz/k2v2cst9.mp3",
+			"vocals/characters/skinz/k2v2cst10.mp3",
+			"vocals/characters/skinz/k2v2gic1.mp3",
+			"vocals/characters/skinz/k2v2gic2.mp3",
+			"vocals/characters/skinz/k2v2gic3.mp3",
+			"vocals/characters/skinz/k2v2gic4.mp3",
+			"vocals/characters/skinz/k2v2gic5.mp3",
+			"vocals/characters/skinz/k2v2gic6.mp3",
+			"vocals/characters/skinz/k2v2gic7.mp3",
+			"vocals/characters/skinz/k2v2gic8.mp3",
+			"vocals/characters/skinz/k2v2gic9.mp3",
+			"vocals/characters/skinz/k2v2gic10.mp3",
+			"vocals/characters/skinz/k2v2nsr3.mp3",
+			"vocals/characters/skinz/k2v2nsr5.mp3",
+			"vocals/characters/skinz/k2v2nsr6.mp3",
+			"vocals/characters/skinz/k2v2tse1.mp3",
+			"vocals/characters/skinz/k2v2tse2.mp3",
+			"vocals/characters/skinz/k2v2tse3.mp3",
+			"vocals/characters/skinz/k2v2tse4.mp3",
+			"vocals/characters/skinz/k2v2tse5.mp3",
+			"vocals/characters/skinz/k2v2tse6.mp3",
+			"vocals/characters/skinz/k2v2wti2.mp3",
+			"vocals/characters/skinz/k2v2wti3.mp3",
+			"vocals/characters/skinz/k2v2wti6.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"vocals/characters/skinz/k2v2cfa1.mp3",
+			"vocals/characters/skinz/k2v2cfa3.mp3",
+			"vocals/characters/skinz/k2v2cfa4.mp3",
+			"vocals/characters/skinz/k2v2cfa5.mp3",
+			"vocals/characters/skinz/k2v2cfa6.mp3",
+			"vocals/characters/skinz/k2v2rti1.mp3",
+			"vocals/characters/skinz/k2v2rti2.mp3",
+			"vocals/characters/skinz/k2v2rti3.mp3",
+			"vocals/characters/skinz/k2v2rti4.mp3",
+			"vocals/characters/skinz/k2v2rti5.mp3",
+			"vocals/characters/skinz/k2v2rti6.mp3",
+			"vocals/characters/skinz/k2v2sal1.mp3",
+			"vocals/characters/skinz/k2v2sal2.mp3",
+			"vocals/characters/skinz/k2v2sal3.mp3",
+			"vocals/characters/skinz/k2v2sal4.mp3",
+			"vocals/characters/skinz/k2v2sal5.mp3",
+			"vocals/characters/skinz/k2v2sal6.mp3",
+			"vocals/characters/skinz/k2v2tsz2.mp3",
+			"vocals/characters/skinz/k2v2wti1.mp3",
+			"vocals/characters/skinz/k2v2wti4.mp3",
+			"vocals/characters/skinz/k2v2wti5.mp3"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"vocals/characters/skinz/k2v2ptc3.mp3",
+			"vocals/characters/skinz/k2v2tpd1.mp3",
+			"vocals/characters/skinz/k2v2tpd2.mp3",
+			"vocals/characters/skinz/k2v2tpd3.mp3",
+			"vocals/characters/skinz/k2v2tpd4.mp3",
+			"vocals/characters/skinz/k2v2tpd5.mp3",
+			"vocals/characters/skinz/k2v2tpd6.mp3"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"vocals/characters/skinz/k2v2cnr1.mp3",
+			"vocals/characters/skinz/k2v2cnr2.mp3",
+			"vocals/characters/skinz/k2v2cnr3.mp3",
+			"vocals/characters/skinz/k2v2ncr1.mp3",
+			"vocals/characters/skinz/k2v2ncr2.mp3",
+			"vocals/characters/skinz/k2v2ncr3.mp3",
+			"vocals/characters/skinz/k2v2ncr4.mp3",
+			"vocals/characters/skinz/k2v2ncr5.mp3",
+			"vocals/characters/skinz/k2v2ncr6.mp3",
+			"vocals/characters/skinz/k2v2nsr1.mp3",
+			"vocals/characters/skinz/k2v2nsr2.mp3"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"vocals/characters/skinz/k2v2bp2.mp3",
+			"vocals/characters/skinz/k2v2bp4.mp3",
+			"vocals/characters/skinz/k2v2ntc6.mp3"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"vocals/characters/skinz/k2v2gr1.mp3",
+			"vocals/characters/skinz/k2v2gr2.mp3",
+			"vocals/characters/skinz/k2v2gr3.mp3"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k2v2bp3.mp3",
+			"vocals/characters/skinz/k2v2rti2.mp3",
+			"vocals/characters/skinz/k2v2ct5.mp3"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"vocals/characters/skinz/k2v2bp1.mp3",
+			"vocals/characters/skinz/k2v2ptc4.mp3"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"vocals/characters/skinz/k2v2bp5.mp3",
+			"vocals/characters/skinz/k2v2bp6.mp3",
+			"vocals/characters/skinz/k2v2cfh2.mp3",
+			"vocals/characters/skinz/k2v2cfh3.mp3",
+			"vocals/characters/skinz/k2v2ja1.mp3",
+			"vocals/characters/skinz/k2v2ja2.mp3",
+			"vocals/characters/skinz/k2v2ja3.mp3",
+			"vocals/characters/skinz/k2v2ja4.mp3",
+			"vocals/characters/skinz/k2v2ja5.mp3",
+			"vocals/characters/skinz/k2v2ja6.mp3",
+			"vocals/characters/skinz/k2v2ntc2.mp3",
+			"vocals/characters/skinz/k2v2ntc3.mp3",
+			"vocals/characters/skinz/k2v2prs2.mp3",
+			"vocals/characters/skinz/k2v2tb1.mp3",
+			"vocals/characters/skinz/k2v2tb2.mp3",
+			"vocals/characters/skinz/k2v2tb3.mp3",
+			"vocals/characters/skinz/k2v2tc1.mp3",
+			"vocals/characters/skinz/k2v2tc2.mp3",
+			"vocals/characters/skinz/k2v2tc3.mp3",
+			"vocals/characters/skinz/k2v2tc4.mp3",
+			"vocals/characters/skinz/k2v2tc5.mp3",
+			"vocals/characters/skinz/k2v2tc6.mp3",
+			"vocals/characters/skinz/scripted/k2v2scb1.mp3",
+			"vocals/characters/skinz/scripted/k2v2scb2.mp3"
+		}
+	elseif voices == 5 then -- Skinz voiceset 5
+		self.SuppressingSoundChance = 6
 		self.Model = {"models/manhunt/npc/skin1.mdl"}
-		self.SuppressingSoundChance = 5
 		self.SoundTbl_Alert = 
 		{
-			"characters/skinz/skinz5_alert1.wav",
-			"characters/skinz/skinz5_alert2.wav",
-			"characters/skinz/skinz5_alert3.wav",
-			"characters/skinz/skinz5_alert4.wav",
-			"characters/skinz/skinz5_alert5.wav",
-			"characters/skinz/skinz5_alert6.wav",
-			"characters/skinz/skinz5_alert7.wav",
-			"characters/skinz/skinz5_alert8.wav",
-			"characters/skinz/skinz5_alert9.wav",
-			"characters/skinz/skinz5_alert10.wav",
-			"characters/skinz/skinz5_alert11.wav",
-			"characters/skinz/skinz5_alert12.wav",
-			"characters/skinz/skinz5_alert13.wav",
-			"characters/skinz/skinz5_alert14.wav",
-			"characters/skinz/skinz5_alert15.wav",
-			"characters/skinz/skinz5_alert16.wav",
-			"characters/skinz/skinz5_alert17.wav"
-		}
-		self.SoundTbl_AllyDeath =
-		{
-			"characters/skinz/skinz5_ally_death1.wav",
-			"characters/skinz/skinz5_ally_death2.wav",
-			"characters/skinz/skinz5_ally_death3.wav",
-			"characters/skinz/skinz5_ally_death4.wav",
-			"characters/skinz/skinz5_ally_death5.wav"
+			"vocals/characters/skinz/k3v1bp1.mp3",
+			"vocals/characters/skinz/k3v1cfa2.mp3",
+			"vocals/characters/skinz/k3v1cfa3.mp3",
+			"vocals/characters/skinz/k3v1cfa4.mp3",
+			"vocals/characters/skinz/k3v1ct1.mp3",
+			"vocals/characters/skinz/k3v1ct3.mp3",
+			"vocals/characters/skinz/k3v1ct4.mp3",
+			"vocals/characters/skinz/k3v1ds1.mp3",
+			"vocals/characters/skinz/k3v1ds2.mp3",
+			"vocals/characters/skinz/k3v1ds3.mp3",
+			"vocals/characters/skinz/k3v1ds4.mp3",
+			"vocals/characters/skinz/k3v1ds5.mp3",
+			"vocals/characters/skinz/k3v1ds6.mp3",
+			"vocals/characters/skinz/k3v1ptc5.mp3",
+			"vocals/characters/skinz/k3v1tc1.mp3",
+			"vocals/characters/skinz/k3v1tc2.mp3",
+			"vocals/characters/skinz/scripted/k3v1sca1.mp3",
+			"vocals/characters/skinz/scripted/k3v1sca2.mp3"
 		}
 		self.SoundTbl_MoveOutOfPlayersWay = 
 		{
-			"characters/skinz/skinz5_bump1.wav",
-			"characters/skinz/skinz5_bump2.wav"
+			"vocals/characters/skinz/k3v1sur1.mp3",
+			"vocals/characters/skinz/k3v1sur2.mp3",
+			"vocals/characters/skinz/k3v1sur3.mp3"
+		}
+		self.SoundTbl_BecomeEnemyToPlayer = 
+		{
+			"vocals/characters/skinz/k3v1ntc5.mp3",
+			"vocals/characters/skinz/k3v1ntc6.mp3",
+			"vocals/characters/skinz/k3v1ds4.mp3",
+			"vocals/characters/skinz/k3v1ds5.mp3",
+			"vocals/characters/skinz/k3v1ds6.mp3",
+			"vocals/characters/skinz/k3v1ptc5.mp3"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"vocals/characters/skinz/k3v1dbs1.mp3",
+			"vocals/characters/skinz/k3v1dbs2.mp3",
+			"vocals/characters/skinz/k3v1dbs3.mp3",
+			"vocals/characters/skinz/k3v1dbs4.mp3",
+			"vocals/characters/skinz/k3v1dbs5.mp3",
+			"vocals/characters/skinz/k3v1dbs6.mp3"
 		}
 		self.SoundTbl_CombatIdle = 
 		{
-			"characters/skinz/skinz5_fight1.wav",
-			"characters/skinz/skinz5_fight2.wav",
-			"characters/skinz/skinz5_fight3.wav",
-			"characters/skinz/skinz5_fight4.wav",
-			"characters/skinz/skinz5_fight5.wav",
-			"characters/skinz/skinz5_fight6.wav",
-			"characters/skinz/skinz5_fight7.wav",
-			"characters/skinz/skinz5_fight8.wav",
-			"characters/skinz/skinz5_fight9.wav",
-			"characters/skinz/skinz5_fight10.wav",
-			"characters/skinz/skinz5_fight11.wav",
-			"characters/skinz/skinz5_fight12.wav",
-			"characters/skinz/skinz5_fight13.wav",
-			"characters/skinz/skinz5_fight14.wav",
-			"characters/skinz/skinz5_fight15.wav",
-			"characters/skinz/skinz5_fight16.wav",
-			"characters/skinz/skinz5_fight17.wav",
-			"characters/skinz/skinz5_fight18.wav",
-			"characters/skinz/skinz5_fight19.wav"
+			"vocals/characters/skinz/k3v1cfh2.mp3",
+			"vocals/characters/skinz/k3v1cfh3.mp3",
+			"vocals/characters/skinz/k3v1cfh4.mp3",
+			"vocals/characters/skinz/k3v1cfh5.mp3",
+			"vocals/characters/skinz/k3v1ntc4.mp3",
+			"vocals/characters/skinz/k3v1prs2.mp3",
+			"vocals/characters/skinz/k3v1ptc2.mp3",
+			"vocals/characters/skinz/k3v1ptc4.mp3",
+			"vocals/characters/skinz/k3v1ptc6.mp3",
+			"vocals/characters/skinz/k3v1tc3.mp3",
+			"vocals/characters/skinz/k3v1tc4.mp3",
+			"vocals/characters/skinz/k3v1tc5.mp3",
+			"vocals/characters/skinz/k3v1tsh1.mp3",
+            "vocals/characters/skinz/k3v1tsh2.mp3",
+            "vocals/characters/skinz/k3v1tsh3.mp3",
+            "vocals/characters/skinz/k3v1tsh4.mp3",
+            "vocals/characters/skinz/k3v1tsh5.mp3",
+            "vocals/characters/skinz/k3v1tsh6.mp3",
+			"vocals/characters/skinz/k3v1tsz3.mp3"
 		}
 		self.SoundTbl_OnGrenadeSight  = 
 		{
-			"characters/skinz/skinz5_grenade_spot1.wav",
-			"characters/skinz/skinz5_grenade_spot2.wav",
-			"characters/skinz/skinz5_death1.wav",
-			"characters/skinz/skinz5_death2.wav",
-			"characters/skinz/skinz5_death3.wav"
+			"vocals/characters/skinz/k3v1pln1.mp3",
+			"vocals/characters/skinz/k3v1pln2.mp3",
+			"vocals/characters/skinz/k3v1pln3.mp3",
+			"vocals/characters/skinz/k3v1sur4.mp3",
+			"vocals/characters/skinz/k3v1sur5.mp3",
+			"vocals/characters/skinz/k3v1sur6.mp3"
 		}
 		self.SoundTbl_IdleDialogueAnswer = 
 		{
-			"characters/skinz/skinz5_idle_answer1.wav",
-			"characters/skinz/skinz5_idle_answer2.wav",
-			"characters/skinz/skinz5_idle_answer3.wav",
-			"characters/skinz/skinz5_idle_answer4.wav",
-			"characters/skinz/skinz5_idle_answer5.wav",
-			"characters/skinz/skinz5_idle_answer6.wav",
-			"characters/skinz/skinz5_idle_answer7.wav"
+			"vocals/characters/skinz/k3v1cin1.mp3",
+			"vocals/characters/skinz/k3v1cin2.mp3",
+			"vocals/characters/skinz/k3v1cin3.mp3",
+			"vocals/characters/skinz/k3v1cnr3.mp3",
+			"vocals/characters/skinz/k3v1cnr4.mp3",
+			"vocals/characters/skinz/k3v1prs4.mp3"
 		}
 		self.SoundTbl_IdleDialogue = 
 		{
-			"characters/skinz/skinz5_idle_question1.wav",
-			"characters/skinz/skinz5_idle_question2.wav",
-			"characters/skinz/skinz5_idle_question3.wav",
-			"characters/skinz/skinz5_idle_question4.wav",
-			"characters/skinz/skinz5_idle_question5.wav"
+			"vocals/characters/skinz/k3v1cse1.mp3",
+			"vocals/characters/skinz/k3v1cse2.mp3",
+			"vocals/characters/skinz/k3v1cse3.mp3",
+			"vocals/characters/skinz/k3v1cst1.mp3",
+			"vocals/characters/skinz/k3v1cst7.mp3",
+			"vocals/characters/skinz/k3v1cst9.mp3",
+			"vocals/characters/skinz/k3v1cst10.mp3"
 		}
 		self.SoundTbl_Idle = 
 		{
-			"characters/skinz/skinz5_idle1.wav",
-			"characters/skinz/skinz5_idle2.wav",
-			"characters/skinz/skinz5_idle3.wav",
-			"characters/skinz/skinz5_idle4.wav",
-			"characters/skinz/skinz5_idle5.wav",
-			"characters/skinz/skinz5_idle6.wav",
-			"characters/skinz/skinz5_idle7.wav",
-			"characters/skinz/skinz5_idle8.wav",
-			"characters/skinz/skinz5_idle9.wav",
-			"characters/skinz/skinz5_idle10.wav",
-			"characters/skinz/skinz5_idle11.wav",
-			"characters/skinz/skinz5_idle12.wav",
-			"characters/skinz/skinz5_idle13.wav",
-			"characters/skinz/skinz5_idle14.wav",
-			"characters/skinz/skinz5_idle15.wav",
-			"characters/skinz/skinz5_idle16.wav",
-			"characters/skinz/skinz5_idle17.wav",
-			"characters/skinz/skinz5_idle18.wav",
-			"characters/skinz/skinz5_idle19.wav",
-			"characters/skinz/skinz5_idle20.wav",
-			"characters/skinz/skinz5_idle21.wav",
-			"characters/skinz/skinz5_idle22.wav",
-			"characters/skinz/skinz5_idle23.wav",
-			"characters/skinz/skinz5_idle24.wav",
-			"characters/skinz/skinz5_idle25.wav",
-			"characters/skinz/skinz5_idle26.wav",
-			"characters/skinz/skinz5_idle27.wav",
-			"characters/skinz/skinz5_idle28.wav",
-			"characters/skinz/skinz5_idle29.wav",
-			"characters/skinz/skinz5_idle30.wav",
-			"characters/skinz/skinz5_idle31.wav"
+			"vocals/characters/skinz/k3v1cnr1.mp3",
+			"vocals/characters/skinz/k3v1cnr2.mp3",
+			"vocals/characters/skinz/k3v1cnr5.mp3",
+			"vocals/characters/skinz/k3v1cnr6.mp3",
+			"vocals/characters/skinz/k3v1cst1.mp3",
+			"vocals/characters/skinz/k3v1cst2.mp3",
+			"vocals/characters/skinz/k3v1cst3.mp3",
+			"vocals/characters/skinz/k3v1cst4.mp3",
+			"vocals/characters/skinz/k3v1cst5.mp3",
+			"vocals/characters/skinz/k3v1cst6.mp3",
+			"vocals/characters/skinz/k3v1cst7.mp3",
+			"vocals/characters/skinz/k3v1cst8.mp3",
+			"vocals/characters/skinz/k3v1cst9.mp3",
+			"vocals/characters/skinz/k3v1cst10.mp3",
+			"vocals/characters/skinz/k3v1gic1.mp3",
+			"vocals/characters/skinz/k3v1gic2.mp3",
+			"vocals/characters/skinz/k3v1gic3.mp3",
+			"vocals/characters/skinz/k3v1gic4.mp3",
+			"vocals/characters/skinz/k3v1gic5.mp3",
+			"vocals/characters/skinz/k3v1gic6.mp3",
+			"vocals/characters/skinz/k3v1gic7.mp3",
+			"vocals/characters/skinz/k3v1gic8.mp3",
+			"vocals/characters/skinz/k3v1gic9.mp3",
+			"vocals/characters/skinz/k3v1gic10.mp3",
+            "vocals/characters/skinz/k3v1nsr2.mp3",
+            "vocals/characters/skinz/k3v1nsr3.mp3",
+            "vocals/characters/skinz/k3v1nsr4.mp3",
+            "vocals/characters/skinz/k3v1nsr5.mp3",
+            "vocals/characters/skinz/k3v1nsr6.mp3",
+			"vocals/characters/skinz/k3v1tse2.mp3",
+			"vocals/characters/skinz/k3v1tse4.mp3",
+			"vocals/characters/skinz/k3v1tse5.mp3",
+			"vocals/characters/skinz/k3v1tse6.mp3",
+            "vocals/characters/skinz/k3v1wti2.mp3",
+            "vocals/characters/skinz/k3v1wti3.mp3",
+            "vocals/characters/skinz/k3v1wti4.mp3",
+            "vocals/characters/skinz/k3v1wti6.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
 		}
 		self.SoundTbl_Investigate = 
 		{
-			"characters/skinz/skinz5_investigate1.wav",
-			"characters/skinz/skinz5_investigate2.wav",
-			"characters/skinz/skinz5_investigate3.wav",
-			"characters/skinz/skinz5_investigate4.wav",
-			"characters/skinz/skinz5_investigate5.wav",
-			"characters/skinz/skinz5_investigate6.wav",
-			"characters/skinz/skinz5_investigate7.wav",
-			"characters/skinz/skinz5_investigate8.wav",
-			"characters/skinz/skinz5_investigate9.wav",
-			"characters/skinz/skinz5_investigate10.wav",
-			"characters/skinz/skinz5_investigate11.wav",
-			"characters/skinz/skinz5_investigate12.wav",
-			"characters/skinz/skinz5_investigate13.wav",
-			"characters/skinz/skinz5_investigate14.wav",
-			"characters/skinz/skinz5_investigate15.wav"
+			"vocals/characters/skinz/k3v1cfa1.mp3",
+			"vocals/characters/skinz/k3v1cfa5.mp3",
+			"vocals/characters/skinz/k3v1cfa6.mp3",
+			"vocals/characters/skinz/k3v1rti1.mp3",
+            "vocals/characters/skinz/k3v1rti2.mp3",
+            "vocals/characters/skinz/k3v1rti3.mp3",
+            "vocals/characters/skinz/k3v1rti4.mp3",
+            "vocals/characters/skinz/k3v1rti5.mp3",
+            "vocals/characters/skinz/k3v1rti6.mp3",
+            "vocals/characters/skinz/k3v1sal1.mp3",
+            "vocals/characters/skinz/k3v1sal2.mp3",
+            "vocals/characters/skinz/k3v1sal3.mp3",
+            "vocals/characters/skinz/k3v1sal4.mp3",
+            "vocals/characters/skinz/k3v1sal5.mp3",
+            "vocals/characters/skinz/k3v1sal6.mp3",
+			"vocals/characters/skinz/k3v1tb2.mp3",
+			"vocals/characters/skinz/k3v1tse1.mp3",
+			"vocals/characters/skinz/k3v1tse3.mp3",
+			"vocals/characters/skinz/k3v1tsz2.mp3",
+			"vocals/characters/skinz/k3v1wti1.mp3",
+			"vocals/characters/skinz/k3v1wti5.mp3"
 		}
 		self.SoundTbl_OnKilledEnemy = 
 		{
-			"characters/skinz/skinz5_kill1.wav",
-			"characters/skinz/skinz5_kill2.wav",
-			"characters/skinz/skinz5_kill3.wav",
-			"characters/skinz/skinz5_kill4.wav",
-			"characters/skinz/skinz5_kill5.wav",
-			"characters/skinz/skinz5_kill6.wav"
+			"vocals/characters/skinz/k3v1tpd1.mp3",
+            "vocals/characters/skinz/k3v1tpd2.mp3",
+            "vocals/characters/skinz/k3v1tpd3.mp3",
+            "vocals/characters/skinz/k3v1tpd4.mp3",
+            "vocals/characters/skinz/k3v1tpd5.mp3",
+            "vocals/characters/skinz/k3v1tpd6.mp3"
 		}
 		self.SoundTbl_LostEnemy = 
 		{
-			"characters/skinz/skinz5_lost_enemy1.wav",
-			"characters/skinz/skinz5_lost_enemy2.wav",
-			"characters/skinz/skinz5_lost_enemy4.wav",
-			"characters/skinz/skinz5_lost_enemy5.wav",
-			"characters/skinz/skinz5_lost_enemy6.wav",
-			"characters/skinz/skinz5_lost_enemy7.wav",
-			"characters/skinz/skinz5_lost_enemy8.wav",
-			"characters/skinz/skinz5_lost_enemy9.wav",
-			"characters/skinz/skinz5_lost_enemy10.wav",
-			"characters/skinz/skinz5_lost_enemy11.wav"
-		}
-		self.SoundTbl_FollowPlayer = 
-		{
-			"characters/skinz/skinz5_player_follow1.wav",
-			"characters/skinz/skinz5_player_follow2.wav",
-			"characters/skinz/skinz5_player_follow3.wav"
+			"vocals/characters/skinz/k3v1bp1.mp3",
+			"vocals/characters/skinz/k3v1ncr1.mp3",
+            "vocals/characters/skinz/k3v1ncr2.mp3",
+            "vocals/characters/skinz/k3v1ncr3.mp3",
+            "vocals/characters/skinz/k3v1ncr4.mp3",
+            "vocals/characters/skinz/k3v1ncr5.mp3",
+            "vocals/characters/skinz/k3v1ncr6.mp3",
+			"vocals/characters/skinz/k3v1tb3.mp3",
+			"vocals/characters/skinz/k3v1tsz1.mp3"
 		}
 		self.SoundTbl_DamageByPlayer = 
 		{
-			"characters/skinz/skinz5_player_hurtby1.wav",
-			"characters/skinz/skinz5_player_hurtby2.wav"
+			"vocals/characters/skinz/k3v1bp2.mp3",
+			"vocals/characters/skinz/k3v1bp3.mp3",
+			"vocals/characters/skinz/k3v1bp6.mp3",
+			"vocals/characters/skinz/k3v1ntc1.mp3",
+			"vocals/characters/skinz/k3v1ntc2.mp3"
 		}
 		self.SoundTbl_OnPlayerSight = 
 		{
-			"characters/skinz/skinz5_player_spot1.wav",
-			"characters/skinz/skinz5_player_spot2.wav"
+			"vocals/characters/skinz/k3v1gr1.mp3",
+			"vocals/characters/skinz/k3v1gr2.mp3",
+			"vocals/characters/skinz/k3v1gr3.mp3"
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k3v1bp4.mp3",
+			"vocals/characters/skinz/k3v1bp5.mp3",
+			"vocals/characters/skinz/k3v1cin1.mp3"
 		}
 		self.SoundTbl_UnFollowPlayer = 
 		{
-			"characters/skinz/skinz5_idle_answer1.wav",
-			"characters/skinz/skinz5_idle31.wav",
-			"characters/skinz/skinz5_lost_enemy11.wav"
+			"vocals/characters/skinz/k3v1ct6.mp3",
+			"vocals/characters/skinz/k3v1nsr1.mp3",
+			"vocals/characters/skinz/k3v1tb1.mp3"
 		}
 		self.SoundTbl_Suppressing = 
 		{
-			"characters/skinz/skinz5_suppressing1.wav",
-			"characters/skinz/skinz5_suppressing2.wav",
-			"characters/skinz/skinz5_suppressing3.wav",
-			"characters/skinz/skinz5_suppressing4.wav",
-			"characters/skinz/skinz5_suppressing5.wav",
-			"characters/skinz/skinz5_suppressing6.wav",
-			"characters/skinz/skinz5_suppressing7.wav",
-			"characters/skinz/skinz5_suppressing8.wav",
-			"characters/skinz/skinz5_suppressing9.wav",
-			"characters/skinz/skinz5_suppressing10.wav",
-			"characters/skinz/skinz5_suppressing11.wav",
-			"characters/skinz/skinz5_suppressing12.wav",
-			"characters/skinz/skinz5_suppressing13.wav",
-			"characters/skinz/skinz5_suppressing14.wav",
-			"characters/skinz/skinz5_suppressing15.wav",
-			"characters/skinz/skinz5_suppressing16.wav",
-			"characters/skinz/skinz5_suppressing17.wav",
-			"characters/skinz/skinz5_suppressing18.wav"
+			"vocals/characters/skinz/k3v1cfh1.mp3",
+			"vocals/characters/skinz/k3v1cfh6.mp3",
+			"vocals/characters/skinz/k3v1ct2.mp3",
+			"vocals/characters/skinz/k3v1ct5.mp3",
+			"vocals/characters/skinz/k3v1ja1.mp3",
+			"vocals/characters/skinz/k3v1ja2.mp3",
+			"vocals/characters/skinz/k3v1ja3.mp3",
+			"vocals/characters/skinz/k3v1ja4.mp3",
+			"vocals/characters/skinz/k3v1ja5.mp3",
+			"vocals/characters/skinz/k3v1ja6.mp3",
+			"vocals/characters/skinz/k3v1ntc3.mp3",
+			"vocals/characters/skinz/k3v1ntc5.mp3",
+			"vocals/characters/skinz/k3v1ntc6.mp3",
+			"vocals/characters/skinz/k3v1prs1.mp3",
+			"vocals/characters/skinz/k3v1prs5.mp3",
+			"vocals/characters/skinz/k3v1prs6.mp3",
+			"vocals/characters/skinz/k3v1ptc1.mp3",
+			"vocals/characters/skinz/k3v1ptc3.mp3",
+			"vocals/characters/skinz/k3v1tc6.mp3"
+		}
+	elseif voices == 6 then -- Skinz voiceset 6
+		self.Model = {"models/manhunt/npc/skin1.mdl"}
+		self.SoundTbl_Alert = 
+		{
+			"vocals/characters/skinz/k3v2bp1.mp3",
+			"vocals/characters/skinz/k3v2cfa5.mp3",
+			"vocals/characters/skinz/k3v2cfh3.mp3",
+			"vocals/characters/skinz/k3v2cfh6.mp3",
+			"vocals/characters/skinz/k3v2ct1.mp3",
+			"vocals/characters/skinz/k3v2ds1.mp3",
+			"vocals/characters/skinz/k3v2ds2.mp3",
+			"vocals/characters/skinz/k3v2ds3.mp3",
+			"vocals/characters/skinz/k3v2ds4.mp3",
+			"vocals/characters/skinz/k3v2ds5.mp3",
+			"vocals/characters/skinz/k3v2ds6.mp3",
+			"vocals/characters/skinz/k3v2tb3.mp3",
+			"vocals/characters/skinz/k3v2tsz3.mp3"
+		}
+		self.SoundTbl_MoveOutOfPlayersWay = 
+		{
+			"vocals/characters/skinz/k3v2ntc2.mp3",
+			"vocals/characters/skinz/k3v2ntc5.mp3",
+			"vocals/characters/skinz/k3v2ntc6.mp3",
+			"vocals/characters/skinz/k3v2sur4.mp3",
+			"vocals/characters/skinz/k3v2sur5.mp3",
+			"vocals/characters/skinz/k3v2sur6.mp3"
+		}
+		self.SoundTbl_BecomeEnemyToPlayer = 
+		{
+			"vocals/characters/skinz/k3v2ntc4.mp3",
+			"vocals/characters/skinz/k3v2wti1.mp3",
+			"vocals/characters/skinz/k3v2tsh1.mp3",
+			"vocals/characters/skinz/k3v2tsh2.mp3",
+			"vocals/characters/skinz/k3v2tsh3.mp3",
+			"vocals/characters/skinz/k3v2tsh4.mp3",
+			"vocals/characters/skinz/k3v2tsh5.mp3",
+			"vocals/characters/skinz/k3v2tsh6.mp3"
+		}
+		self.SoundTbl_AllyDeath =
+		{
+			"vocals/characters/skinz/k3v2dbs1.mp3",
+			"vocals/characters/skinz/k3v2dbs2.mp3",
+			"vocals/characters/skinz/k3v2dbs3.mp3",
+			"vocals/characters/skinz/k3v2dbs4.mp3",
+			"vocals/characters/skinz/k3v2dbs5.mp3",
+			"vocals/characters/skinz/k3v2dbs6.mp3"
+		}
+		self.SoundTbl_CombatIdle = 
+		{
+			"vocals/characters/skinz/k3v2cfa1.mp3",
+			"vocals/characters/skinz/k3v2cfa2.mp3",
+			"vocals/characters/skinz/k3v2cfa4.mp3",
+			"vocals/characters/skinz/k3v2cfh1.mp3",
+			"vocals/characters/skinz/k3v2cfh2.mp3",
+			"vocals/characters/skinz/k3v2cfh4.mp3",
+			"vocals/characters/skinz/k3v2cfh5.mp3",
+			"vocals/characters/skinz/k3v2prs3.mp3",
+			"vocals/characters/skinz/k3v2prs4.mp3",
+			"vocals/characters/skinz/k3v2prs5.mp3",
+			"vocals/characters/skinz/k3v2prs6.mp3",
+			"vocals/characters/skinz/k3v2tc2.mp3",
+			"vocals/characters/skinz/k3v2tc3.mp3",
+			"vocals/characters/skinz/k3v2tc5.mp3",
+			"vocals/characters/skinz/k3v2tc6.mp3",
+			"vocals/characters/skinz/k3v2tsh1.mp3",
+			"vocals/characters/skinz/k3v2tsh2.mp3",
+			"vocals/characters/skinz/k3v2tsh3.mp3",
+			"vocals/characters/skinz/k3v2tsh4.mp3",
+			"vocals/characters/skinz/k3v2tsh5.mp3",
+			"vocals/characters/skinz/k3v2tsh6.mp3"
+		}
+		self.SoundTbl_OnGrenadeSight  = 
+		{
+			"vocals/characters/skinz/k3v2pln1.mp3",
+			"vocals/characters/skinz/k3v2pln2.mp3",
+			"vocals/characters/skinz/k3v2pln3.mp3",
+			"vocals/characters/skinz/k3v2sur1.mp3",
+			"vocals/characters/skinz/k3v2sur2.mp3",
+			"vocals/characters/skinz/k3v2sur3.mp3"
+		}
+		self.SoundTbl_IdleDialogueAnswer = 
+		{
+			"vocals/characters/skinz/k3v2cnr3.mp3",
+			"vocals/characters/skinz/k3v2cnr4.mp3",
+			"vocals/characters/skinz/k3v2cse1.mp3",
+			"vocals/characters/skinz/k3v2cse2.mp3",
+			"vocals/characters/skinz/k3v2cse3.mp3",
+			"vocals/characters/skinz/k3v2nsr1.mp3",
+			"vocals/characters/skinz/k3v2nsr2.mp3"
+		}
+		self.SoundTbl_IdleDialogue = 
+		{
+			"vocals/characters/skinz/k3v2cin1.mp3",
+			"vocals/characters/skinz/k3v2cin2.mp3",
+			"vocals/characters/skinz/k3v2cin3.mp3",
+			"vocals/characters/skinz/k3v2ct6.mp3",
+			"vocals/characters/skinz/k3v2tsz2.mp3"
+		}
+		self.SoundTbl_Idle = 
+		{
+			"vocals/characters/skinz/k3v2cnr1.mp3",
+			"vocals/characters/skinz/k3v2cnr2.mp3",
+			"vocals/characters/skinz/k3v2cnr6.mp3",
+			"vocals/characters/skinz/k3v2cst1.mp3",
+			"vocals/characters/skinz/k3v2cst2.mp3",
+			"vocals/characters/skinz/k3v2cst3.mp3",
+			"vocals/characters/skinz/k3v2cst4.mp3",
+			"vocals/characters/skinz/k3v2cst5.mp3",
+			"vocals/characters/skinz/k3v2cst6.mp3",
+			"vocals/characters/skinz/k3v2cst7.mp3",
+			"vocals/characters/skinz/k3v2cst8.mp3",
+			"vocals/characters/skinz/k3v2cst9.mp3",
+			"vocals/characters/skinz/k3v2cst10.mp3",
+			"vocals/characters/skinz/k3v2gic1.mp3",
+			"vocals/characters/skinz/k3v2gic2.mp3",
+			"vocals/characters/skinz/k3v2gic3.mp3",
+			"vocals/characters/skinz/k3v2gic4.mp3",
+			"vocals/characters/skinz/k3v2gic5.mp3",
+			"vocals/characters/skinz/k3v2gic6.mp3",
+			"vocals/characters/skinz/k3v2nsr3.mp3",
+			"vocals/characters/skinz/k3v2nsr6.mp3",
+			"vocals/characters/skinz/k3v2tse1.mp3",
+			"vocals/characters/skinz/k3v2tse2.mp3",
+			"vocals/characters/skinz/k3v2tse3.mp3",
+			"vocals/characters/skinz/k3v2tse4.mp3",
+			"vocals/characters/skinz/k3v2tse5.mp3",
+			"vocals/characters/skinz/k3v2tse6.mp3",
+			"vocals/characters/skinz/k3v2wti3.mp3",
+			"vocals/characters/skinz/k3v2wti6.mp3",
+			"vocals/shared_sfx_hunters/whistle1.wav",
+			"vocals/shared_sfx_hunters/whistle2.wav",
+			"vocals/shared_sfx_hunters/whistle3.wav",
+			"vocals/shared_sfx_hunters/whistle4.wav",
+			"vocals/shared_sfx_hunters/whistle5.wav",
+			"vocals/shared_sfx_hunters/whistle6.wav",
+			"vocals/shared_sfx_hunters/whistle7.wav",
+			"vocals/shared_sfx_hunters/whistle8.wav",
+			"vocals/shared_sfx_hunters/whistle9.wav",
+			"vocals/shared_sfx_hunters/whistle10.wav",
+			"vocals/shared_sfx_hunters/whistle11.wav",
+			"vocals/shared_sfx_hunters/whistle12.wav"
+		}
+		self.SoundTbl_Investigate = 
+		{
+			"vocals/characters/skinz/k3v2cfa3.mp3",
+			"vocals/characters/skinz/k3v2cfa6.mp3",
+			"vocals/characters/skinz/k3v2rti1.mp3",
+			"vocals/characters/skinz/k3v2rti2.mp3",
+			"vocals/characters/skinz/k3v2rti3.mp3",
+			"vocals/characters/skinz/k3v2rti4.mp3",
+			"vocals/characters/skinz/k3v2rti5.mp3",
+			"vocals/characters/skinz/k3v2rti6.mp3",
+			"vocals/characters/skinz/k3v2sal1.mp3",
+			"vocals/characters/skinz/k3v2sal2.mp3",
+			"vocals/characters/skinz/k3v2sal3.mp3",
+			"vocals/characters/skinz/k3v2sal4.mp3",
+			"vocals/characters/skinz/k3v2sal5.mp3",
+			"vocals/characters/skinz/k3v2sal6.mp3",
+			"vocals/characters/skinz/k3v2tb2.mp3",
+			"vocals/characters/skinz/k3v2tsz1.mp3",
+			"vocals/characters/skinz/k3v2wti2.mp3",
+			"vocals/characters/skinz/k3v2wti4.mp3",
+			"vocals/characters/skinz/k3v2wti5.mp3"
+		}
+		self.SoundTbl_OnKilledEnemy = 
+		{
+			"vocals/characters/skinz/k3v2tpd1.mp3",
+			"vocals/characters/skinz/k3v2tpd2.mp3",
+			"vocals/characters/skinz/k3v2tpd3.mp3",
+			"vocals/characters/skinz/k3v2tpd4.mp3",
+			"vocals/characters/skinz/k3v2tpd5.mp3",
+			"vocals/characters/skinz/k3v2tpd6.mp3"
+		}
+		self.SoundTbl_LostEnemy = 
+		{
+			"vocals/characters/skinz/k3v2bp5.mp3",
+			"vocals/characters/skinz/k3v2cnr5.mp3",
+			"vocals/characters/skinz/k3v2ncr1.mp3",
+			"vocals/characters/skinz/k3v2ncr2.mp3",
+			"vocals/characters/skinz/k3v2ncr3.mp3",
+			"vocals/characters/skinz/k3v2ncr4.mp3",
+			"vocals/characters/skinz/k3v2ncr5.mp3",
+			"vocals/characters/skinz/k3v2ncr6.mp3",
+			"vocals/characters/skinz/k3v2nsr4.mp3",
+			"vocals/characters/skinz/k3v2nsr5.mp3"
+		}
+		self.SoundTbl_DamageByPlayer = 
+		{
+			"vocals/characters/skinz/k3v2bp1.mp3",
+			"vocals/characters/skinz/k3v2bp2.mp3",
+			"vocals/characters/skinz/k3v2bp6.mp3"
+		}
+		self.SoundTbl_OnPlayerSight = 
+		{
+			"vocals/characters/skinz/k3v2ct2.mp3",
+			"vocals/characters/skinz/k3v2ct4.mp3",
+			"vocals/characters/skinz/k3v2ct5.mp3",
+			"vocals/characters/skinz/k3v2gr1.mp3",
+			"vocals/characters/skinz/k3v2gr2.mp3",
+			"vocals/characters/skinz/k3v2gr3.mp3"	
+		}
+		self.SoundTbl_FollowPlayer = 
+		{
+			"vocals/characters/skinz/k3v2sal6.mp3",
+			"vocals/characters/skinz/k3v2cse1.mp3",
+			"vocals/characters/skinz/k3v2cin2.mp3"
+		}
+		self.SoundTbl_UnFollowPlayer = 
+		{
+			"vocals/characters/skinz/k3v2prs1.mp3",
+			"vocals/characters/skinz/k3v2prs2.mp3"
+		}
+		self.SoundTbl_Suppressing = 
+		{
+			"vocals/characters/skinz/k3v2bp3.mp3",
+			"vocals/characters/skinz/k3v2bp4.mp3",
+			"vocals/characters/skinz/k3v2ct3.mp3",
+			"vocals/characters/skinz/k3v2ja1.mp3",
+			"vocals/characters/skinz/k3v2ja2.mp3",
+			"vocals/characters/skinz/k3v2ja3.mp3",
+			"vocals/characters/skinz/k3v2ja4.mp3",
+			"vocals/characters/skinz/k3v2ja5.mp3",
+			"vocals/characters/skinz/k3v2ja6.mp3",
+			"vocals/characters/skinz/k3v2ntc1.mp3",
+			"vocals/characters/skinz/k3v2ntc2.mp3",
+			"vocals/characters/skinz/k3v2ntc3.mp3",
+			"vocals/characters/skinz/k3v2ntc4.mp3",
+			"vocals/characters/skinz/k3v2ntc5.mp3",
+			"vocals/characters/skinz/k3v2ntc6.mp3",
+			"vocals/characters/skinz/k3v2ptc1.mp3",
+			"vocals/characters/skinz/k3v2ptc2.mp3",
+			"vocals/characters/skinz/k3v2ptc3.mp3",
+			"vocals/characters/skinz/k3v2ptc4.mp3",
+			"vocals/characters/skinz/k3v2ptc5.mp3",
+			"vocals/characters/skinz/k3v2ptc6.mp3",
+			"vocals/characters/skinz/k3v2tb1.mp3",
+			"vocals/characters/skinz/k3v2tc1.mp3",
+			"vocals/characters/skinz/k3v2tc4.mp3"
 		}
 	end
 end
@@ -1087,13 +1646,13 @@ end
 function ENT:Gibs(gType)
 	if gType == "headgib" then
 		if self:GetModel() == "models/manhunt/npc/skin1.mdl" then
-			self:SetBodygroup(1,1)
+			self:SetBodygroup(1,math.random(1,1))
 		end
 		if self:GetModel() == "models/manhunt/npc/skin2.mdl" then
-			self:SetBodygroup(1,3)
+			self:SetBodygroup(1,math.random(1,2))
 		end
 		if self:GetModel() == "models/manhunt/npc/skin3.mdl" then
-			self:SetBodygroup(1,2)
+			self:SetBodygroup(1,math.random(1,3))
 		end
 	end
 end
@@ -1117,6 +1676,7 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 		util.Effect("bloodspray",bloodspray)
 
 	if hitgroup == HITGROUP_HEAD then
+		self:PlaySoundSystem("Death", SoundTbl_DeathGib)
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/manhunt/gibs/1.mdl",{Pos=self:LocalToWorld(Vector(0,0,68)),Ang=self:GetAngles()+Angle(0,-90,0)})
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/manhunt/gibs/1.mdl",{Pos=self:LocalToWorld(Vector(0,0,68)),Ang=self:GetAngles()+Angle(0,-90,0)})
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/manhunt/gibs/2.mdl",{Pos=self:LocalToWorld(Vector(0,4,60)),Ang=self:GetAngles()+Angle(0,-90,0)})
@@ -1126,9 +1686,6 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/manhunt/gibs/4.mdl",{Pos=self:LocalToWorld(Vector(0,3,65)),Ang=self:GetAngles()+Angle(0,-90,0)})
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/manhunt/gibs/4.mdl",{Pos=self:LocalToWorld(Vector(0,3,65)),Ang=self:GetAngles()+Angle(0,-90,0)})
 		self:CreateGibEntity("obj_vj_gib_manhunt","models/gibs/humans/eye_gib.mdl",{Pos=self:LocalToWorld(Vector(0,0,65)),Ang=self:GetAngles()+Angle(0,-90,0),Vel=self:GetRight()*math.Rand(150,250)+self:GetForward()*math.Rand(-200,200)})
-			if self:GetModel() == "models/manhunt/npc/skin3.mdl" then
-			self:CreateGibEntity("obj_vj_gib_manhunt","models/gibs/humans/eye_gib.mdl",{Pos=self:LocalToWorld(Vector(0,0,35)),Ang=self:GetAngles()+Angle(0,-90,0),Vel=self:GetRight()*math.Rand(150,250)+self:GetForward()*math.Rand(-200,200)})
-		end
 		self:Gibs("headgib")
 		end
 	end

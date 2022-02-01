@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/manhunt/gmodelspc/cleaver2"
+"$nocull" "1"  
+ "$halflambert" "1" 
+ }

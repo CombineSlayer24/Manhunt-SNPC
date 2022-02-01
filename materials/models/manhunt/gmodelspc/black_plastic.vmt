@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/black_plastic"
+"$nocull" "1"  
+ "$halflambert" "1"  }

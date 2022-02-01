@@ -29,7 +29,7 @@ function ENT:SpawnFunction(ply, tr)
  
         if (!tr.Hit) then return end
        
-        local SpawnPos = (tr.HitPos + tr.HitNormal * 45)
+        local SpawnPos = (tr.HitPos + tr.HitNormal * 40)
         local ent = ents.Create("sent_vj_rifle_ammo_pickup")
         
         ent:SetPos(SpawnPos)

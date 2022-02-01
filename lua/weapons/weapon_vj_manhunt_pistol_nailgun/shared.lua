@@ -29,7 +29,7 @@ SWEP.ViewModelFlip				= false -- Flip the model? Usally used for CS:S models
 SWEP.ViewModelFOV				= 90
 --SWEP.Spawnable					= true
 SWEP.AdminSpawnable				= false
-SWEP.Primary.Damage				= 9.5 -- Damage
+SWEP.Primary.Damage				= 13.5 -- Damage
 SWEP.Primary.PlayerDamage		= 1 -- Put 1 to make it the same as above
 SWEP.Primary.Force				= 4
 SWEP.Primary.NumberOfShots		= 1 -- How many shots per attack?
@@ -38,21 +38,21 @@ SWEP.Primary.Delay				= 0.4 -- Time until it can shoot again
 SWEP.Primary.TakeAmmo			= 1 -- How much ammo should it take on each shot?
 SWEP.Primary.Automatic			= true -- Is it automatic?
 SWEP.Primary.Ammo				= "Pistol" -- Ammo type
-SWEP.Primary.Sound				= {"weapons/manhunt/pistol/fire_nailgun1.wav","weapons/manhunt/pistol/fire_nailgun2.wav"}
+SWEP.Primary.Sound				= {"weapons/manhunt/airgun.wav"}
 SWEP.Primary.HasDistantSound	= true -- Does it have a distant sound when the gun is shot?
-SWEP.Primary.DistantSound		= {"weapons/manhunt/pistol/echo_nailgun1.wav","weapons/manhunt/pistol/echo_nailgun2.wav"}
+SWEP.Primary.DistantSound		= {"weapons/manhunt/airgun_distant.wav"}
 
 SWEP.Primary.DistantSoundLevel = 105 -- Distant sound level
 SWEP.Primary.DistantSoundPitch	= VJ_Set(90, 110) -- Distant sound pitch
-SWEP.Primary.DistantSoundVolume	= 1 -- Distant sound volume
+SWEP.Primary.DistantSoundVolume	= 0.75 -- Distant sound volume
 
 SWEP.PrimaryEffects_MuzzleAttachment = 1
 --SWEP.PrimaryEffects_ShellAttachment = 2
 --SWEP.PrimaryEffects_ShellType = "VJ_Weapon_PistolShell1"
 	-- NPC Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_HasReloadSound = true -- Should it play a sound when the base detects the SNPC playing a reload animation?
-SWEP.NPC_ReloadSound = {"weapons/manhunt/pistol/reload.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
-SWEP.NPC_ReloadSoundLevel = 75 -- How far does the sound go?
+SWEP.NPC_ReloadSound = {"weapons/manhunt/reload_generic.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
+SWEP.NPC_ReloadSoundLevel = 85 -- How far does the sound go?
 
 SWEP.Reload_TimeUntilAmmoIsSet	= 2.1 -- Time until ammo is set to the weapon
 SWEP.Reload_TimeUntilFinished	= 2.1 -- How much time until the player can play idle animation, shoot, etc.

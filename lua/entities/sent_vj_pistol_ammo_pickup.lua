@@ -181,54 +181,67 @@ function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
                 local ammo_random = math.random(1,13)
                 if ammo_random == 1 then
                         caller:GiveAmmo(3, "Pistol", true)
+                        caller:GiveAmmo(3, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (3)" )
                 elseif ammo_random == 2 then
                         caller:GiveAmmo(3, "Pistol", true)
+                        caller:GiveAmmo(3, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (3)" )
                 elseif ammo_random == 3 then
                         caller:GiveAmmo(3, "Pistol", true)
+                        caller:GiveAmmo(3, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (3)" )
                 elseif ammo_random == 4 then
                         caller:GiveAmmo(6, "Pistol", true)
+                        caller:GiveAmmo(6, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6)" )
                 elseif ammo_random == 5 then
                         caller:GiveAmmo(6, "Pistol", true)
+                        caller:GiveAmmo(6, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6)" )
                 elseif ammo_random == 6 then
                         caller:GiveAmmo(6, "Pistol", true)
+                        caller:GiveAmmo(6, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6)" )
                 elseif ammo_random == 7 then
                         caller:GiveAmmo(6, "Pistol", true)
+                        caller:GiveAmmo(6, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6)" )
                 elseif ammo_random == 8 then
                         caller:GiveAmmo(6, "Pistol", true)
+                        caller:GiveAmmo(6, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (6)" )
                 elseif ammo_random == 9 then
                         caller:GiveAmmo(10, "Pistol", true)
+                        caller:GiveAmmo(10, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (10)" )
                 elseif ammo_random == 10 then
                         caller:GiveAmmo(12, "Pistol", true)
+                        caller:GiveAmmo(12, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (12)" )
                 elseif ammo_random == 11 then
                         caller:GiveAmmo(12, "Pistol", true)
+                        caller:GiveAmmo(12, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (12)" )
                 elseif ammo_random == 12 then
                         caller:GiveAmmo(15, "Pistol", true)
+                        caller:GiveAmmo(15, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (15)" )
                 elseif ammo_random == 13 then
                         caller:GiveAmmo(24, "Pistol", true)
+                        caller:GiveAmmo(24, "357", true)
                         activator:EmitSound(Sound("weapons/weapon_pickup_mh.wav"), 70, 100)
                         activator:PrintMessage(HUD_PRINTTALK, "Pistol Ammo (24)" )
                 end

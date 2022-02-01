@@ -36,33 +36,33 @@ SWEP.Primary.Delay				= 2.0 -- Time until it can shoot again
 SWEP.Primary.TakeAmmo			= 1 -- How much ammo should it take on each shot?
 SWEP.Primary.Automatic			= true -- Is it automatic?
 SWEP.Primary.Ammo				= "AR2" -- Ammo type
-SWEP.Primary.Sound				= {"weapons/manhunt/rifle/sniper_fire1.wav","weapons/manhunt/rifle/sniper_fire2.wav"}
+SWEP.Primary.Sound				= {"weapons/manhunt/rifle.wav"}
 SWEP.Primary.HasDistantSound	= true -- Does it have a distant sound when the gun is shot?
-SWEP.Primary.DistantSound		= {"weapons/manhunt/rifle/sniper_fire_echo1.wav","weapons/manhunt/rifle/sniper_fire_echo2.wav"}
+SWEP.Primary.DistantSound		= {"weapons/manhunt/rifle_distant.wav"}
 
 SWEP.Primary.DistantSoundLevel = 140 -- Distant sound level
 SWEP.Primary.DistantSoundPitch	= VJ_Set(90, 110) -- Distant sound pitch
-SWEP.Primary.DistantSoundVolume	= 1 -- Distant sound volume
+SWEP.Primary.DistantSoundVolume	= 0.7 -- Distant sound volume
 
 SWEP.PrimaryEffects_MuzzleAttachment = 1
 SWEP.PrimaryEffects_ShellAttachment = 2
 SWEP.PrimaryEffects_ShellType = "VJ_Weapon_RifleShell1"
 	-- NPC Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_HasReloadSound = true -- Should it play a sound when the base detects the SNPC playing a reload animation?
-SWEP.NPC_ReloadSound = {"weapons/manhunt/pistol/reload.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
+SWEP.NPC_ReloadSound = {"weapons/manhunt/reload_generic.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
 SWEP.NPC_ReloadSoundLevel = 75 -- How far does the sound go?
 
 SWEP.Reload_TimeUntilAmmoIsSet	= 2.1 -- Time until ammo is set to the weapon
 SWEP.Reload_TimeUntilFinished	= 2.1 -- How much time until the player can play idle animation, shoot, etc.
 
-SWEP.NPC_ExtraFireSound			=  {"weapons/manhunt/rifle/sniper_bolt.wav"} -- Plays an extra sound after it fires (Example: Bolt action sound)
+SWEP.NPC_ExtraFireSound			=  {"weapons/manhunt/rifle_bolt.wav"} -- Plays an extra sound after it fires (Example: Bolt action sound)
 SWEP.NPC_ExtraFireSoundTime		= 0.6 -- How much time until it plays the sound (After Firing)?
 SWEP.NPC_ExtraFireSoundLevel	= 65 -- How far does the sound go?
 --------------------------------------------------------------------------------------------------------------------------------------------
 function SWEP:CustomOnPrimaryAttack_AfterShoot()
 	timer.Simple(0.6, function()
 		if IsValid(self) && IsValid(self:GetOwner()) then
-			self:EmitSound(Sound("weapons/manhunt/rifle/sniper_bolt.wav"), 75, 100)
+			self:EmitSound(Sound("weapons/manhunt/rifle_bolt.wav"), 75, 100)
 		end
 	end)
 end

@@ -30,7 +30,7 @@ function ENT:SpawnFunction(ply, tr)
  
         if (!tr.Hit) then return end
        
-        local SpawnPos = (tr.HitPos + tr.HitNormal * 50)
+        local SpawnPos = (tr.HitPos + tr.HitNormal * 46)
         local ent = ents.Create("sent_vj_pills_pickup")
         
         ent:SetPos(SpawnPos)
@@ -82,7 +82,7 @@ function ENT:SpawnFunction(ply, tr)
         ent.CoronaOrb2:SetKeyValue("maxdxlevel","0")
         ent.CoronaOrb2:SetKeyValue("framerate","10.0")
         ent.CoronaOrb2:SetKeyValue("spawnflags","0")
-        ent.CoronaOrb2:SetKeyValue("scale","0.6")
+        ent.CoronaOrb2:SetKeyValue("scale","0.52")
         ent.CoronaOrb2:SetPos(SpawnPos)
         ent.CoronaOrb2:Spawn()
         ent:DeleteOnRemove(ent.CoronaOrb2)

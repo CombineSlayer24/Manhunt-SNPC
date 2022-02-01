@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/FlashBang"
+"$nocull" "1"  
+ "$halflambert" "1" 
+ }

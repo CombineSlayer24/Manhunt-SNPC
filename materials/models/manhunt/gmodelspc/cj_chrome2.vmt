@@ -1,0 +1,20 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/CJ_CHROME2"
+	"$nocull" "1" 
+	"$halflambert" "1" 
+
+	"$envmap" "models/Manhunt/gmodelspc/CJ_SPEC"
+	//"$basealphaenvmapmask" 1
+	"$envmapsphere"	1	
+	"$multipass" 1
+		"$envmaptint" "[1 1 1]"
+		"$envmapcontrast" 1
+		"$envmapsaturation" .5
+	"VertexLitGeneric_HDR_DX9"
+	{
+		"$envmaptint" "[1 1 1]"
+		"$envmapcontrast" 1
+		"$envmapsaturation" .5
+	}
+}

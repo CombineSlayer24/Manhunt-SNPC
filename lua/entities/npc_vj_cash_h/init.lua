@@ -65,66 +65,90 @@ ENT.OnPlayerSightSoundChance = 4
 ENT.NextSoundTime_Idle = VJ_Set(8, 20)
 ENT.OnPlayerSightNextTime = VJ_Set(15, 20)
 -----------------GLOBAL SOUNDS-------------------
-ENT.SoundTbl_FootStep = {"shared_sfx_hunters/footstep1.wav","shared_sfx_hunters/footstep2.wav","shared_sfx_hunters/footstep3.wav","shared_sfx_hunters/footstep4.wav","shared_sfx_hunters/footstep5.wav"}
-ENT.SoundTbl_Death = {"characters/cash/death1.wav","characters/cash/death2.wav","characters/cash/death3.wav","characters/cash/death4.wav","characters/cash/death5.wav","characters/cash/death6.wav","characters/cash/death7.wav","characters/cash/death8.wav","characters/cash/death9.wav","characters/cash/death10.wav","characters/cash/death11.wav","characters/cash/death12.wav","characters/cash/death13.wav","characters/cash/death14.wav","characters/cash/death15.wav","characters/cash/death16.wav","characters/cash/death17.wav"}
-ENT.SoundTbl_Pain = {"characters/cash/pain1.wav","characters/cash/pain2.wav","characters/cash/pain3.wav","characters/cash/pain4.wav","characters/cash/pain5.wav","characters/cash/pain6.wav","characters/cash/pain7.wav","characters/cash/pain8.wav","characters/cash/pain9.wav","characters/cash/pain10.wav","characters/cash/pain11.wav","characters/cash/pain12.wav","characters/cash/pain13.wav","characters/cash/pain14.wav","characters/cash/pain15.wav","characters/cash/pain16.wav","characters/cash/pain17.wav","characters/cash/pain18.wav","characters/cash/pain19.wav","characters/cash/pain20.wav","characters/cash/pain21.wav","characters/cash/pain22.wav","characters/cash/pain23.wav","characters/cash/pain24.wav","characters/cash/pain24.wav","characters/cash/pain25.wav","characters/cash/pain26.wav","characters/cash/pain27.wav","characters/cash/pain28.wav","characters/cash/pain29.wav","characters/cash/pain30.wav","characters/cash/pain31.wav","characters/cash/pain32.wav","characters/cash/pain33.wav","characters/cash/pain34.wav","characters/cash/pain35.wav","characters/cash/pain36.wav","characters/cash/pain37.wav","characters/cash/pain38.wav","characters/cash/pain39.wav","characters/cash/pain40.wav","characters/cash/pain41.wav","characters/cash/pain42.wav","characters/cash/pain43.wav","characters/cash/pain44.wav","characters/cash/pain45.wav"}
+ENT.SoundTbl_FootStep = {"vocals/shared_sfx_hunters/footstep1.wav","vocals/shared_sfx_hunters/footstep2.wav","vocals/shared_sfx_hunters/footstep3.wav","vocals/shared_sfx_hunters/footstep4.wav","vocals/shared_sfx_hunters/footstep5.wav"}
+ENT.SoundTbl_Death = {"vocals/characters/cash/death1.wav","vocals/characters/cash/death2.wav","vocals/characters/cash/death3.wav","vocals/characters/cash/death4.wav","vocals/characters/cash/death5.wav","vocals/characters/cash/death6.wav","vocals/characters/cash/death7.wav","vocals/characters/cash/death8.wav","vocals/characters/cash/death9.wav","vocals/characters/cash/death10.wav","vocals/characters/cash/death11.wav","vocals/characters/cash/death12.wav","vocals/characters/cash/death13.wav","vocals/characters/cash/death14.wav","vocals/characters/cash/death15.wav","vocals/characters/cash/death16.wav","vocals/characters/cash/death17.wav"}
+ENT.SoundTbl_Pain = {"vocals/characters/cash/pain1.wav","vocals/characters/cash/pain2.wav","vocals/characters/cash/pain3.wav","vocals/characters/cash/pain4.wav","vocals/characters/cash/pain5.wav","vocals/characters/cash/pain6.wav","vocals/characters/cash/pain7.wav","vocals/characters/cash/pain8.wav","vocals/characters/cash/pain9.wav","vocals/characters/cash/pain10.wav","vocals/characters/cash/pain11.wav","vocals/characters/cash/pain12.wav","vocals/characters/cash/pain13.wav","vocals/characters/cash/pain14.wav","vocals/characters/cash/pain15.wav","vocals/characters/cash/pain16.wav","vocals/characters/cash/pain17.wav","vocals/characters/cash/pain18.wav","vocals/characters/cash/pain19.wav","vocals/characters/cash/pain20.wav","vocals/characters/cash/pain21.wav","vocals/characters/cash/pain22.wav","vocals/characters/cash/pain23.wav","vocals/characters/cash/pain24.wav","vocals/characters/cash/pain24.wav","vocals/characters/cash/pain25.wav","vocals/characters/cash/pain26.wav","vocals/characters/cash/pain27.wav","vocals/characters/cash/pain28.wav","vocals/characters/cash/pain29.wav","vocals/characters/cash/pain30.wav","vocals/characters/cash/pain31.wav","vocals/characters/cash/pain32.wav","vocals/characters/cash/pain33.wav","vocals/characters/cash/pain34.wav","vocals/characters/cash/pain35.wav","vocals/characters/cash/pain36.wav","vocals/characters/cash/pain37.wav","vocals/characters/cash/pain38.wav","vocals/characters/cash/pain39.wav","vocals/characters/cash/pain40.wav","vocals/characters/cash/pain41.wav","vocals/characters/cash/pain42.wav","vocals/characters/cash/pain43.wav","vocals/characters/cash/pain44.wav","vocals/characters/cash/pain45.wav"}
 
 ENT.SoundTbl_MoveOutOfPlayersWay = 
 {
-	"characters/cash/player_follow2.wav",
-	"characters/cash/fight3.wav"
+	"vocals/characters/cash/player_follow2.wav",
+	"vocals/characters/cash/fight3.wav"
 }
 ENT.SoundTbl_CombatIdle = 
 {
-	"characters/cash/fight1.wav",
-	"characters/cash/fight2.wav",
-	"characters/cash/fight3.wav",
-	"characters/cash/fight4.wav",
-	"characters/cash/fight5.wav"
+	"vocals/characters/cash/fight1.wav",
+	"vocals/characters/cash/fight2.wav",
+	"vocals/characters/cash/fight3.wav",
+	"vocals/characters/cash/fight4.wav",
+	"vocals/characters/cash/fight5.wav"
 }
 ENT.SoundTbl_IdleDialogueAnswer = 
 {
-	"characters/cash/idle_answer1.wav"
+	"vocals/characters/cash/idle_answer1.wav"
 }
 ENT.SoundTbl_Idle = 
 {
-	"characters/cash/idle1.wav",
-	"characters/cash/idle2.wav",
-	"characters/cash/idle3.wav",
-	"characters/cash/idle4.wav"
+	"vocals/characters/cash/idle1.wav",
+	"vocals/characters/cash/idle2.wav",
+	"vocals/characters/cash/idle3.wav",
+	"vocals/characters/cash/idle4.wav"
 }
 ENT.SoundTbl_OnKilledEnemy = 
 {
-	"characters/cash/kill1.wav"
+	"vocals/characters/cash/kill1.wav"
 }
 ENT.SoundTbl_FollowPlayer = 
 {
-	"characters/cash/player_follow1.wav",
-	"characters/cash/player_follow2.wav",
-	"characters/cash/player_follow3.wav",
-	"characters/cash/player_follow4.wav",
-	"characters/cash/player_follow5.wav",
-	"characters/cash/player_follow6.wav",
-	"characters/cash/player_follow7.wav"
+	"vocals/characters/cash/player_follow1.wav",
+	"vocals/characters/cash/player_follow2.wav",
+	"vocals/characters/cash/player_follow3.wav",
+	"vocals/characters/cash/player_follow4.wav",
+	"vocals/characters/cash/player_follow5.wav",
+	"vocals/characters/cash/player_follow6.wav",
+	"vocals/characters/cash/player_follow7.wav"
 }
 ENT.SoundTbl_OnPlayerSight = 
 {
-	"characters/cash/player_follow4.wav"
+	"vocals/characters/cash/player_follow4.wav"
 }
 ENT.SoundTbl_UnFollowPlayer = 
 {
-	"characters/cash/player_unfollow1.wav",
-	"characters/cash/player_unfollow2.wav",
-	"characters/cash/player_unfollow3.wav",
-	"characters/cash/player_unfollow4.wav",
-	"characters/cash/player_unfollow5.wav",
-	"characters/cash/player_unfollow6.wav",
-	"characters/cash/player_unfollow7.wav",
-	"characters/cash/player_unfollow8.wav"
+	"vocals/characters/cash/player_unfollow1.wav",
+	"vocals/characters/cash/player_unfollow2.wav",
+	"vocals/characters/cash/player_unfollow3.wav",
+	"vocals/characters/cash/player_unfollow4.wav",
+	"vocals/characters/cash/player_unfollow5.wav",
+	"vocals/characters/cash/player_unfollow6.wav",
+	"vocals/characters/cash/player_unfollow7.wav",
+	"vocals/characters/cash/player_unfollow8.wav"
+}
+local SoundTbl_OnFire =
+{
+	"vocals/characters/cash/e1v1pln1.wav",
+	"vocals/characters/cash/e1v1pln2.wav",
+	"vocals/characters/cash/e1v1pln3.wav",
+	"vocals/characters/cash/e1v1pln4.wav",
+	"vocals/characters/cash/e1v1pln5.wav",
+	"vocals/characters/cash/e1v1pln6.wav",
+	"vocals/characters/cash/e1v1pln7.wav",
+	"vocals/characters/cash/e1v1pln8.wav",
+	"vocals/characters/cash/e1v1pln9.wav",
+	"vocals/characters/cash/e1v1pln10.wav",
+	"vocals/characters/cash/e1v1pln11.wav",
+	"vocals/characters/cash/e1v1pln12.wav",
+	"vocals/characters/cash/e1v1pln13.wav",
+	"vocals/characters/cash/e1v1pln14.wav"
 }
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize()
 	self:SetSkin(math.random(0,1))
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+-- When set on fire, play OnFire voice lines instead of spamming grunt pain sounds
+function ENT:CustomOnTakeDamage_AfterDamage(dmginfo, hitgroup)
+	if self:Health() > 0 && dmginfo:IsDamageType(DMG_BURN) then
+		self:PlaySoundSystem("Pain", SoundTbl_OnFire)
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)

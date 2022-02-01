@@ -6,7 +6,7 @@
 Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying, and more.
 
 ### FEATURES:
-- Gibbing (attacking the head will gib very deliciously)
+- Gibbing (Destroying the head will give a dramatic death sound)
 - Gruesome death effects
 - Lots of dialogue
 - Weapons from Manhunt
@@ -23,6 +23,7 @@ Spawn Icons, and everything in this pack right now is bound to change.
 - [x] CCPD (Police Officer) 
 - [x] Hoods
 - [x] James Earl Cash
+- [x] Monkey (special goody)
 
 # Credits:
 - [Rockstar Games](https://www.rockstargames.com/) - Original content, sounds and trademark of Manhunt / Manhunt series.
@@ -39,16 +40,16 @@ Spawn Icons, and everything in this pack right now is bound to change.
 - [x] Voiceset 3
 - [x] Voiceset 4
 - [x] Voiceset 5
-- [ ] Voiceset 6
+- [x] Voiceset 6
 
 //
 - Hoods
 - [x] Voiceset 1
 - [x] Voiceset 2
-- [ ] Voiceset 3
-- [ ] Voiceset 4
-- [ ] Voiceset 5
-- [ ] Voiceset 6
+- [x] Voiceset 3
+- [x] Voiceset 4
+- [x] Voiceset 5
+- [x] Voiceset 6
 
 //
 - Carcer City Police (Police Officer)

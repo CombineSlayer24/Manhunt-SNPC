@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/Gen_Brushed_Metal"
+"$nocull" "1"  
+ "$halflambert" "1" 
+ }
