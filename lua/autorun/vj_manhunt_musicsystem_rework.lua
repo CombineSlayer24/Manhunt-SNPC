@@ -3,7 +3,7 @@ How it works:
 When the client (singleplayer) or an admin is playing ingame.
 --
 if they choose to enable the music system, we play the Idle phase.
-Idle phase plays when there is no enemies are aware of our presence.
+Idle phase plays when there is no enemies that are aware of our presence.
 -- 
 IF a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
 Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to somehow hook into VJ heard noise???)
@@ -15,15 +15,33 @@ If a hostile NPC has spot us and is in active fight, if the NPC ENT ( nearbyENT 
 Combat phase plays when the hostile NPC is close to the client, if the NPC is far away, we change Combat phase to Spotted phase.
 --
 I don't really know what i'm trying to do, i'm looking at addons like PayDay2 assault phases for a groundwork idea? I serious need help with this.
+I'll mosty likely remove all of the PD2 stuff and somehow just figure it out.
 ]]
 
+-- Precahcing sounds
+--[[ util.PrecacheSound("sound/music/steams/born_again_1_idle.ogg")
+util.PrecacheSound("sound/music/steams/born_again_2_suspicious.ogg")
+util.PrecacheSound("sound/music/steams/born_again_3_spotted.ogg")
+util.PrecacheSound("sound/music/steams/born_again_4_combat.ogg")
+util.PrecacheSound("sound/music/steams/doorway_hell_1_idle.ogg")
+util.PrecacheSound("sound/music/steams/doorway_hell_2_suspicious.ogg")
+util.PrecacheSound("sound/music/steams/doorway_hell_3_spotted.ogg")
+util.PrecacheSound("sound/music/steams/doorway_hell_4_combat.ogg")
+util.PrecacheSound("sound/music/steams/roadway_to_hell_1_idle.ogg")
+util.PrecacheSound("sound/music/steams/roadway_to_hell_2_suspicious.ogg")
+util.PrecacheSound("sound/music/steams/roadway_to_hell_3_spotted.ogg")
+util.PrecacheSound("sound/music/steams/roadway_to_hell_4_combat.ogg")
+util.PrecacheSound("sound/music/steams/white_trash_1_idle.ogg")
+util.PrecacheSound("sound/music/steams/white_trash_2_suspicious.ogg")
+util.PrecacheSound("sound/music/steams/white_trash_3_spotted.ogg")
+util.PrecacheSound("sound/music/steams/white_trash_4_combat.ogg")
 
---[[ local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 1 - Enabled, 0 - Disabled",0,1)
+local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 1 - Enabled, 0 - Disabled",0,1)
 --local mh_music_volume = CreateConVar("vj_sv_manhunt_music_volume","1",FCVAR_REPLICATED,"Change the volume of the music.",0,3)
 local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
 local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
-local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Spotted volume control",0,3)
+local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
 local mh_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
 
 local ManhuntMusic_Table = {
@@ -172,7 +190,7 @@ local ManhuntMusic_Table = {
 
 local function CacheSound(path,attempt) -- Credit to PD2 Assault phases
 	attempt = attempt or 1
-	
+
 	sound.PlayFile("sound/music/stems/"..path..".ogg","noplay noblock",function(snd,errid,err)
 		if err then
 			MsgC(Color(200,50,0),"Manhunt Music System: Failed to cache sound "..path..". Attempt "..attempt..", ErrID: "..errid..", Error: "..err..".")
