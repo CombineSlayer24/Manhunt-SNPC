@@ -18,7 +18,7 @@ Server admin/mods can choose which scene OST to play to all clients. (doing clie
 I don't really know what i'm trying to do, i would need help with this. ]]--
 
 
---[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
+if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 local ply = LocalPlayer()
 local npc = ent.IsVJBaseSNPC()
 
@@ -32,7 +32,7 @@ local mh_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLI
 
 local ManhuntMusic_Table = {
 	["born_again"] = {
-		Name = "Born Again (Hoods)",
+        Name = "Born Again (Hoods)",
 		Idle = {"born_again_1_idle"},
         Suspicious = {"born_again_2_suspicious"},
         Spotted = {"born_again_3_spotted"},
@@ -173,7 +173,7 @@ local ManhuntMusic_Table = {
     },
 }
 
-local function MusicGet(name)
+function MusicGet(name)
 	return ManhuntMusic_Table[name]
 end
 
@@ -186,7 +186,7 @@ hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
         s:Clear()
         
         for k,v in pairs(ManhuntMusic_Table) do
-            s:AddChoice(v. ,k)
+            s:AddChoice(v.name,k)
         end
     end
-end ]]--
+end
