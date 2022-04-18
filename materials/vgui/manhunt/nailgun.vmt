@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "vgui/manhunt/nailgun"
+	"$vertexcolor" 1   "$vertexalpha" 1   "$additive" 1 }
+

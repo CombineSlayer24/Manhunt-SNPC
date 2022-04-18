@@ -17,18 +17,18 @@ Combat phase plays when the hostile NPC is close to the client, if the NPC is fa
 Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
 I don't really know what i'm trying to do, i would need help with this. ]]--
 
-
+--[[
 if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 local ply = LocalPlayer()
 local npc = ent.IsVJBaseSNPC()
 
-local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 1 - Enabled, 0 - Disabled",0,1)
+--local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 1 - Enabled, 0 - Disabled",0,1)
 --local mh_music_volume = CreateConVar("vj_sv_manhunt_music_volume","1",FCVAR_REPLICATED,"Change the volume of the music.",0,3)
-local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
-local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
-local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
-local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
-local mh_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
+--local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
+--local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
+--local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
+--local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
+--local mh_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
 
 local ManhuntMusic_Table = {
     ["born_again"] = {
@@ -174,7 +174,7 @@ local ManhuntMusic_Table = {
 }
 
 function MusicGet(name)
-	return ManhuntMusic_Table[name]
+    return ManhuntMusic_Table[name]
 end
 
 hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
@@ -189,4 +189,4 @@ hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
             s:AddChoice(v.name,k)
         end
     end
-end
+end ]]--

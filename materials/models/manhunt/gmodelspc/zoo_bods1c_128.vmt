@@ -1,6 +1,0 @@
-"VertexLitGeneric"
-{
-	"$basetexture" "models/Manhunt/gmodelspc/Zoo_BodS1C_128"
-"$nocull" "1"  
- "$halflambert" "1" 
- }
