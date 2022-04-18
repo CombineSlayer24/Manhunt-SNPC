@@ -1,40 +1,26 @@
---[[ Manhunt Music is aimming to recreate the music system in Manhunt 1, I will need help to make this as I'm not too far experienced with lua.
+--[[ Manhunt Music is aiming to recreate the music system in Manhunt 1,
 How it works: 
-When the client (singleplayer) or an admin is playing ingame.
+When the client is in-game and we play the music based on the client's actions
 --
-if they choose to enable the music system, we play the Idle phase.
-Idle phase plays when there is no enemies that are aware of our presence.
+If they choose to enable the music system, we play the Idle phase.
+Idle phase plays when there are currently no enemies that are aware of our presence.
 -- 
-IF a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
-Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to somehow hook into VJ heard noise???)
+If a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
+Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to call the Investigate code from VJ Base)
 --
 If a hostile NPC spots us, we play Spotted phase
 Spotted phase plays when the hostile NPC has spotted us (the client that got spotted)
 --
-If a hostile NPC has spot us and is in active fight, if the NPC ENT ( nearbyENT ) gets close to the client, we play Combat phase
+If a hostile NPC has spot us and is in active fight and if the VJ SNPC gets close to the client, we play Combat phase
 Combat phase plays when the hostile NPC is close to the client, if the NPC is far away, we change Combat phase to Spotted phase.
 --
-I don't really know what i'm trying to do, i'm looking at addons like PayDay2 assault phases for a groundwork idea? I serious need help with this.
-I'll mosty likely remove all of the PD2 stuff and somehow just figure it out.
-]]
+Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
+I don't really know what i'm trying to do, i would need help with this. ]]--
 
--- Precahcing sounds
---[[ util.PrecacheSound("sound/music/steams/born_again_1_idle.ogg")
-util.PrecacheSound("sound/music/steams/born_again_2_suspicious.ogg")
-util.PrecacheSound("sound/music/steams/born_again_3_spotted.ogg")
-util.PrecacheSound("sound/music/steams/born_again_4_combat.ogg")
-util.PrecacheSound("sound/music/steams/doorway_hell_1_idle.ogg")
-util.PrecacheSound("sound/music/steams/doorway_hell_2_suspicious.ogg")
-util.PrecacheSound("sound/music/steams/doorway_hell_3_spotted.ogg")
-util.PrecacheSound("sound/music/steams/doorway_hell_4_combat.ogg")
-util.PrecacheSound("sound/music/steams/roadway_to_hell_1_idle.ogg")
-util.PrecacheSound("sound/music/steams/roadway_to_hell_2_suspicious.ogg")
-util.PrecacheSound("sound/music/steams/roadway_to_hell_3_spotted.ogg")
-util.PrecacheSound("sound/music/steams/roadway_to_hell_4_combat.ogg")
-util.PrecacheSound("sound/music/steams/white_trash_1_idle.ogg")
-util.PrecacheSound("sound/music/steams/white_trash_2_suspicious.ogg")
-util.PrecacheSound("sound/music/steams/white_trash_3_spotted.ogg")
-util.PrecacheSound("sound/music/steams/white_trash_4_combat.ogg")
+
+--[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
+local ply = LocalPlayer()
+local npc = ent.IsVJBaseSNPC()
 
 local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 1 - Enabled, 0 - Disabled",0,1)
 --local mh_music_volume = CreateConVar("vj_sv_manhunt_music_volume","1",FCVAR_REPLICATED,"Change the volume of the music.",0,3)
@@ -178,112 +164,17 @@ local ManhuntMusic_Table = {
         Spotted = {"time_2_die_3_spotted"},
         Combat = {"time_2_die_4_combat"},
 	},
-	-- unused theme sounds like it could've been used for the Hoods, or just a leftover to test the music system
-    ["unused_score"] = {
+    ["unused_theme"] = { --Test music most likely? Sounds like could've been used for the Hoods, or just a test sample.
         Name = "Unused Theme",
         Idle = {"unused_1_idle"},
         Suspicious = {"unused_2_suspicious"},
         Spotted = {"unused_3_spotted"},
         Combat = {"unused_4_combat"},
-	},
+    },
 }
 
-local function CacheSound(path,attempt) -- Credit to PD2 Assault phases
-	attempt = attempt or 1
-
-	sound.PlayFile("sound/music/stems/"..path..".ogg","noplay noblock",function(snd,errid,err)
-		if err then
-			MsgC(Color(200,50,0),"Manhunt Music System: Failed to cache sound "..path..". Attempt "..attempt..", ErrID: "..errid..", Error: "..err..".")
-			
-			if errid==41 and attempt<5 then
-				MsgC(Color(200,200,0)," Trying cache again...\n")
-				
-				CacheSound(path,attempt+1)
-			else
-				MsgC("\n")
-			end
-		
-			return
-		end
-		
-		SoundCache[path] = snd
-		snd:EnableLooping(true)
-	end)
-end
-
-local function CacheMusic(name) -- Credit to PD2 Assault phases
-	local cfg = GetMusicConfig(name)
-	if !cfg then return end
-	
-	local tocache = {}
-	
-	for k,v in ipairs(cfg.Stealth) do tocache[name.."/"..v] = true end
-	for k,v in ipairs(cfg.Control) do tocache[name.."/"..v] = true end
-	for k,v in ipairs(cfg.Anticipation) do tocache[name.."/"..v] = true end
-	for k,v in ipairs(cfg.Bridge) do tocache[name.."/"..v] = true end
-	for k,v in ipairs(cfg.Assault) do tocache[name.."/"..v] = true end
-	
-	for k,v in pairs(tocache) do
-		CacheSound(k)
-	end
-end
-
-local function CacheAllMusic() -- Credit to PD2 Assault phases
-	for k,v in pairs(DefaultMusic) do CacheMusic(k) end
-	for k,v in pairs(CustomMusic) do CacheMusic(k) end
-end
-CacheAllMusic()
-
-local function GetSoundLen(sound) -- Credit to PD2 Assault phases
-	return SoundCache[sound] and SoundCache[sound]:GetLength() or 0
-end
-
-local function PlayIdleMusic() -- Credit to PD2 Assault phases
-	StopPreviousTrack()
-	
-	if !musiccfg or !musiccfg.Idle then return end
-	
-	local start = SysTime()
-	
-	CurrentMusicData = {
-		music = curmusic,
-		type = "idle",
-		data = {},
-	}
-	
-	for k,v in ipairs(musiccfg.Idle) do
-		local sound = curmusic.."/"..v
-		local len = GetSoundLen(sound)
-		
-		table.insert(CurrentMusicData.data,{sound = sound,start = start})
-		start = start+len
-	end
-end
-
-local function PlayCombatMusic() -- Credit to PD2 Assault phases
-	StopPreviousTrack()
-	
-	local klocation = Vector( self:GetPos() )
-	local nearbyENT = ents.FindInSphere( klocation , 150) -- I need to get this to find hostile NPCS
-	local curmusic = GetActiveMusic()
-	local musiccfg = GetMusicConfig(curmusic)
-	if !musiccfg or !musiccfg.Combat then return end
-	
-	local start = SysTime()
-	
-	CurrentMusicData = {
-		music = curmusic,
-		type = "combat",
-		data = {},
-	}
-	
-	for k,v in ipairs(musiccfg.Combat) do
-		local sound = curmusic.."/"..v
-		local len = GetSoundLen(sound)
-		
-		table.insert(CurrentMusicData.data,{sound = sound,start = start})
-		start = start+len
-	end
+local function MusicGet(name)
+	return ManhuntMusic_Table[name]
 end
 
 hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
@@ -294,8 +185,8 @@ hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
     box.LoadMusics = function(s)
         s:Clear()
         
-        for k,v in pairs(DefaultMusic) do
-            s:AddChoice(v.Name,k)
+        for k,v in pairs(ManhuntMusic_Table) do
+            s:AddChoice(v. ,k)
         end
     end
-end ]]
+end ]]--
