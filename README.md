@@ -6,7 +6,7 @@
 Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying, and more.
 
 ### REQUIREMENTS:
-You will need [Full Integrated Animation] (https://steamcommunity.com/sharedfiles/filedetails/?id=1470158687), otherwise you'll see SNPCs that are using Fists T-Poseing 
+You will need [Full Integrated Animation](https://steamcommunity.com/sharedfiles/filedetails/?id=1470158687), otherwise you'll see SNPCs that are using Fists T-Poseing 
 
 ### FEATURES:
 - Gibbing (Destroying the head will give a dramatic death sound)
