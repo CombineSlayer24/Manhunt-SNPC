@@ -163,7 +163,7 @@ local ManhuntMusic_Table = {
         Suspicious = {"time_2_die_2_suspicious"},
         Spotted = {"time_2_die_3_spotted"},
         Combat = {"time_2_die_4_combat"},
-	},
+    },
     ["unused_theme"] = { --Test music most likely? Sounds like could've been used for the Hoods, or just a test sample.
         Name = "Unused Theme",
         Idle = {"unused_1_idle"},
