@@ -39,8 +39,8 @@ function ENT:SpawnFunction(ply, tr)
 
     
     ent.PickupGlow = ents.Create("light_dynamic")
-    ent.PickupGlow:SetKeyValue("brightness", "5")
-    ent.PickupGlow:SetKeyValue("distance", "90")
+    ent.PickupGlow:SetKeyValue("brightness", "4") -- 5 old
+    ent.PickupGlow:SetKeyValue("distance", "80") -- 80 old
     ent.PickupGlow:SetLocalPos(ent:GetPos())
     ent.PickupGlow:SetLocalAngles(ent:GetAngles())
     ent.PickupGlow:Fire("Color", "255 128 0")
@@ -58,13 +58,14 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb:SetKeyValue("rendercolor","255 128 0")
     ent.CoronaOrb:SetKeyValue("renderfx","14")
     ent.CoronaOrb:SetKeyValue("rendermode","3")
-    ent.CoronaOrb:SetKeyValue("renderamt","255")
+    ent.CoronaOrb:SetKeyValue("renderamt","200")
     ent.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb:SetKeyValue("mindxlevel","0")
     ent.CoronaOrb:SetKeyValue("maxdxlevel","0")
     ent.CoronaOrb:SetKeyValue("framerate","10.0")
     ent.CoronaOrb:SetKeyValue("spawnflags","0")
     ent.CoronaOrb:SetKeyValue("scale","0.36")
+    ent.CoronaOrb:SetParent(ent)
     ent.CoronaOrb:SetPos(SpawnPos)
     ent.CoronaOrb:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb)
@@ -74,8 +75,8 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb2:SetKeyValue("GlowProxySize","4.0")
     ent.CoronaOrb2:SetKeyValue("HDRColorScale","1.0")
     ent.CoronaOrb2:SetKeyValue("rendercolor","255 128 0")
-    ent.CoronaOrb2:SetKeyValue("renderfx","0")
-    ent.CoronaOrb2:SetKeyValue("rendermode","5")
+    ent.CoronaOrb2:SetKeyValue("renderfx","15")
+    ent.CoronaOrb2:SetKeyValue("rendermode","9")
     ent.CoronaOrb2:SetKeyValue("renderamt","255")
     ent.CoronaOrb2:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb2:SetKeyValue("mindxlevel","0")
@@ -83,6 +84,7 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb2:SetKeyValue("framerate","10.0")
     ent.CoronaOrb2:SetKeyValue("spawnflags","0")
     ent.CoronaOrb2:SetKeyValue("scale","0.52")
+    ent.CoronaOrb2:SetParent(ent)
     ent.CoronaOrb2:SetPos(SpawnPos)
     ent.CoronaOrb2:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb2)
@@ -94,13 +96,14 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb3:SetKeyValue("rendercolor","255 128 0")
     ent.CoronaOrb3:SetKeyValue("renderfx","14")
     ent.CoronaOrb3:SetKeyValue("rendermode","3")
-    ent.CoronaOrb3:SetKeyValue("renderamt","255")
+    ent.CoronaOrb3:SetKeyValue("renderamt","200")
     ent.CoronaOrb3:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb3:SetKeyValue("mindxlevel","0")
     ent.CoronaOrb3:SetKeyValue("maxdxlevel","0")
     ent.CoronaOrb3:SetKeyValue("framerate","10.0")
     ent.CoronaOrb3:SetKeyValue("spawnflags","0")
     ent.CoronaOrb3:SetKeyValue("scale","0.36")
+    ent.CoronaOrb3:SetParent(ent)
     ent.CoronaOrb3:SetPos(SpawnPos)
     ent.CoronaOrb3:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb3)
@@ -121,8 +124,10 @@ function ENT:Initialize()
     self.Entity:SetMoveType(MOVETYPE_VPHYSICS)
     self.Entity:SetSolid(SOLID_VPHYSICS)
     self.Entity:DrawShadow(false)
+    self.Entity:SetCollisionGroup(1)
 
-    self.Entity:SetCollisionGroup(20)
+    self.Entity:SetTrigger(true) -- Used for ENT:Touch(ply)
+    self.TouchDelay = 0 -- Used for ENT:Touch(ply)
 
     local phys = self.Entity:GetPhysicsObject()
 
@@ -130,8 +135,6 @@ function ENT:Initialize()
         phys:Wake()
         phys:SetMass(40)
     end
-
-    self.Entity:SetUseType(SIMPLE_USE)
 
     timer.Create("delay_rotating_unq"..self.Entity:GetCreationID(), 0, 1, function()  
         self.Entity:SetMoveType(MOVETYPE_NONE)
@@ -153,65 +156,73 @@ if CLIENT then -- Spinning code
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Use(activator, caller) -- Gives ammo when pressing the "Use" key
-	if activator:IsPlayer() then
+function ENT:Touch(ply) -- when we touch this, pick it up
+    if ply:IsPlayer() and ply:GetMoveType() == MOVETYPE_NOCLIP then // if player is in noclip, deny them.
+        if CurTime() <= self.TouchDelay then return end
+        self.TouchDelay = CurTime() + 1.25
+        ply:PrintMessage(HUD_PRINTCENTER, "You cannot pick this up while in Noclip!")
+        ply:EmitSound(Sound("weapons/pickup_deny_nc.wav"), 70, 100)
+        return 
+    end
+
+	if ply:IsPlayer() then
         local ammo_random = math.random(1,14)
         if ammo_random == 1 then
-            caller:GiveAmmo(1, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
+            ply:GiveAmmo(1, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
         elseif ammo_random == 2 then
-            caller:GiveAmmo(1, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
+            ply:GiveAmmo(1, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
         elseif ammo_random == 3 then
-            caller:GiveAmmo(2, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (2)" )
+            ply:GiveAmmo(2, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (2)" )
         elseif ammo_random == 4 then
-            caller:GiveAmmo(3, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
+            ply:GiveAmmo(3, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
         elseif ammo_random == 5 then
-            caller:GiveAmmo(3, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
+            ply:GiveAmmo(3, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
         elseif ammo_random == 6 then
-            caller:GiveAmmo(4, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (4)" )
+            ply:GiveAmmo(4, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (4)" )
         elseif ammo_random == 7 then
-            caller:GiveAmmo(5, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
+            ply:GiveAmmo(5, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
         elseif ammo_random == 8 then
-            caller:GiveAmmo(5, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
+            ply:GiveAmmo(5, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
         elseif ammo_random == 9 then
-            caller:GiveAmmo(6, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+            ply:GiveAmmo(6, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 10 then
-            caller:GiveAmmo(6, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+            ply:GiveAmmo(6, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 11 then
-            caller:GiveAmmo(6, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
+            ply:GiveAmmo(6, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 12 then
-            caller:GiveAmmo(7, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (7)" )
+            ply:GiveAmmo(7, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (7)" )
         elseif ammo_random == 13 then
-            caller:GiveAmmo(8, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
+            ply:GiveAmmo(8, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
         elseif ammo_random == 14 then
-            caller:GiveAmmo(8, "Buckshot", true)
-            activator:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
-            activator:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
+            ply:GiveAmmo(8, "Buckshot", true)
+            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
         end
 		self:Remove()
 	end

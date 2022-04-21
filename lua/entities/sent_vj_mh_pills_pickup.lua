@@ -29,19 +29,19 @@ end )
 function ENT:SpawnFunction(ply, tr)
     if (!tr.Hit) then return end
     
-    local SpawnPos = (tr.HitPos + tr.HitNormal * 46)
-    local SpawnPos_Corona = (tr.HitPos + tr.HitNormal * 48)
+    local SpawnPos = (tr.HitPos + tr.HitNormal * 36)
+    local SpawnPos_SmallCorona = (tr.HitPos + tr.HitNormal * 38)
     local ent = ents.Create("sent_vj_mh_pills_pickup")
     
     ent:SetPos(SpawnPos)
     ent:Spawn()
     ent:Activate()
-    ent:SetModelScale( ent:GetModelScale() * 1.62, 0 )
+    ent:SetModelScale( ent:GetModelScale() * 1.9, 0 )
     ent.Planted = false
 
     ent.PickupGlow = ents.Create("light_dynamic")
-    ent.PickupGlow:SetKeyValue("brightness", "5.25")
-    ent.PickupGlow:SetKeyValue("distance", "105")
+    ent.PickupGlow:SetKeyValue("brightness", "4") -- 5.25 old
+    ent.PickupGlow:SetKeyValue("distance", "85") -- 105 old
     ent.PickupGlow:SetLocalPos(ent:GetPos())
     ent.PickupGlow:SetLocalAngles(ent:GetAngles())
     ent.PickupGlow:Fire("Color", "255 255 255")
@@ -59,14 +59,15 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb:SetKeyValue("rendercolor","255 255 255")
     ent.CoronaOrb:SetKeyValue("renderfx","14")
     ent.CoronaOrb:SetKeyValue("rendermode","3")
-    ent.CoronaOrb:SetKeyValue("renderamt","255")
+    ent.CoronaOrb:SetKeyValue("renderamt","200")
     ent.CoronaOrb:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb:SetKeyValue("mindxlevel","0")
     ent.CoronaOrb:SetKeyValue("maxdxlevel","0")
     ent.CoronaOrb:SetKeyValue("framerate","10.0")
     ent.CoronaOrb:SetKeyValue("spawnflags","0")
     ent.CoronaOrb:SetKeyValue("scale","0.5")
-    ent.CoronaOrb:SetPos(SpawnPos_Corona)
+    ent.CoronaOrb:SetParent(ent)
+    ent.CoronaOrb:SetPos(SpawnPos_SmallCorona)
     ent.CoronaOrb:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb)
 
@@ -77,14 +78,15 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb2:SetKeyValue("rendercolor","255 255 255")
     ent.CoronaOrb2:SetKeyValue("renderfx","0")
     ent.CoronaOrb2:SetKeyValue("rendermode","5")
-    ent.CoronaOrb2:SetKeyValue("renderamt","255")
+    ent.CoronaOrb2:SetKeyValue("renderamt","50")
     ent.CoronaOrb2:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb2:SetKeyValue("mindxlevel","0")
     ent.CoronaOrb2:SetKeyValue("maxdxlevel","0")
     ent.CoronaOrb2:SetKeyValue("framerate","10.0")
     ent.CoronaOrb2:SetKeyValue("spawnflags","0")
     ent.CoronaOrb2:SetKeyValue("scale","0.52")
-    ent.CoronaOrb2:SetPos(SpawnPos_Corona)
+    ent.CoronaOrb2:SetParent(ent)
+    ent.CoronaOrb2:SetPos(SpawnPos)
     ent.CoronaOrb2:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb2)
 
@@ -95,14 +97,15 @@ function ENT:SpawnFunction(ply, tr)
     ent.CoronaOrb3:SetKeyValue("rendercolor","255 255 255")
     ent.CoronaOrb3:SetKeyValue("renderfx","14")
     ent.CoronaOrb3:SetKeyValue("rendermode","3")
-    ent.CoronaOrb3:SetKeyValue("renderamt","255")
+    ent.CoronaOrb3:SetKeyValue("renderamt","230")
     ent.CoronaOrb3:SetKeyValue("disablereceiveshadows","0")
     ent.CoronaOrb3:SetKeyValue("mindxlevel","0")
     ent.CoronaOrb3:SetKeyValue("maxdxlevel","0")
     ent.CoronaOrb3:SetKeyValue("framerate","10.0")
     ent.CoronaOrb3:SetKeyValue("spawnflags","0")
     ent.CoronaOrb3:SetKeyValue("scale","0.5")
-    ent.CoronaOrb3:SetPos(SpawnPos_Corona)
+    ent.CoronaOrb3:SetParent(ent, 0)
+    ent.CoronaOrb3:SetPos(SpawnPos_SmallCorona)
     ent.CoronaOrb3:Spawn()
     ent:DeleteOnRemove(ent.CoronaOrb3)
 
@@ -122,7 +125,7 @@ function ENT:Initialize()
     self.Entity:SetSolid(SOLID_VPHYSICS)
     self.Entity:DrawShadow(false)
 
-    self.Entity:SetCollisionGroup(20)
+    self.Entity:SetCollisionGroup(1)
 
     local phys = self.Entity:GetPhysicsObject()
 
@@ -131,7 +134,8 @@ function ENT:Initialize()
         phys:SetMass(40)
     end
 
-    self.Entity:SetUseType(SIMPLE_USE)
+    self.Entity:SetTrigger(true) -- Used for ENT:Touch(ply)
+    self.TouchDelay = 0 -- Used for ENT:Touch(ply)
 
     timer.Create("delay_rotating_unq"..self.Entity:GetCreationID(), 0, 1, function()  
         self.Entity:SetMoveType(MOVETYPE_NONE)
@@ -153,16 +157,26 @@ if CLIENT then -- Spinning code
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Use(activator) -- Gives health upon pressing "Use" key
-    if (activator:Health() < activator:GetMaxHealth()) then
-        activator:SetHealth(math.Clamp( activator:Health() + 50, 0, activator:GetMaxHealth())) // if our health is < than 100, we can take health and be capped at our max health.
-        activator:PrintMessage(HUD_PRINTCENTER, "Painkillers (50% health restored)")
-        activator:EmitSound(Sound("weapons/pickup_hel.wav"), 70, 100)
+function ENT:Touch(ply) -- Gives health upon pressing "Use" key
+    if ply:IsPlayer() and ply:GetMoveType() == MOVETYPE_NOCLIP then // if player is in noclip, deny them.
+        if CurTime() <= self.TouchDelay then return end
+        self.TouchDelay = CurTime() + 1.25
+        ply:PrintMessage(HUD_PRINTCENTER, "You cannot pick this up while in Noclip!")
+        ply:EmitSound(Sound("weapons/pickup_deny_nc.wav"), 70, 100)
+        return 
+    end
+    
+    if  ply:IsPlayer() and ply:Health() < ply:GetMaxHealth() then
+        ply:SetHealth(math.Clamp( ply:Health() + 50, 0, ply:GetMaxHealth())) // if our health is <= than 100, we can take health and be capped at our max health.
+        ply:PrintMessage(HUD_PRINTCENTER, "Painkillers (50% health restored)")
+        ply:EmitSound(Sound("weapons/pickup_hel.wav"), 70, 100)
         self:Remove()
     else
-        if (activator:Health() + activator:GetMaxHealth()) then // if our health is max, we show a message why we can't pick it up
-            activator:PrintMessage(HUD_PRINTCENTER, "Health full!" )
-            activator:EmitSound(Sound("weapons/pickup_deny.wav"), 100, 100)
+        if ply:Health() + ply:GetMaxHealth() then // if our health is max, we show a message why we can't pick it up
+            if CurTime() <= self.TouchDelay then return end
+            self.TouchDelay = CurTime() + 1.25
+            ply:PrintMessage(HUD_PRINTCENTER, "Your Health is full!" )
+            ply:EmitSound(Sound("weapons/pickup_deny.wav"), 70, 100)
         end
     end
 end
