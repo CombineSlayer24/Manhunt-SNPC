@@ -20,8 +20,9 @@ I don't really know what i'm trying to do, i would need help with this. ]]--
 
 
 if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
---local ply = IsPlayer()
---local npc = ent.IsVJBaseSNPC()
+local ply = IsPlayer() -- For targetting players
+local npc = ent.IsVJBaseSNPC() -- For targetting VJ Only NPCs
+local attacker = damageInfo:GetAttacker():IsVJBaseSNPC() -- for getting the NPC that damaged the player(s)
 
 --local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
 --local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
@@ -172,7 +173,7 @@ local ManhuntMusic_Table = {
         Combat = {"unused_4_combat"},
     },
 }
-
+-- uh, im not sure that's how tables work????
 function MusicGet(name)
 	return ManhuntMusic_Table[name]
 end
@@ -192,3 +193,33 @@ hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
         end
     end)
 end)
+
+--[[ function GetMusicState()
+    if IsValid(ply) then
+
+    end
+end
+
+function PlayIdle()
+
+end
+
+function PlaySuspicious()
+
+end
+
+function PlaySpotted()
+
+end
+
+function PlayCombat()
+
+end
+
+function CheckForEnemies()
+
+end
+
+function CheckIfInvestigating()
+    
+end ]]
