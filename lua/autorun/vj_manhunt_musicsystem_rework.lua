@@ -5,6 +5,8 @@ all 4 tracks should play at once, however, 3 tracks are muted and 1 will be play
 --
 If they choose to enable the music system, we play the Idle phase.
 Idle phase plays when there are currently no enemies that are aware of our presence.
+--
+If the player is in a dark area, we slowly fade out the music. (only in Idle mode)
 -- 
 If a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
 Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to call the Investigate code from VJ Base)
@@ -17,19 +19,16 @@ Combat phase plays when the hostile NPC is close to the client, if the NPC is fa
 --
 Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
 I don't really know what i'm trying to do, i would need help with this. ]]--
-
-
 if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
-local ply = IsPlayer() -- For targetting players
-local npc = ent.IsVJBaseSNPC() -- For targetting VJ Only NPCs
-local attacker = damageInfo:GetAttacker():IsVJBaseSNPC() -- for getting the NPC that damaged the player(s)
 
---local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
---local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
---local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
---local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
---local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
---local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
+-- Serverside commands that affect all players
+local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
+local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
+local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
+local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
+local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
+local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
+
 
 local ManhuntMusic_Table = {
     ["born_again"] = {
@@ -173,26 +172,33 @@ local ManhuntMusic_Table = {
         Combat = {"unused_4_combat"},
     },
 }
--- uh, im not sure that's how tables work????
+
+if ( SERVER ) then    
+    hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
+        spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "Manhunt (Music System)", "Manhunt (Music System)", "", "", function(panel)
+            
+            panel:Help("This menu contains options for the music system. Only server admins/mods can change setting listed here.")
+
+            local box,label = panel:ComboBox("Select music")
+            box.LoadMusics = function(s)
+                s:Clear()
+
+                for k,v in pairs(ManhuntMusic_Table) do
+                    s:AddChoice(v.name,k)
+                end
+            end
+        end)
+    end)
+end
+
+local ply = IsPlayer() -- For targetting players
+local npc = ent.IsVJBaseSNPC() -- For VJ Only NPCs
+local attacker = damageInfo:GetAttacker():IsVJBaseSNPC() -- for getting the NPC that damaged the player(s)
+
 function MusicGet(name)
 	return ManhuntMusic_Table[name]
 end
 
-hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
-    spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "Manhunt (Music System)", "Manhunt (Music System)", "", "", function(panel)
-        
-        panel:Help("This menu contains options for the music system. Only server admins/mods can change setting listed here.")
-
-        local box,label = panel:ComboBox("Select music")
-        box.LoadMusics = function(s)
-            s:Clear()
-
-            for k,v in pairs(ManhuntMusic_Table) do
-                s:AddChoice(v.name,k)
-            end
-        end
-    end)
-end)
 
 --[[ function GetMusicState()
     if IsValid(ply) then
