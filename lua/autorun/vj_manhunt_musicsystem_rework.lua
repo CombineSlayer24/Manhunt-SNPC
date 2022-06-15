@@ -23,7 +23,7 @@ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 
 -- Serverside commands that affect all players
 local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
-local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?")
+local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?",0,2)
 local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
 local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
