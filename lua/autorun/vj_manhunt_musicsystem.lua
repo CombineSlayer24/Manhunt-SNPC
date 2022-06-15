@@ -29,7 +29,6 @@ local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4"
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
 local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
 
-
 local ManhuntMusic_Table = {
     ["born_again"] = {
         Name = "Born Again (Hoods)",
@@ -200,7 +199,7 @@ function MusicGet(name)
 end
 
 -- Get the current music state for the player
---[[ function GetMusicState()
+function GetMusicState()
     if IsValid(ply) then
 
     end
@@ -239,4 +238,4 @@ end
 -- filter check if the VJ NPC is invetigating the player that made the noise
 function CheckIfInvestigating()
     
-end ]]
+end
