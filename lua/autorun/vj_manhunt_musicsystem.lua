@@ -192,7 +192,6 @@ end
 
 local ply = IsPlayer() -- For targetting players
 local npc = ent.IsVJBaseSNPC() -- For VJ Only NPCs
-local attacker = damageInfo:GetAttacker():IsVJBaseSNPC() -- for getting the NPC that damaged the player(s)
 
 function MusicGet(name)
 	return ManhuntMusic_Table[name]
