@@ -9,7 +9,7 @@ Idle phase plays when there are currently no enemies that are aware of our prese
 If the player is in a dark area, we slowly fade out the music. (only in Idle mode)
 -- 
 If a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
-Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to call the Investigate code from VJ Base)
+Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to call the Investigation detection system code from VJ Base)
 --
 If a hostile NPC spots us, we play Spotted phase
 Spotted phase plays when the hostile NPC has spotted us (the client that got spotted)
@@ -19,7 +19,8 @@ Combat phase plays when the hostile NPC is close to the client, if the NPC is fa
 --
 Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
 I don't really know what i'm trying to do, i would need help with this. ]]--
-if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
+
+--[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 
 -- Serverside commands that affect all players
 local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
@@ -237,4 +238,4 @@ end
 -- filter check if the VJ NPC is invetigating the player that made the noise
 function CheckIfInvestigating()
     
-end
+end ]]
