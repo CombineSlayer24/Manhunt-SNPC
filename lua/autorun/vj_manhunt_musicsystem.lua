@@ -15,21 +15,35 @@ If a hostile NPC spots us, we play Spotted phase
 Spotted phase plays when the hostile NPC has spotted us (the client that got spotted)
 --
 If a hostile NPC has spot us and is in active fight and if the VJ SNPC gets close to the client, we play Combat phase
-Combat phase plays when the hostile NPC is close to the client, if the NPC is far away, we change Combat phase to Spotted phase.
+Combat phase plays when the hostile NPC is close to the client (400-500 HU?), if the NPC is far away, we change Combat phase to Spotted phase.
 --
 Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
 I don't really know what i'm trying to do, i would need help with this. ]]--
 
---[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
+if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 
 -- Serverside commands that affect all players
 local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
-local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1", FCVAR_REPLICATED,"How fast should we make music transitions?",0,2)
+local mh_music_fade_speed = CreateConVar( "vj_sv_manhunt_music_fade", "1.25", FCVAR_REPLICATED,"How fast should we make music transitions? < than 1 = fast, > than 1 = slower",0,2)
 local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCVAR_REPLICATED,"Idle volume control",0,3)
 local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
 local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
 
+if ( SERVER ) then
+
+	resource.AddFile("sound/vj_manhunt/music/stems/born_again_1_idle.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/born_again_2_suspicious.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/born_again_3_spotted.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/born_again_4_combat.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_1_idle.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_2_suspicious.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_3_spotted.ogg")
+	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_4_combat.ogg")
+
+end
+
+-- Files are in .OGG format
 local ManhuntMusic_Table = {
     ["born_again"] = {
         Name = "Born Again (Hoods)",
@@ -192,7 +206,7 @@ if ( SERVER ) then
 end
 
 local ply = IsPlayer() -- For targetting players
-local npc = ent.IsVJBaseSNPC() -- For VJ Only NPCs
+local npc = ent.IsVJBaseSNPC() -- For VJ Only NPCs ( We want to target VJ only NPCS because they can Investigate sounds, unlike HL2 NPCs )
 
 function MusicGet(name)
 	return ManhuntMusic_Table[name]
@@ -238,4 +252,4 @@ end
 -- filter check if the VJ NPC is invetigating the player that made the noise
 function CheckIfInvestigating()
     
-end ]]
+end
