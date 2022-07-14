@@ -30,155 +30,156 @@ local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4"
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
 local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
 
+// Only 2 are added since these are only in the demo
 if ( SERVER ) then
 
-	resource.AddFile("sound/vj_manhunt/music/stems/born_again_1_idle.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/born_again_2_suspicious.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/born_again_3_spotted.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/born_again_4_combat.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_1_idle.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_2_suspicious.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_3_spotted.ogg")
-	resource.AddFile("sound/vj_manhunt/music/stems/doorway_hell_4_combat.ogg")
+	resource.AddFile("sound/music/stems/born_again_1_idle.ogg")
+	resource.AddFile("sound/music/stems/born_again_2_suspicious.ogg")
+	resource.AddFile("sound/music/stems/born_again_3_spotted.ogg")
+	resource.AddFile("sound/music/stems/born_again_4_combat.ogg")
+	resource.AddFile("sound/music/stems/doorway_hell_1_idle.ogg")
+	resource.AddFile("sound/music/stems/doorway_hell_2_suspicious.ogg")
+	resource.AddFile("sound/music/stems/doorway_hell_3_spotted.ogg")
+	resource.AddFile("sound/music/stems/doorway_hell_4_combat.ogg")
 
 end
 
 -- Files are in .OGG format
 local ManhuntMusic_Table = {
     ["born_again"] = {
-        Name = "Born Again (Hoods)",
+        Name = "Born Again",
         Idle = {"born_again_1_idle"},
         Suspicious = {"born_again_2_suspicious"},
         Spotted = {"born_again_3_spotted"},
         Combat = {"born_again_4_combat"},
     },
     ["doorway_hell"] = {
-        Name = "Doorway To Hell (Hoods)",
+        Name = "Doorway To Hell",
         Idle = {"doorway_hell_1_idle"},
         Suspicious = {"doorway_hell_2_suspicious"},
         Spotted = {"doorway_hell_3_spotted"},
         Combat = {"doorway_hell_4_combat"},
     },
     ["roadway_to_hell"] = {
-        Name = "Roadway To Hell (Hoods)",
+        Name = "Roadway To Hell",
         Idle = {"roadway_to_hell_1_idle"},
         Suspicious = {"roadway_to_hell_2_suspicious"},
         Spotted = {"roadway_to_hell_3_spotted"},
         Combat = {"roadway_to_hell_4_combat"},
     },
     ["white_trash"] = {
-        Name = "White Trash (Skinz)",
+        Name = "White Trash",
         Idle = {"white_trash_1_idle"},
         Suspicious = {"white_trash_2_suspicious"},
         Spotted = {"white_trash_3_spotted"},
         Combat = {"white_trash_4_combat"},
     },
     ["fuelled_by_hate"] = {
-        Name = "Fuelled By Hate (Skinz)",
+        Name = "Fuelled By Hate",
         Idle = {"fuelled_by_hate_1_idle"},
         Suspicious = {"fuelled_by_hate_2_suspicious"},
         Spotted = {"fuelled_by_hate_3_spotted"},
         Combat = {"fuelled_by_hate_4_combat"},
     },
     ["grounds_for_assault"] = {
-        Name = "Grounds For Assault (Wardogs)",
+        Name = "Grounds For Assault",
         Idle = {"grounds_for_assault_1_idle"},
         Suspicious = {"grounds_for_assault_2_suspicious"},
         Spotted = {"grounds_for_assault_3_spotted"},
         Combat = {"grounds_for_assault_4_combat"},
     },
     ["strapped_for_cash"] = {
-        Name = "Strapped For Cash (Wardogs)",
+        Name = "Strapped For Cash",
         Idle = {"strapped_for_cash_1_idle"},
         Suspicious = {"strapped_for_cash_2_suspicious"},
         Spotted = {"strapped_for_cash_3_spotted"},
         Combat = {"strapped_for_cash_4_combat"},
     },
     ["view_of_innocence"] = {
-        Name = "View Of Innocence (Innocentz)",
+        Name = "View Of Innocence",
         Idle = {"view_of_innocence_1_idle"},
         Suspicious = {"view_of_innocence_2_suspicious"},
         Spotted = {"view_of_innocence_3_spotted"},
         Combat = {"view_of_innocence_4_combat"},
     },
     ["graveyard_shift"] = {
-        Name = "Graveyard Shift (Innocentz)",
+        Name = "Graveyard Shift",
         Idle = {"graveyard_shift_1_idle"},
         Suspicious = {"graveyard_shift_2_suspicious"},
         Spotted = {"graveyard_shift_3_spotted"},
         Combat = {"graveyard_shift_4_combat"},
     },
     ["mouth_of_madness"] = {
-        Name = "Mouth Of Madness (Smileys)",
+        Name = "Mouth Of Madness",
         Idle = {"mouth_of_madness_1_idle"},
         Suspicious = {"mouth_of_madness_2_suspicious"},
         Spotted = {"mouth_of_madness_3_spotted"},
         Combat = {"mouth_of_madness_4_combat"},
     },
     ["doing_time"] = {
-        Name = "Doing Time (Smileys)",
+        Name = "Doing Time",
         Idle = {"doing_time_1_idle"},
         Suspicious = {"doing_time_2_suspicious"},
         Spotted = {"doing_time_3_spotted"},
         Combat = {"doing_time_4_combat"},
     },
     ["divided_they_fall"] = {
-        Name = "Divided They Fall (Wardgos)",
+        Name = "Divided They Fall",
         Idle = {"divided_they_fall_1_idle"},
         Suspicious = {"divided_they_fall_2_suspicious"},
         Spotted = {"divided_they_fall_3_spotted"},
         Combat = {"divided_they_fall_4_combat"},
     },
     ["press_coverage"] = {
-        Name = "Press Coverage (CCPD)",
+        Name = "Press Coverage",
         Idle = {"press_coverage_1_idle"},
         Suspicious = {"press_coverage_2_suspicious"},
         Spotted = {"press_coverage_3_spotted"},
         Combat = {"press_coverage_4_combat"},
     },
     ["wrong_sides_of_the_tracks"] = {
-        Name = "Wrong Side of the Tracks (CCPD/SWAT)",
+        Name = "Wrong Side of the Tracks",
         Idle = {"wrong_side_of_tracks_1_idle"},
         Suspicious = {"wrong_side_of_tracks_2_suspicious"},
         Spotted = {"wrong_side_of_tracks_3_spotted"},
         Combat = {"wrong_side_of_tracks_4_combat"},
     },
     ["trained_to_kill"] = {
-        Name = "Trained To Kill (CCPD/SWAT)",
+        Name = "Trained To Kill",
         Idle = {"trained_to_kill_1_idle"},
         Suspicious = {"trained_to_kill_2_suspicious"},
         Spotted = {"trained_to_kill_3_spotted"},
         Combat = {"trained_to_kill_4_combat"},
     },
     ["border_patrol"] = {
-        Name = "Border Patrol (Cerberus)",
+        Name = "Border Patrol",
         Idle = {"border_patrol_1_idle"},
         Suspicious = {"border_patrol_2_suspicious"},
         Spotted = {"border_patrol_3_spotted"},
         Combat = {"border_patrol_4_combat"},
     },
     ["key_personnel"] = {
-        Name = "Key Personnel (Cerberus)",
+        Name = "Key Personnel",
         Idle = {"key_personnel_1_idle"},
         Suspicious = {"key_personnel_2_suspicious"},
         Spotted = {"key_personnel_3_spotted"},
         Combat = {"key_personnel_4_combat"},
     },
     ["deliverance"] = {
-        Name = "Deliverance (Cerberus)",
+        Name = "Deliverance",
         Idle = {"deliverance_1_idle"},
         Suspicious = {"deliverance_2_suspicious"},
         Spotted = {"deliverance_3_spotted"},
         Combat = {"deliverance_4_combat"},
     },
     ["time_2_die"] = {
-        Name = "Time 2 Die (Bonus Level)",
+        Name = "Time 2 Die",
         Idle = {"time_2_die_1_idle"},
         Suspicious = {"time_2_die_2_suspicious"},
         Spotted = {"time_2_die_3_spotted"},
         Combat = {"time_2_die_4_combat"},
     },
-    ["unused_theme"] = { --Test music most likely? Sounds like could've been used for the Hoods, or just a test sample.
+    ["unused_theme"] = {
         Name = "Unused Theme",
         Idle = {"unused_1_idle"},
         Suspicious = {"unused_2_suspicious"},
