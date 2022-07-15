@@ -189,7 +189,7 @@ local ManhuntMusic_Table = {
 }
 
 if ( SERVER ) then    
-    hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT", function()
+    hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_MANHUNT_MUSICSYSTEM", function()
         spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "Manhunt (Music System)", "Manhunt (Music System)", "", "", function(panel)
             
             panel:Help("This menu contains options for the music system. Only server admins/mods can change setting listed here.")
