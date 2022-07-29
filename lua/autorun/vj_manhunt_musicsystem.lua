@@ -5,8 +5,6 @@ all 4 tracks should play at once, however, 3 tracks are muted and 1 will be play
 --
 If they choose to enable the music system, we play the Idle phase.
 Idle phase plays when there are currently no enemies that are aware of our presence.
---
-If the player is in a dark area, we slowly fade out the music. (only in Idle mode)
 -- 
 If a hostile NPC has heard the player (that made the noise) we play the Suspicious phase
 Suspicious phase plays when 1 or more hostile NPCs are walking to the ares that they heard the noise (need to call the Investigation detection system code from VJ Base)
@@ -17,8 +15,7 @@ Spotted phase plays when the hostile NPC has spotted us (the client that got spo
 If a hostile NPC has spot us and is in active fight and if the VJ SNPC gets close to the client, we play Combat phase
 Combat phase plays when the hostile NPC is close to the client (400-500 HU?), if the NPC is far away, we change Combat phase to Spotted phase.
 --
-Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
-I don't really know what i'm trying to do, i would need help with this. ]]--
+Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)]]--
 
 --[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 
@@ -204,11 +201,6 @@ function GetMusicState()
     if IsValid(ply) then
 
     end
-end
-
--- If we are in the shawdows (dark lit areas), slowly fade the idle music to 0
-function DarknessPhase()
-
 end
 
 -- Play Idle phase if no enemies know our location
