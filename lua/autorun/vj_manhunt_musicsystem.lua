@@ -20,7 +20,7 @@ Combat phase plays when the hostile NPC is close to the client (400-500 HU?), if
 Server admin/mods can choose which scene OST to play to all clients. (doing clientside may be a real headache, so probably serverside works better?)
 I don't really know what i'm trying to do, i would need help with this. ]]--
 
-if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
+--[[ if (!file.Exists("autorun/vj_base_autorun.lua","LUA")) then return end
 
 -- Serverside commands that affect all players
 local mh_music_enable = CreateConVar("vj_sv_manhunt_music_enable","1",FCVAR_REPLICATED," Enable the Manhunt Music System. 0- Off, 1- On",0,1)
@@ -29,20 +29,6 @@ local mh_music_vol_idle = CreateConVar("vj_sv_manhunt_music_vol_idle","0.35",FCV
 local mh_music_vol_sus = CreateConVar("vj_sv_manhunt_music_vol_suspicious","0.4",FCVAR_REPLICATED,"Suspicious volume control",0,3)
 local mh_music_vol_spot = CreateConVar("vj_sv_manhunt_music_vol_spotted","0.6",FCVAR_REPLICATED,"Spotted volume control",0,3)
 local mh_music_vol_comb = CreateConVar("vj_sv_manhunt_music_vol_combat","0.75",FCVAR_REPLICATED,"Combat volume control",0,3)
-
-// Only 2 are added since these are only in the demo
-if ( SERVER ) then
-
-	resource.AddFile("sound/music/stems/born_again_1_idle.ogg")
-	resource.AddFile("sound/music/stems/born_again_2_suspicious.ogg")
-	resource.AddFile("sound/music/stems/born_again_3_spotted.ogg")
-	resource.AddFile("sound/music/stems/born_again_4_combat.ogg")
-	resource.AddFile("sound/music/stems/doorway_hell_1_idle.ogg")
-	resource.AddFile("sound/music/stems/doorway_hell_2_suspicious.ogg")
-	resource.AddFile("sound/music/stems/doorway_hell_3_spotted.ogg")
-	resource.AddFile("sound/music/stems/doorway_hell_4_combat.ogg")
-
-end
 
 -- Files are in .OGG format
 local ManhuntMusic_Table = {
@@ -253,4 +239,4 @@ end
 -- filter check if the VJ NPC is invetigating the player that made the noise
 function CheckIfInvestigating()
     
-end
+end ]]--
