@@ -65,81 +65,89 @@ ENT.OnPlayerSightSoundChance = 4
 ENT.NextSoundTime_Idle = VJ_Set(8, 20)
 ENT.OnPlayerSightNextTime = VJ_Set(15, 20)
 -----------------GLOBAL SOUNDS-------------------
-ENT.SoundTbl_Death = {"vocals/characters/cash/death1.wav","vocals/characters/cash/death2.wav","vocals/characters/cash/death3.wav","vocals/characters/cash/death4.wav","vocals/characters/cash/death5.wav","vocals/characters/cash/death6.wav","vocals/characters/cash/death7.wav","vocals/characters/cash/death8.wav","vocals/characters/cash/death9.wav","vocals/characters/cash/death10.wav","vocals/characters/cash/death11.wav","vocals/characters/cash/death12.wav","vocals/characters/cash/death13.wav","vocals/characters/cash/death14.wav","vocals/characters/cash/death15.wav","vocals/characters/cash/death16.wav","vocals/characters/cash/death17.wav"}
-ENT.SoundTbl_Pain = {"vocals/characters/cash/pain1.wav","vocals/characters/cash/pain2.wav","vocals/characters/cash/pain3.wav","vocals/characters/cash/pain4.wav","vocals/characters/cash/pain5.wav","vocals/characters/cash/pain6.wav","vocals/characters/cash/pain7.wav","vocals/characters/cash/pain8.wav","vocals/characters/cash/pain9.wav","vocals/characters/cash/pain10.wav","vocals/characters/cash/pain11.wav","vocals/characters/cash/pain12.wav","vocals/characters/cash/pain13.wav","vocals/characters/cash/pain14.wav","vocals/characters/cash/pain15.wav","vocals/characters/cash/pain16.wav","vocals/characters/cash/pain17.wav","vocals/characters/cash/pain18.wav","vocals/characters/cash/pain19.wav","vocals/characters/cash/pain20.wav","vocals/characters/cash/pain21.wav","vocals/characters/cash/pain22.wav","vocals/characters/cash/pain23.wav","vocals/characters/cash/pain24.wav","vocals/characters/cash/pain24.wav","vocals/characters/cash/pain25.wav","vocals/characters/cash/pain26.wav","vocals/characters/cash/pain27.wav","vocals/characters/cash/pain28.wav","vocals/characters/cash/pain29.wav","vocals/characters/cash/pain30.wav","vocals/characters/cash/pain31.wav","vocals/characters/cash/pain32.wav","vocals/characters/cash/pain33.wav","vocals/characters/cash/pain34.wav","vocals/characters/cash/pain35.wav","vocals/characters/cash/pain36.wav","vocals/characters/cash/pain37.wav","vocals/characters/cash/pain38.wav","vocals/characters/cash/pain39.wav","vocals/characters/cash/pain40.wav","vocals/characters/cash/pain41.wav","vocals/characters/cash/pain42.wav","vocals/characters/cash/pain43.wav","vocals/characters/cash/pain44.wav","vocals/characters/cash/pain45.wav"}
+ENT.SoundTbl_Death = {"vj_manhunt/vocals/characters/cash/death1.wav","vj_manhunt/vocals/characters/cash/death2.wav","vj_manhunt/vocals/characters/cash/death3.wav","vj_manhunt/vocals/characters/cash/death4.wav","vj_manhunt/vocals/characters/cash/death5.wav","vj_manhunt/vocals/characters/cash/death6.wav","vj_manhunt/vocals/characters/cash/death7.wav","vj_manhunt/vocals/characters/cash/death8.wav","vj_manhunt/vocals/characters/cash/death9.wav","vj_manhunt/vocals/characters/cash/death10.wav","vj_manhunt/vocals/characters/cash/death11.wav","vj_manhunt/vocals/characters/cash/death12.wav","vj_manhunt/vocals/characters/cash/death13.wav","vj_manhunt/vocals/characters/cash/death14.wav","vj_manhunt/vocals/characters/cash/death15.wav","vj_manhunt/vocals/characters/cash/death16.wav","vj_manhunt/vocals/characters/cash/death17.wav"}
+ENT.SoundTbl_Pain = {"vj_manhunt/vocals/characters/cash/pain1.wav","vj_manhunt/vocals/characters/cash/pain2.wav","vj_manhunt/vocals/characters/cash/pain3.wav","vj_manhunt/vocals/characters/cash/pain4.wav","vj_manhunt/vocals/characters/cash/pain5.wav","vj_manhunt/vocals/characters/cash/pain6.wav","vj_manhunt/vocals/characters/cash/pain7.wav","vj_manhunt/vocals/characters/cash/pain8.wav","vj_manhunt/vocals/characters/cash/pain9.wav","vj_manhunt/vocals/characters/cash/pain10.wav","vj_manhunt/vocals/characters/cash/pain11.wav","vj_manhunt/vocals/characters/cash/pain12.wav","vj_manhunt/vocals/characters/cash/pain13.wav","vj_manhunt/vocals/characters/cash/pain14.wav","vj_manhunt/vocals/characters/cash/pain15.wav","vj_manhunt/vocals/characters/cash/pain16.wav","vj_manhunt/vocals/characters/cash/pain17.wav","vj_manhunt/vocals/characters/cash/pain18.wav","vj_manhunt/vocals/characters/cash/pain19.wav","vj_manhunt/vocals/characters/cash/pain20.wav","vj_manhunt/vocals/characters/cash/pain21.wav","vj_manhunt/vocals/characters/cash/pain22.wav","vj_manhunt/vocals/characters/cash/pain23.wav","vj_manhunt/vocals/characters/cash/pain24.wav","vj_manhunt/vocals/characters/cash/pain24.wav","vj_manhunt/vocals/characters/cash/pain25.wav","vj_manhunt/vocals/characters/cash/pain26.wav","vj_manhunt/vocals/characters/cash/pain27.wav","vj_manhunt/vocals/characters/cash/pain28.wav","vj_manhunt/vocals/characters/cash/pain29.wav","vj_manhunt/vocals/characters/cash/pain30.wav","vj_manhunt/vocals/characters/cash/pain31.wav","vj_manhunt/vocals/characters/cash/pain32.wav","vj_manhunt/vocals/characters/cash/pain33.wav","vj_manhunt/vocals/characters/cash/pain34.wav","vj_manhunt/vocals/characters/cash/pain35.wav","vj_manhunt/vocals/characters/cash/pain36.wav","vj_manhunt/vocals/characters/cash/pain37.wav","vj_manhunt/vocals/characters/cash/pain38.wav","vj_manhunt/vocals/characters/cash/pain39.wav","vj_manhunt/vocals/characters/cash/pain40.wav","vj_manhunt/vocals/characters/cash/pain41.wav","vj_manhunt/vocals/characters/cash/pain42.wav","vj_manhunt/vocals/characters/cash/pain43.wav","vj_manhunt/vocals/characters/cash/pain44.wav","vj_manhunt/vocals/characters/cash/pain45.wav"}
 
 ENT.SoundTbl_MoveOutOfPlayersWay = 
 {
-	"vocals/characters/cash/player_follow2.wav",
-	"vocals/characters/cash/fight3.wav"
+	"vj_manhunt/vocals/characters/cash/player_follow2.wav",
+	"vj_manhunt/vocals/characters/cash/fight3.wav"
 }
 ENT.SoundTbl_CombatIdle = 
 {
-	"vocals/characters/cash/fight1.wav",
-	"vocals/characters/cash/fight2.wav",
-	"vocals/characters/cash/fight3.wav",
-	"vocals/characters/cash/fight4.wav",
-	"vocals/characters/cash/fight5.wav"
+	"vj_manhunt/vocals/characters/cash/fight1.wav",
+	"vj_manhunt/vocals/characters/cash/fight2.wav",
+	"vj_manhunt/vocals/characters/cash/fight3.wav",
+	"vj_manhunt/vocals/characters/cash/fight4.wav",
+	"vj_manhunt/vocals/characters/cash/fight5.wav"
 }
 ENT.SoundTbl_IdleDialogueAnswer = 
 {
-	"vocals/characters/cash/idle_answer1.wav"
+	"vj_manhunt/vocals/characters/cash/idle_answer1.wav"
 }
 ENT.SoundTbl_Idle = 
 {
-	"vocals/characters/cash/idle1.wav",
-	"vocals/characters/cash/idle2.wav",
-	"vocals/characters/cash/idle3.wav",
-	"vocals/characters/cash/idle4.wav"
+	"vj_manhunt/vocals/characters/cash/idle1.wav",
+	"vj_manhunt/vocals/characters/cash/idle2.wav",
+	"vj_manhunt/vocals/characters/cash/idle3.wav",
+	"vj_manhunt/vocals/characters/cash/idle4.wav"
 }
 ENT.SoundTbl_OnKilledEnemy = 
 {
-	"vocals/characters/cash/kill1.wav"
+	"vj_manhunt/vocals/characters/cash/kill1.wav"
 }
 ENT.SoundTbl_FollowPlayer = 
 {
-	"vocals/characters/cash/player_follow1.wav",
-	"vocals/characters/cash/player_follow2.wav",
-	"vocals/characters/cash/player_follow3.wav",
-	"vocals/characters/cash/player_follow4.wav",
-	"vocals/characters/cash/player_follow5.wav",
-	"vocals/characters/cash/player_follow6.wav",
-	"vocals/characters/cash/player_follow7.wav"
+	"vj_manhunt/vocals/characters/cash/player_follow1.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow2.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow3.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow4.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow5.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow6.wav",
+	"vj_manhunt/vocals/characters/cash/player_follow7.wav"
 }
 ENT.SoundTbl_OnPlayerSight = 
 {
-	"vocals/characters/cash/player_follow4.wav"
+	"vj_manhunt/vocals/characters/cash/player_follow4.wav"
 }
 ENT.SoundTbl_UnFollowPlayer = 
 {
-	"vocals/characters/cash/player_unfollow1.wav",
-	"vocals/characters/cash/player_unfollow2.wav",
-	"vocals/characters/cash/player_unfollow3.wav",
-	"vocals/characters/cash/player_unfollow4.wav",
-	"vocals/characters/cash/player_unfollow5.wav",
-	"vocals/characters/cash/player_unfollow6.wav",
-	"vocals/characters/cash/player_unfollow7.wav",
-	"vocals/characters/cash/player_unfollow8.wav"
+	"vj_manhunt/vocals/characters/cash/player_unfollow1.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow2.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow3.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow4.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow5.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow6.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow7.wav",
+	"vj_manhunt/vocals/characters/cash/player_unfollow8.wav"
 }
 local SoundTbl_OnFire =
 {
-	"vocals/characters/cash/e1v1pln1.wav",
-	"vocals/characters/cash/e1v1pln2.wav",
-	"vocals/characters/cash/e1v1pln3.wav",
-	"vocals/characters/cash/e1v1pln4.wav",
-	"vocals/characters/cash/e1v1pln5.wav",
-	"vocals/characters/cash/e1v1pln6.wav",
-	"vocals/characters/cash/e1v1pln7.wav",
-	"vocals/characters/cash/e1v1pln8.wav",
-	"vocals/characters/cash/e1v1pln9.wav",
-	"vocals/characters/cash/e1v1pln10.wav",
-	"vocals/characters/cash/e1v1pln11.wav",
-	"vocals/characters/cash/e1v1pln12.wav",
-	"vocals/characters/cash/e1v1pln13.wav",
-	"vocals/characters/cash/e1v1pln14.wav"
+	"vj_manhunt/vocals/characters/cash/e1v1pln1.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln2.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln3.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln4.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln5.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln6.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln7.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln8.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln9.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln10.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln11.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln12.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln13.wav",
+	"vj_manhunt/vocals/characters/cash/e1v1pln14.wav"
 }
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomInitialize()
+function ENT:CustomOnInitialize()
+	if GetConVarNumber("vj_manhunt_aggressive_tactics") == 0 then
+		self.WaitForEnemyToComeOut = true
+		self.MoveOrHideOnDamageByEnemy = true
+	end
+	if GetConVarNumber("vj_manhunt_aggressive_tactics") == 1 then
+		self.WaitForEnemyToComeOut = false
+		self.MoveOrHideOnDamageByEnemy = false
+	end
 	self:SetSkin(math.random(0,1))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +166,7 @@ function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo, hitgroup)
 	end
 	-- Increase head damage
 	if dmginfo:IsBulletDamage() and hitgroup == HITGROUP_HEAD then
-		if GetConVarNumber("vj_manhunt_hunters_headshot_sound") == 1 then VJ_EmitSound(self, "vocals/zmb_vocals/headshot_"..math.random(0,6)..".wav", 70) end
+		if GetConVarNumber("vj_manhunt_hunters_headshot_sound") == 1 then VJ_EmitSound(self, "vj_manhunt/vocals/zmb_vocals/headshot_"..math.random(0,6)..".wav", 70) end
 		dmginfo:ScaleDamage(1.75)
 	end
 end
@@ -198,46 +206,46 @@ end
 -- Credit to Darkborn's LNR
 ENT.FootSteps = {
 	[MAT_ANTLION] = {
-		"vocals/shared_sfx_hunters/fsgras1.mp3",
-		"vocals/shared_sfx_hunters/fsgras2.mp3",
-		"vocals/shared_sfx_hunters/fsgras3.mp3",
-		"vocals/shared_sfx_hunters/fsgras4.mp3",
-		"vocals/shared_sfx_hunters/fsgras5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras5.mp3"
 	},
 	[MAT_BLOODYFLESH] = {
-		"vocals/shared_sfx_hunters/fsgras1.mp3",
-		"vocals/shared_sfx_hunters/fsgras2.mp3",
-		"vocals/shared_sfx_hunters/fsgras3.mp3",
-		"vocals/shared_sfx_hunters/fsgras4.mp3",
-		"vocals/shared_sfx_hunters/fsgras5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras5.mp3"
 	},
 	[MAT_CONCRETE] = {
-		"vocals/shared_sfx_hunters/fscon1.mp3",
-		"vocals/shared_sfx_hunters/fscon2.mp3",
-		"vocals/shared_sfx_hunters/fscon3.mp3",
-		"vocals/shared_sfx_hunters/fscon4.mp3",
-		"vocals/shared_sfx_hunters/fscon5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fscon1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fscon2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fscon3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fscon4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fscon5.mp3"
 	},
 	[MAT_DIRT] = {
-		"vocals/shared_sfx_hunters/fsgrav1.mp3",
-		"vocals/shared_sfx_hunters/fsgrav2.mp3",
-		"vocals/shared_sfx_hunters/fsgrav3.mp3",
-		"vocals/shared_sfx_hunters/fsgrav4.mp3",
-		"vocals/shared_sfx_hunters/fsgrav5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgrav1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgrav2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgrav3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgrav4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgrav5.mp3"
 	},
 	[MAT_FLESH] = {
-		"vocals/shared_sfx_hunters/fsgras1.mp3",
-		"vocals/shared_sfx_hunters/fsgras2.mp3",
-		"vocals/shared_sfx_hunters/fsgras3.mp3",
-		"vocals/shared_sfx_hunters/fsgras4.mp3",
-		"vocals/shared_sfx_hunters/fsgras5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras5.mp3"
 	},
 	[MAT_GRATE] = {
-		"vocals/shared_sfx_hunters/fsmetal1.mp3",
-		"vocals/shared_sfx_hunters/fsmetal2.mp3",
-		"vocals/shared_sfx_hunters/fsmetal3.mp3",
-		"vocals/shared_sfx_hunters/fsmetal4.mp3",
-		"vocals/shared_sfx_hunters/fsmetal5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal5.mp3"
 	},
 	[MAT_ALIENFLESH] = {
 		"physics/flesh/flesh_impact_hard1.wav",
@@ -248,10 +256,10 @@ ENT.FootSteps = {
 		"physics/flesh/flesh_impact_hard6.wav"
 	},
 	[74] = { -- Snow
-		"vocals/shared_sfx_hunters/fsmud1.mp3",
-		"vocals/shared_sfx_hunters/fsmud2.mp3",
-		"vocals/shared_sfx_hunters/fsmud3.mp3",
-		"vocals/shared_sfx_hunters/fsmud4.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud4.mp3"
 	},
 	[MAT_PLASTIC] = {
 		"physics/plaster/drywall_footstep1.wav",
@@ -260,24 +268,24 @@ ENT.FootSteps = {
 		"physics/plaster/drywall_footstep4.wav"
 	},
 	[MAT_METAL] = {
-		"vocals/shared_sfx_hunters/fsmetal1.mp3",
-		"vocals/shared_sfx_hunters/fsmetal2.mp3",
-		"vocals/shared_sfx_hunters/fsmetal3.mp3",
-		"vocals/shared_sfx_hunters/fsmetal4.mp3",
-		"vocals/shared_sfx_hunters/fsmetal5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal5.mp3"
 	},
 	[MAT_SAND] = {
-		"vocals/shared_sfx_hunters/fsmud1.mp3",
-		"vocals/shared_sfx_hunters/fsmud2.mp3",
-		"vocals/shared_sfx_hunters/fsmud3.mp3",
-		"vocals/shared_sfx_hunters/fsmud4.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmud4.mp3"
 	},
 	[MAT_FOLIAGE] = {
-		"vocals/shared_sfx_hunters/fsgras1.mp3",
-		"vocals/shared_sfx_hunters/fsgras2.mp3",
-		"vocals/shared_sfx_hunters/fsgras3.mp3",
-		"vocals/shared_sfx_hunters/fsgras4.mp3",
-		"vocals/shared_sfx_hunters/fsgras5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras5.mp3"
 	},
 	[MAT_COMPUTER] = {
 		"physics/plaster/drywall_footstep1.wav",
@@ -286,38 +294,38 @@ ENT.FootSteps = {
 		"physics/plaster/drywall_footstep4.wav"
 	},
 	[MAT_SLOSH] = {
-		"vocals/shared_sfx_hunters/fswatr1.mp3",
-		"vocals/shared_sfx_hunters/fswatr2.mp3",
-		"vocals/shared_sfx_hunters/fswatr3.mp3",
-		"vocals/shared_sfx_hunters/fswatr4.mp3",
-		"vocals/shared_sfx_hunters/fswatr5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fswatr1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswatr2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswatr3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswatr4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswatr5.mp3"
 	},
 	[MAT_TILE] = {
-		"vocals/shared_sfx_hunters/fstile1.mp3",
-		"vocals/shared_sfx_hunters/fstile2.mp3",
-		"vocals/shared_sfx_hunters/fstile3.mp3",
-		"vocals/shared_sfx_hunters/fstile4.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fstile1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fstile2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fstile3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fstile4.mp3"
 	},
 	[85] = { -- Grass
-		"vocals/shared_sfx_hunters/fsgras1.mp3",
-		"vocals/shared_sfx_hunters/fsgras2.mp3",
-		"vocals/shared_sfx_hunters/fsgras3.mp3",
-		"vocals/shared_sfx_hunters/fsgras4.mp3",
-		"vocals/shared_sfx_hunters/fsgras5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsgras5.mp3"
 	},
 	[MAT_VENT] = {
-		"vocals/shared_sfx_hunters/fsmetal1.mp3",
-		"vocals/shared_sfx_hunters/fsmetal2.mp3",
-		"vocals/shared_sfx_hunters/fsmetal3.mp3",
-		"vocals/shared_sfx_hunters/fsmetal4.mp3",
-		"vocals/shared_sfx_hunters/fsmetal5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fsmetal5.mp3"
 	},
 	[MAT_WOOD] = {
-		"vocals/shared_sfx_hunters/fswood1.mp3",
-		"vocals/shared_sfx_hunters/fswood2.mp3",
-		"vocals/shared_sfx_hunters/fswood3.mp3",
-		"vocals/shared_sfx_hunters/fswood4.mp3",
-		"vocals/shared_sfx_hunters/fswood5.mp3"
+		"vj_manhunt/vocals/shared_sfx_hunters/fswood1.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswood2.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswood3.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswood4.mp3",
+		"vj_manhunt/vocals/shared_sfx_hunters/fswood5.mp3"
 	},
 	[MAT_GLASS] = {
 		"physics/glass/glass_sheet_step1.wav",

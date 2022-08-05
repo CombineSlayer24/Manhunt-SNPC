@@ -19,9 +19,9 @@ SWEP.NPC_NextPrimaryFire 		= 1.093
 SWEP.Primary.Delay				= 1.3 -- Time until it can shoot again
 SWEP.Primary.Automatic			= false -- Is it automatic?
 SWEP.Primary.Ammo				= "null" -- Ammo type
-SWEP.Primary.Sound				= {"weapons/melee/mh_melee_miss.wav"}
+SWEP.Primary.Sound				= {"vj_manhunt/weapons/melee/mh_melee_miss.wav"}
 SWEP.Primary.HasDistantSound	= false -- Does it have a distant sound when the gun is shot?
-SWEP.Primary.DistantSound		= {"weapons/melee/mh_melee_miss.wav"}
+SWEP.Primary.DistantSound		= {"vj_manhunt/weapons/melee/mh_melee_miss.wav"}
 
 SWEP.UseHands				= true
 SWEP.ViewModelFOV			= 67
@@ -29,8 +29,8 @@ SWEP.ViewModelFOV			= 67
 function SWEP:CustomOnInitialize()
 
 self.Owner.AnimTbl_MeleeAttack = {"melee_gunhit","range_fists_l_1","range_fists_l_2","range_fists_r_1","range_fists_r_2","range_fistse_noga_1","range_fistse_noga_2","swing"}
-self.Owner.DefaultSoundTbl_MeleeAttack = {"weapons/melee/mh_melee_hit1.wav","weapons/melee/mh_melee_hit2.wav","weapons/melee/mh_melee_hit3.wav"}
-self.Owner.DefaultSoundTbl_MeleeAttackMiss = {"weapons/melee/mh_melee_miss.wav"}
+self.Owner.DefaultSoundTbl_MeleeAttack = {"vj_manhunt/weapons/melee/mh_melee_hit1.wav","vj_manhunt/weapons/melee/mh_melee_hit2.wav","vj_manhunt/weapons/melee/mh_melee_hit3.wav"}
+self.Owner.DefaultSoundTbl_MeleeAttackMiss = {"vj_manhunt/weapons/melee/mh_melee_miss.wav"}
 self.Owner.AnimTbl_WeaponAttack = {ACT_HL2MP_IDLE_FIST}
 end
 
@@ -71,7 +71,7 @@ self.Owner:VJ_ACT_PLAYACTIVITY(ACT_HL2MP_IDLE_FIST,false,0.01,false,1,{SequenceD
 	damagedice = math.Rand(1,2)
 			
 	pain = self.Primary.Damage * damagedice
-			self.Weapon:EmitSound("weapons/melee/mh_melee_miss.wav")--slash in the wind sound here
+			self.Weapon:EmitSound("vj_manhunt/weapons/melee/mh_melee_miss.wav")--slash in the wind sound here
 				if SERVER and IsValid(self.Owner) then
 						local slash = {}
 						slash.start = pos

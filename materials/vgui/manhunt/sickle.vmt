@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "vgui/manhunt/sickle"
+	"$vertexcolor" 1   "$vertexalpha" 1   "$additive" 1 }
+

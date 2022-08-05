@@ -17,7 +17,7 @@ SWEP.Spawnable = false
 SWEP.NPC_EnableDontUseRegulate 	= false -- Used for VJ Base SNPCs, if enabled the SNPC will remove use regulate
 SWEP.NPC_NextPrimaryFire 		= 2 -- Next time it can use primary fire
 SWEP.NPC_TimeUntilFire	 		= 0.1 -- How much time until the bullet/projectile is fired?
-SWEP.NPC_CustomSpread = 0.5
+SWEP.NPC_CustomSpread = 0.1
 SWEP.NPC_AllowCustomSpread = true
 	-- Main Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.HoldType 					= "ar2" -- List of holdtypes are in the GMod wiki
@@ -36,11 +36,11 @@ SWEP.Primary.Delay				= 2.0 -- Time until it can shoot again
 SWEP.Primary.TakeAmmo			= 1 -- How much ammo should it take on each shot?
 SWEP.Primary.Automatic			= true -- Is it automatic?
 SWEP.Primary.Ammo				= "AR2" -- Ammo type
-SWEP.Primary.Sound				= {"weapons/manhunt/rifle.wav"}
+SWEP.Primary.Sound				= {"vj_manhunt/weapons/manhunt/rifle.wav"}
 SWEP.Primary.HasDistantSound	= true -- Does it have a distant sound when the gun is shot?
-SWEP.Primary.DistantSound		= {"weapons/manhunt/rifle_distant.wav"}
+SWEP.Primary.DistantSound		= {"vj_manhunt/weapons/manhunt/rifle_distant.wav"}
 
-SWEP.Primary.DistantSoundLevel = 140 -- Distant sound level
+SWEP.Primary.DistantSoundLevel = 110 -- Distant sound level
 SWEP.Primary.DistantSoundPitch	= VJ_Set(90, 110) -- Distant sound pitch
 SWEP.Primary.DistantSoundVolume	= 0.7 -- Distant sound volume
 
@@ -49,20 +49,20 @@ SWEP.PrimaryEffects_ShellAttachment = 1
 SWEP.PrimaryEffects_ShellType = "VJ_Weapon_RifleShell1"
 	-- NPC Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_HasReloadSound = true -- Should it play a sound when the base detects the SNPC playing a reload animation?
-SWEP.NPC_ReloadSound = {"weapons/manhunt/reload_generic.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
+SWEP.NPC_ReloadSound = {"vj_manhunt/weapons/manhunt/reload_generic.wav"} -- Sounds it plays when the base detects the SNPC playing a reload animation
 SWEP.NPC_ReloadSoundLevel = 75 -- How far does the sound go?
 
 SWEP.Reload_TimeUntilAmmoIsSet	= 2.1 -- Time until ammo is set to the weapon
 SWEP.Reload_TimeUntilFinished	= 2.1 -- How much time until the player can play idle animation, shoot, etc.
 
-SWEP.NPC_ExtraFireSound			=  {"weapons/manhunt/rifle_bolt.wav"} -- Plays an extra sound after it fires (Example: Bolt action sound)
+SWEP.NPC_ExtraFireSound			=  {"vj_manhunt/weapons/manhunt/rifle_bolt.wav"} -- Plays an extra sound after it fires (Example: Bolt action sound)
 SWEP.NPC_ExtraFireSoundTime		= 0.6 -- How much time until it plays the sound (After Firing)?
 SWEP.NPC_ExtraFireSoundLevel	= 65 -- How far does the sound go?
 --------------------------------------------------------------------------------------------------------------------------------------------
 function SWEP:CustomOnPrimaryAttack_AfterShoot()
 	timer.Simple(0.6, function()
 		if IsValid(self) && IsValid(self:GetOwner()) then
-			self:EmitSound(Sound("weapons/manhunt/rifle_bolt.wav"), 75, 100)
+			self:EmitSound(Sound("vj_manhunt/weapons/manhunt/rifle_bolt.wav"), 75, 100)
 		end
 	end)
 end

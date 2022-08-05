@@ -11,8 +11,8 @@ SWEP.MadeForNPCsOnly = true -- Is this weapon meant to be for NPCs only?
 	-- NPC Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.NPC_NextPrimaryFire = 1 -- Next time it can use primary fire
 SWEP.NPC_TimeUntilFire = 0.48 -- How much time until the bullet/projectile is fired?
-SWEP.MeleeWeaponSound_Hit = {"weapons/melee/crowbar_hit1.wav","weapons/melee/crowbar_hit2.wav","weapons/melee/crowbar_hit3.wav"}
-SWEP.NPC_BeforeFireSound = {"weapons/melee/mh_melee_miss.wav"}
+SWEP.MeleeWeaponSound_Hit = {"vj_manhunt/weapons/melee/crowbar_hit1.wav","vj_manhunt/weapons/melee/crowbar_hit2.wav","vj_manhunt/weapons/melee/crowbar_hit3.wav"}
+SWEP.NPC_BeforeFireSound = {"vj_manhunt/weapons/melee/mh_melee_miss.wav"}
 	-- Main Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.WorldModel = "models/Manhunt/weapons/w_crowbar.mdl"
 SWEP.HoldType = "melee"

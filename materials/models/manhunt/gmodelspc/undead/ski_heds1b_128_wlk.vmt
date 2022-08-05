@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Manhunt/gmodelspc/undead/Ski_HedS1B_128_Wlk"
+"$nocull" "1"  
+ "$halflambert" "1" 
+ }

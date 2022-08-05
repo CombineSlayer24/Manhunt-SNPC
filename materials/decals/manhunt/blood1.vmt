@@ -3,6 +3,6 @@
 	"$translucent" 1
 	"$basetexture" "decals/manhunt/blood1"
 	"$decal" 1
-	"$decalscale" 0.5
+	"$decalscale" 0.65
 	"$modelmaterial" "decals/manhunt/blood1_model"
 } 

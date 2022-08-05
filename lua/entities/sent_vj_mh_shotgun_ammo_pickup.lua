@@ -161,7 +161,7 @@ function ENT:Touch(ply) -- when we touch this, pick it up
         if CurTime() <= self.TouchDelay then return end
         self.TouchDelay = CurTime() + 1.25
         ply:PrintMessage(HUD_PRINTCENTER, "You cannot pick this up while in Noclip!")
-        ply:EmitSound(Sound("weapons/pickup_deny_nc.wav"), 70, 100)
+        ply:EmitSound(Sound("vj_manhunt/weapons/pickup_deny_nc.wav"), 70, 100)
         return 
     end
 
@@ -169,59 +169,59 @@ function ENT:Touch(ply) -- when we touch this, pick it up
         local ammo_random = math.random(1,14)
         if ammo_random == 1 then
             ply:GiveAmmo(1, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
         elseif ammo_random == 2 then
             ply:GiveAmmo(1, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (1)" )
         elseif ammo_random == 3 then
             ply:GiveAmmo(2, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (2)" )
         elseif ammo_random == 4 then
             ply:GiveAmmo(3, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
         elseif ammo_random == 5 then
             ply:GiveAmmo(3, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (3)" )
         elseif ammo_random == 6 then
             ply:GiveAmmo(4, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (4)" )
         elseif ammo_random == 7 then
             ply:GiveAmmo(5, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
         elseif ammo_random == 8 then
             ply:GiveAmmo(5, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (5)" )
         elseif ammo_random == 9 then
             ply:GiveAmmo(6, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 10 then
             ply:GiveAmmo(6, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 11 then
             ply:GiveAmmo(6, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (6)" )
         elseif ammo_random == 12 then
             ply:GiveAmmo(7, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (7)" )
         elseif ammo_random == 13 then
             ply:GiveAmmo(8, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
         elseif ammo_random == 14 then
             ply:GiveAmmo(8, "Buckshot", true)
-            ply:EmitSound(Sound("weapons/pickup_wep.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_wep.wav"), 70, 100)
             ply:PrintMessage(HUD_PRINTTALK, "Shotgun Ammo (8)" )
         end
 		self:Remove()

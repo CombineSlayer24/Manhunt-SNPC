@@ -162,21 +162,21 @@ function ENT:Touch(ply) -- Gives health upon pressing "Use" key
         if CurTime() <= self.TouchDelay then return end
         self.TouchDelay = CurTime() + 1.25
         ply:PrintMessage(HUD_PRINTCENTER, "You cannot pick this up while in Noclip!")
-        ply:EmitSound(Sound("weapons/pickup_deny_nc.wav"), 70, 100)
+        ply:EmitSound(Sound("vj_manhunt/weapons/pickup_deny_nc.wav"), 70, 100)
         return 
     end
     
     if  ply:IsPlayer() and ply:Health() < ply:GetMaxHealth() then
         ply:SetHealth(math.Clamp( ply:Health() + 50, 0, ply:GetMaxHealth())) // if our health is <= than 100, we can take health and be capped at our max health.
         ply:PrintMessage(HUD_PRINTCENTER, "Painkillers (50% health restored)")
-        ply:EmitSound(Sound("weapons/pickup_hel.wav"), 70, 100)
+        ply:EmitSound(Sound("vj_manhunt/weapons/pickup_hel.wav"), 70, 100)
         self:Remove()
     else
         if ply:Health() + ply:GetMaxHealth() then // if our health is max, we show a message why we can't pick it up
             if CurTime() <= self.TouchDelay then return end
             self.TouchDelay = CurTime() + 1.25
             ply:PrintMessage(HUD_PRINTCENTER, "Your Health is full!" )
-            ply:EmitSound(Sound("weapons/pickup_deny.wav"), 70, 100)
+            ply:EmitSound(Sound("vj_manhunt/weapons/pickup_deny.wav"), 70, 100)
         end
     end
 end
