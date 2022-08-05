@@ -18,13 +18,13 @@ You will need [Full Integrated Animation](https://steamcommunity.com/sharedfiles
 - Satisfyingly fun to hide from
 
 To see the full list, click on the workshop page and read the description on there.
-[Workshop addon] (https://steamcommunity.com/sharedfiles/filedetails/?id=2844778098)
+[Workshop addon](https://steamcommunity.com/sharedfiles/filedetails/?id=2844778098)
 
 # Credits: (Without these lovely folks, this wouldn't be possible
 - [Rockstar Games](https://www.rockstargames.com/) - Original content, sounds and trademark of Manhunt / Manhunt series.
 - [Geist](https://steamcommunity.com/sharedfiles/filedetails/?id=691058457) - Ported models, textures, sounds. Without him, this SNPC conversion wouldn't be possible.
 - [VJBase](https://steamcommunity.com/sharedfiles/filedetails/?id=131759821) - For making an awesome NPC Base. Sounds, models.
 - [☭Comrade Communist☭](https://steamcommunity.com/profiles/76561198123708672) - Melee weapon animations, Fist code.
-- [Darkborn] (https://steamcommunity.com/profiles/76561198353846936) Modifying/editing the animations, sounds and code.
-- [Zet0r] (https://steamcommunity.com/profiles/76561198041656915) Ported COD Zombies animations, code.
+- [Darkborn](https://steamcommunity.com/profiles/76561198353846936) Modifying/editing the animations, sounds and code.
+- [Zet0r](https://steamcommunity.com/profiles/76561198041656915) Ported COD Zombies animations, code.
 - [Me - Pyri](https://steamcommunity.com/id/swellseeker7820/) - Spawnicons, sounds ported from Manhunt, NPCs.
