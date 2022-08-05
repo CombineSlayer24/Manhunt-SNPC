@@ -1,4 +1,4 @@
-# [VJ] Manhunt SNPC ( Early Demo / W.I.P )
+# [VJ] Manhunt SNPC ( FULL )
 ![Manhunt_logo](https://user-images.githubusercontent.com/82725572/145485035-99aa3276-4e1b-444c-910e-4aa9a54e5a81.png)
 
 **NPCs from the game Manhunt (2003) by Rockstar Games, into Garry's Mod via VJ Base.**
