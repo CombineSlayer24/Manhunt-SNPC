@@ -3,7 +3,7 @@
 
 **NPCs from the game Manhunt (2003) by Rockstar Games, into Garry's Mod via VJ Base.**
 ![Manhunt](https://user-images.githubusercontent.com/82725572/145485043-f34cc927-3d96-44b4-b96b-cb3cbd69b5a3.png)
-Recreating Manhunt Hunters in GMod, making for a fun, great stealth roleplaying, and more.
+Manhunt Hunters in GMod, making for a fun, great stealth, and more.
 
 ### REQUIREMENTS:
 You will need [Full Integrated Animation](https://steamcommunity.com/sharedfiles/filedetails/?id=1470158687), otherwise you'll see SNPCs that are using Fists T-Poseing 
