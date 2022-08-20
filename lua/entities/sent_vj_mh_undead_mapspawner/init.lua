@@ -79,7 +79,7 @@ function ENT:Initialize()
 	self.LNR_HordeChance = GetConVarNumber("VJ_LNR_MapSpawner_HordeChance")
 	self.LNR_HordeCooldownMin = GetConVarNumber("VJ_LNR_MapSpawner_HordeCooldownMin")
 	self.LNR_HordeCooldownMax = GetConVarNumber("VJ_LNR_MapSpawner_HordeCooldownMax")
-	self.LNR_MaxZombie = GetConVarNumber("VJ_LNR_MapSpawner_MaxMon")
+	self.LNR_MaxZombie = GetConVarNumber("VJ_LNR_MapSpawner_MaxZom")
 	self.LNR_MaxHordeSpawn = GetConVarNumber("VJ_LNR_MapSpawner_HordeCount")
 	self.tbl_SpawnedNPCs = {}
 	self.tbl_NPCsWithEnemies = {}
@@ -88,10 +88,10 @@ function ENT:Initialize()
 	self.NextZombieSpawnTime = CurTime() +1
 	self.NextSpecialZombieSpawnTime = CurTime() +math.random(4,20)
 	self.NextHordeSpawnTime = CurTime() +math.Rand(self.LNR_HordeCooldownMin,self.LNR_HordeCooldownMax)
-	self.NextAIBossCheckTime = CurTime() +5
+	self.NextAISpecialCheckTime = CurTime() +5
 	self.HordeSpawnRate = 0.19
 	self.MaxSpecialZombie = 15
-	self.CanSpawnSpecialZombie = true --GetConVarNumber("VJ_LNR_MapSpawner_Boss")
+	self.CanSpawnSpecialZombie = true 
 
 	for _,v in ipairs(player.GetAll()) do
 
@@ -243,7 +243,7 @@ end
 function ENT:FindEnemy()
 	local tbl = {}
 	for _,v in pairs(ents.GetAll()) do
-		if (v:IsPlayer() && GetConVarNumber("ai_ignoreplayers") == 0 || v:IsNPC()) && v:Health() > 0 && !v:IsFlagSet(65536) && (v.VJ_NPC_Class && !VJ_HasValue(v.VJ_NPC_Class,"CLASS_ZOMBIE") or true) then
+		if (v:IsPlayer() || v:IsNPC()) && v:Health() > 0 && !v:IsFlagSet(65536) && (v.VJ_NPC_Class && !VJ_HasValue(v.VJ_NPC_Class,"CLASS_ZOMBIE") or true) then
 			table_insert(tbl,v)
 		end
 	end
@@ -294,7 +294,7 @@ function ENT:Think()
 	    self.LNR_HordeChance = GetConVarNumber("VJ_LNR_MapSpawner_HordeChance")
 	    self.LNR_HordeCooldownMin = GetConVarNumber("VJ_LNR_MapSpawner_HordeCooldownMin")
 	    self.LNR_HordeCooldownMax = GetConVarNumber("VJ_LNR_MapSpawner_HordeCooldownMax")
-	    self.LNR_MaxZombie = GetConVarNumber("VJ_LNR_MapSpawner_MaxMon")
+	    self.LNR_MaxZombie = GetConVarNumber("VJ_LNR_MapSpawner_MaxZom")
 	    self.LNR_MaxHordeSpawn = GetConVarNumber("VJ_LNR_MapSpawner_HordeCount")
 		self.AI_RefreshTime = GetConVarNumber("VJ_LNR_MapSpawner_RefreshRate") 
 		
@@ -340,34 +340,35 @@ function ENT:Think()
 		-- Spawns AI		
 		if CurTime() > self.NextZombieSpawnTime then
 			if #self.tbl_SpawnedNPCs >= self.LNR_MaxZombie -self.LNR_MaxHordeSpawn then return end -- Makes sure that we can at least spawn a mob when it's time
-			self:SpawnZombie(self:PickZombie(self.Zombie),self:FindSpawnPosition(false))
+			self:SpawnZombie(self:PickZombie(self.Zombie),self:FindSpawnPosition(false))				
 			self.NextZombieSpawnTime = CurTime() +math.Rand(GetConVarNumber("VJ_LNR_MapSpawner_DelayMin"),GetConVarNumber("VJ_LNR_MapSpawner_DelayMax"))
+			
 end
 
-		if GetConVarNumber("VJ_LNR_MapSpawner_Specials") == 0 or !file.Exists("lua/autorun/vj_lnrspecials_autorun.lua","GAME") then return end
 			if CurTime() > self.NextSpecialZombieSpawnTime then
 				self:SpawnSpecialZombie(self:PickZombie(self.SpecialZombie),self:FindSpawnPosition(true))
-				self.NextSpecialZombieSpawnTime = CurTime() +math.Rand(4,20)
+				self.NextSpecialZombieSpawnTime = CurTime() +math.Rand(4,20)			
 end		
 		-- Spawns Hordes
 		if CurTime() > self.NextHordeSpawnTime && math.random(1,self.LNR_HordeChance) == 1 then
 			for i = 1,self.LNR_MaxHordeSpawn do
 				timer.Simple(self.HordeSpawnRate *i,function() -- Help with lag when spawning
 					if IsValid(self) then
-						self:SpawnZombie(self:PickZombie(self.Zombie),self:FindSpawnPosition(true,true),true)			
+						self:SpawnZombie(self:PickZombie(self.Zombie),self:FindSpawnPosition(true,true),true)					
 					end
 				end)
 			end
+
 			for _,v in ipairs(player.GetAll()) do
-				v:ChatPrint("Here comes the horde!")
+				v:ChatPrint("Incoming horde!")
 				v:EmitSound("vj_manhunt/map_spawner/undead_mapspawner/map_tune_"..math.random(1,12)..".mp3", 51)
-			end
+             end			
 			self.NextHordeSpawnTime = CurTime() +math.Rand(self.LNR_HordeCooldownMin,self.LNR_HordeCooldownMax)
 		end
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:GetBossCount(class)
+function ENT:GetSpecialCount(class)
 	local count = 0
 	for _,v in pairs(self.tbl_SpawnedSpecialZombie) do
 		if IsValid(v) && v:GetClass() == class then
@@ -387,7 +388,7 @@ function ENT:PickZombie(tbl)
 				break
 			end
 		else
-			if self:GetBossCount(v.class) < v.max then
+			if self:GetSpecialCount(v.class) < v.max then
 				ent = v.class
 				break
 			end
@@ -397,6 +398,7 @@ function ENT:PickZombie(tbl)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SpawnZombie(ent,pos,isMob)
+    if GetConVar("VJ_LNR_MapSpawner_HL2"):GetInt() == 0 then return end
 	if ent == false then return end
 	if pos == nil or pos == false then return end
 	if #self.tbl_SpawnedNPCs >= self.LNR_MaxZombie then return end
@@ -405,43 +407,35 @@ function ENT:SpawnZombie(ent,pos,isMob)
 	Zombie:SetAngles(Angle(0,math.random(0,360),0))
 	Zombie:Spawn()
 	table_insert(self.tbl_SpawnedNPCs,Zombie)
-	if isMob then
-		Zombie.FindEnemy_UseSphere = true
-		Zombie.FindEnemy_CanSeeThroughWalls = true
-		Zombie:DrawShadow(false)
-		timer.Simple(0,function()
-			if IsValid(Zombie) then
-				Zombie:DrawShadow(false)
-			end
-		end)
-	end
 	Zombie.MapSpawner = self
 	Zombie.EntitiesToNoCollide = {}
 	for _,v in pairs(self.Zombie) do
 		table_insert(Zombie.EntitiesToNoCollide,v.class)
-end	
+	end
 	for _,v in pairs(self.SpecialZombie) do
 		table_insert(Zombie.EntitiesToNoCollide,v.class)
-	end
+    end			
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SpawnSpecialZombie(ent,pos)
+	if GetConVar("VJ_LNR_MapSpawner_Specials"):GetInt() == 0 then return end 
 	if ent == false then return end
 	if pos == nil or pos == false then return end
 	if #self.tbl_SpawnedSpecialZombie >= self.MaxSpecialZombie then return end
 
-	local Boss = ents.Create(ent)
-	Boss:SetPos(pos)
-	Boss:SetAngles(Angle(0,math.random(0,360),0))
-	Boss:Spawn()
-	Boss.FindEnemy_UseSphere = true
-	Boss.FindEnemy_CanSeeThroughWalls = true
-	table_insert(self.tbl_SpawnedSpecialZombie,Boss)
-	Boss.MapSpawner = self
-	Boss.EntitiesToNoCollide = {}
+	local Special_Zombie = ents.Create(ent)
+	Special_Zombie:SetPos(pos)
+	Special_Zombie:SetAngles(Angle(0,math.random(0,360),0))
+	Special_Zombie:Spawn()
+	table_insert(self.tbl_SpawnedSpecialZombie,Special_Zombie)
+	Special_Zombie.MapSpawner = self
+	Special_Zombie.EntitiesToNoCollide = {}
+	for _,v in pairs(self.Zombie) do
+		table_insert(Special_Zombie.EntitiesToNoCollide,v.class)
+	end	
 	for _,v in pairs(self.SpecialZombie) do
-		table_insert(Boss.EntitiesToNoCollide,v.class)
-	end
+		table_insert(Special_Zombie.EntitiesToNoCollide,v.class)
+    end			
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnRemove()

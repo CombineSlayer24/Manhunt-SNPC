@@ -669,7 +669,7 @@ if LNRExists == true then
 	VJ.AddConVar("vj_manhunt_hunters_zmb_eyeglow", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 	VJ.AddConVar("vj_manhunt_hunters_zmb_faster", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 	VJ.AddConVar("vj_manhunt_hunters_zmb_riser", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
-	VJ.AddConVar("vj_manhunt_hunters_zmb_deathanim", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+	--VJ.AddConVar("vj_manhunt_hunters_zmb_deathanim", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 	--VJ.AddConVar("vj_manhunt_hunters_zmb_humanallegiance", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 	VJ.AddConVar("vj_manhunt_hunters_zmb_map_music", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 	VJ.AddConVar("vj_manhunt_hunters_zmb_map_spooky_snds", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
@@ -685,13 +685,10 @@ if LNRExists == true then
 				end
 				Panel:AddControl("Header", {Description = "NOTICE!: Newly spawned SNPC's will take affect to the changes you made!"})
 				Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
-				Panel:AddControl("Button", {Text = "#vjbase.menu.general.reset.everything", Command = "vj_manhunt_hunters_zmb_eyeglow 1\nvj_manhunt_hunters_zmb_deathanim 1\nvj_manhunt_hunters_zmb_riser 1\nvj_manhunt_hunters_zmb_map_music 1\nvj_manhunt_hunters_zmb_map_delete 1\nvj_manhunt_hunters_zmb_map_spooky_snds 1\nvj_manhunt_hunters_zmb_faster 0"})
-				--Panel:AddControl("Button", {Text = "#vjbase.menu.general.reset.everything", Command = "vj_manhunt_hunters_zmb_eyeglow 1\nvj_manhunt_hunters_zmb_deathanim 1\nvj_manhunt_hunters_zmb_riser 1\nvj_manhunt_hunters_zmb_humanallegiance 0\nvj_manhunt_hunters_zmb_map_music 1\nvj_manhunt_hunters_zmb_map_delete 1\nvj_manhunt_hunters_zmb_map_spooky_snds 1\nvj_manhunt_hunters_zmb_faster 0"})
-				
+				Panel:AddControl("Button", {Text = "#vjbase.menu.general.reset.everything", Command = "vj_manhunt_hunters_zmb_eyeglow 1\nvj_manhunt_hunters_zmb_riser 1\nvj_manhunt_hunters_zmb_map_music 1\nvj_manhunt_hunters_zmb_map_delete 1\nvj_manhunt_hunters_zmb_map_spooky_snds 1\nvj_manhunt_hunters_zmb_faster 0"})
+
 				Panel:AddControl("Checkbox", {Label = "Eneble eyeglow for Undead Hunters?", Command = "vj_manhunt_hunters_zmb_eyeglow"})
 				Panel:ControlHelp("NOTE: Having too many Undead SNPCs may lag your computer with eyeglow on.")
-				
-				Panel:AddControl("Checkbox", {Label = "Eneble death animations for Undead Hunters?", Command = "vj_manhunt_hunters_zmb_deathanim"})
 				
 				Panel:AddControl("Checkbox", {Label = "Eneble dirt spawns for Undead Hunters?", Command = "vj_manhunt_hunters_zmb_riser"})
 				Panel:ControlHelp("If enabled, Undead hunters can use the rise sapwn animation.\n\nAim at the ground of the available materials to have the zombie do the rising animation.\n\nWorks only on 'soft' materials such as Grass, Snow, Dirt, Sand and Foliage")
