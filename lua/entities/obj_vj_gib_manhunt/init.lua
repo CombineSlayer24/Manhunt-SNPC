@@ -30,7 +30,6 @@ function ENT:Initialize()
 	-- Misc
 	self:InitialSetup()
 	if GetConVar("vj_npc_sd_gibbing"):GetInt() == 1 then self.CollideSound = "" end
-	if GetConVar("vj_npc_nogibdecals"):GetInt() == 1 then self.Collide_Decal = "" end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 local defCollideSds = {"vj_manhunt/weapons/bloody_impact1.wav","vj_manhunt/weapons/bloody_impact2.wav","vj_manhunt/weapons/bloody_impact3.wav","vj_manhunt/weapons/bloody_impact4.wav","vj_manhunt/weapons/bloody_impact5.wav","vj_manhunt/weapons/bloody_impact6.wav","vj_manhunt/weapons/bloody_impact7.wav","vj_manhunt/weapons/bloody_impact8.wav","vj_manhunt/weapons/bloody_impact9.wav","vj_manhunt/weapons/bloody_impact10.wav","vj_manhunt/weapons/bloody_impact11.wav"}
